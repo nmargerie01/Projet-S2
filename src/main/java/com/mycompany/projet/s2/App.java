@@ -18,8 +18,8 @@ public class App extends Application {
     private final int pointSize = 2; 
     private double x,y,w,z;
     private int fenetre, porte ,revet;
-
-
+    BooleanData doubleclic = new BooleanData();
+   
     @Override
     public void start(Stage stage) throws Exception {
         MenuBar menuBar = new MenuBar();
@@ -49,26 +49,24 @@ public class App extends Application {
         // Quadrillage
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
-                double x = col * cellSize;
-                double y = row * cellSize;
-                root.getChildren().add(new Circle(x, y, 0.5, Color.BLACK));}}
+                double varx = col * cellSize;
+                double vary = row * cellSize;
+                root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
         
-        // Création d'un coin
-        if(creation.getValue() == "Coin"){
-            root.setOnMouseClicked(event -> {
-                double x = Math.floor(event.getX() / cellSize) * cellSize;
-                double y = Math.floor(event.getY() / cellSize) * cellSize;
-                Circle circle = new Circle(x, y, pointSize, Color.BLACK);
-                root.getChildren().add(circle);
-                Coin c = new Coin(Principale.listeCoin.size()+1,x,y);
-                Principale.listeCoin.add(c);});}
-        
-        // Création d'un mur
-        if(creation.getValue() == "Mur"){
-            root.setOnMousePressed(event -> {
-                x = Math.floor(event.getX() / cellSize) * cellSize;
-                y = Math.floor(event.getY() / cellSize) * cellSize;});
-            root.setOnMouseReleased(event -> {
+        root.setOnMouseClicked(event -> {
+                    
+            // Création d'un coin
+            if (creation.getValue().equals("Coin")) {
+            double x = Math.floor(event.getX() / cellSize) * cellSize;
+            double y = Math.floor(event.getY() / cellSize) * cellSize;
+            Circle circle = new Circle(x, y, pointSize, Color.BLACK);
+            root.getChildren().add(circle);
+            Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
+            Principale.listeCoin.add(c);
+            doubleclic.bool = false;}
+            
+            // Creation d'un mur
+            if (((creation.getValue()) == "Mur") && (doubleclic.bool == true)){
                 w = Math.floor(event.getX() / cellSize) * cellSize;
                 z = Math.floor(event.getY() / cellSize) * cellSize;
                 Line line = new Line (x,y,w,z);
@@ -107,8 +105,13 @@ public class App extends Application {
                 parametreStage.show(); 
                 Revetement revetement = Principale.rechercherevetement(revet);
                 Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
-            });}
-
+                doubleclic.bool = false;}
+                
+            if ((creation.getValue()) == "Mur"){
+                x = Math.floor(event.getX() / cellSize) * cellSize;
+                y = Math.floor(event.getY() / cellSize) * cellSize;
+                doubleclic.bool = true;}});
+        
         
         layout.setCenter(root);
 
