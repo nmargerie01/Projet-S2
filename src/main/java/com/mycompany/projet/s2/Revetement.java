@@ -31,7 +31,8 @@ public class Revetement {
                 '}';
     }
     
-    public String afficher() {
+    public String afficherlegende() {
         return idRevetement+" | " + designation + " - " + prixUnitaire;
     }
-}
+    
+    }

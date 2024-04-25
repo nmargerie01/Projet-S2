@@ -28,6 +28,16 @@ public class Sol {
                 '}';
     }
     
+    public void afficher() {
+        System.out.println ("Sol(" +idSol +
+                "," + coin1 + 
+                "," + coin2 +
+                "," + coin3 +
+                "," + coin4 +
+                "," + revsol +
+                ')');
+    }
+    
     public double surface() {
         double l,L,surface;
         l=Math.sqrt(((this.coin1.x-this.coin2.x)*(this.coin1.x-this.coin2.x))+((this.coin1.y-this.coin2.y)*(this.coin1.y-this.coin2.y)));
