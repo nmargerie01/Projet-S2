@@ -178,7 +178,7 @@ public class Principale {
                 return sol;}}
         return null;}
     
-    public Revetement rechercherevetement (int id) {
+    public static Revetement rechercherevetement (int id) {
         for (Revetement revetement : listeRevetement) {
             if (revetement.idRevetement == id) {
                 return revetement;}}

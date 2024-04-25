@@ -22,6 +22,8 @@ public class App extends Application {
    
     @Override
     public void start(Stage stage) throws Exception {
+        
+        // Barre de menu
         MenuBar menuBar = new MenuBar();
         Menu file = new Menu("Fichier");
 
@@ -70,6 +72,7 @@ public class App extends Application {
                 w = Math.floor(event.getX() / cellSize) * cellSize;
                 z = Math.floor(event.getY() / cellSize) * cellSize;
                 Line line = new Line (x,y,w,z);
+                root.getChildren().add(line);
                 Coin debut = Principale.recherchecoinparcoordonnee(x,y);
                 Coin fin = Principale.recherchecoinparcoordonnee(w,z);
                 Stage parametreStage = new Stage();
@@ -91,7 +94,8 @@ public class App extends Application {
                     fenetre = Integer.valueOf(textfenetre.getText());
                     porte = Integer.valueOf(textporte.getText());
                     revet = Integer.valueOf(textrevet.getText());
-                    parametreStage.close();});
+                    parametreStage.close();
+                    doubleclic.bool = false;});
                 grid.add(labfenetre, 0, 0);
                 grid.add(textfenetre, 1, 0);
                 grid.add(labporte, 0, 1);
@@ -104,8 +108,7 @@ public class App extends Application {
                 parametreStage.setTitle("Parametre");
                 parametreStage.show(); 
                 Revetement revetement = Principale.rechercherevetement(revet);
-                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
-                doubleclic.bool = false;}
+                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);}
                 
             if ((creation.getValue()) == "Mur"){
                 x = Math.floor(event.getX() / cellSize) * cellSize;
