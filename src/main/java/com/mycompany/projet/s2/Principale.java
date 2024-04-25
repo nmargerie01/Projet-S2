@@ -160,6 +160,12 @@ public class Principale {
                 return coin;}}
         return null;}
     
+    public static Coin recherchecoinparcoordonnee (double x, double y) {
+        for (Coin coin : listeCoin) {
+            if (coin.x == x && coin.y == y) {
+                return coin;}}
+        return null;}
+    
     public Mur recherchemur (int id) {
         for (Mur mur : listeMur) {
             if (mur.idMur == id) {

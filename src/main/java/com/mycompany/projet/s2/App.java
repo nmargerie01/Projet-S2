@@ -1,27 +1,22 @@
 package com.mycompany.projet.s2;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.*;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private final int rows = 40; // Nombre de lignes
-    private final int cols = 40; // Nombre de colonnes
+    private final int rows = 60; // Nombre de lignes
+    private final int cols = 100; // Nombre de colonnes
     private final int cellSize = 10; // Taille d'une cellule
     private final int pointSize = 2; // Taille des points
+    private double x,y,w,z;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -49,7 +44,7 @@ public class App extends Application {
         });
 
         ChoiceBox<String> creation = new ChoiceBox<>();
-        creation.getItems().addAll("Coin", "Mur");
+        creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
 
         HBox hbox = new HBox();
@@ -60,23 +55,37 @@ public class App extends Application {
 
         Pane root = new Pane();
 
-        // Dessiner le quadrillage
+        // Quadrillage
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
                 double x = col * cellSize;
                 double y = row * cellSize;
-                root.getChildren().add(new Circle(x, y, 1, Color.BLACK)); // Intersection du quadrillage
+                root.getChildren().add(new Circle(x, y, 0.5, Color.BLACK));}}
+        
+        // Création d'un coin
+        if(creation.getValue() == "Coin"){
+            root.setOnMouseClicked(event -> {
+                double x = Math.floor(event.getX() / cellSize) * cellSize;
+                double y = Math.floor(event.getY() / cellSize) * cellSize;
+                Circle circle = new Circle(x, y, pointSize, Color.BLACK);
+                root.getChildren().add(circle);
+                Coin c = new Coin(Principale.listeCoin.size()+1,x,y);
+                Principale.listeCoin.add(c);});}
+        
+        // Création d'un mur
+        if(creation.getValue() == "Mur"){
+            root.setOnMousePressed(event -> {
+                x = Math.floor(event.getX() / cellSize) * cellSize;
+                y = Math.floor(event.getY() / cellSize) * cellSize;});
+            root.setOnMouseReleased(event -> {
+                w = Math.floor(event.getX() / cellSize) * cellSize;
+                z = Math.floor(event.getY() / cellSize) * cellSize;});
+            Line line = new Line (x,y,w,z) ;
+            Coin debut = Principale.recherchecoinparcoordonnee(x,y);
+            Mur mur = new Mur(Principale.listeMur.size()+1,debut,y);
             }
-        }
 
-        // Gestion du clic pour placer un point
-        root.setOnMouseClicked(event -> {
-            double x = Math.floor(event.getX() / cellSize) * cellSize;
-            double y = Math.floor(event.getY() / cellSize) * cellSize;
-            Circle circle = new Circle(x, y, pointSize, Color.BLACK); // Dessiner le point en noir et un peu plus petit
-            root.getChildren().add(circle);
-        });
-
+        
         layout.setCenter(root);
 
         Scene scene = new Scene(layout, cols * cellSize, rows * cellSize);
