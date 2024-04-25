@@ -66,7 +66,7 @@ public class App extends Application {
             doubleclic.bool = false;}
             
             // Creation d'un mur
-            if (((creation.getValue()) == "Mur") && (doubleclic.bool == true)){
+            if ((creation.getValue().equals("Mur")) && (doubleclic.bool == true)){
                 w = Math.floor(event.getX() / cellSize) * cellSize;
                 z = Math.floor(event.getY() / cellSize) * cellSize;
                 Line line = new Line (x,y,w,z);
