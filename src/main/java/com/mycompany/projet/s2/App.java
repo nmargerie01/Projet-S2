@@ -12,11 +12,12 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private final int rows = 60; // Nombre de lignes
-    private final int cols = 100; // Nombre de colonnes
-    private final int cellSize = 10; // Taille d'une cellule
-    private final int pointSize = 2; // Taille des points
+    private final int rows = 60; 
+    private final int cols = 100; 
+    private final int cellSize = 10; 
+    private final int pointSize = 2; 
     private double x,y,w,z;
+    private int fenetre, porte ,revet;
 
 
     @Override
@@ -32,17 +33,6 @@ public class App extends Application {
         MenuItem item3 = new MenuItem("Exit");
 
         file.getItems().addAll(item1, item2, item3);
-
-        item1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("JavaFX MenuBar");
-                alert.setHeaderText("Menu Item");
-                alert.setContentText("Clicked");
-                alert.show();
-            }
-        });
 
         ChoiceBox<String> creation = new ChoiceBox<>();
         creation.getItems().addAll("Coin", "Mur", "Piece");
@@ -84,17 +74,39 @@ public class App extends Application {
                 Line line = new Line (x,y,w,z);
                 Coin debut = Principale.recherchecoinparcoordonnee(x,y);
                 Coin fin = Principale.recherchecoinparcoordonnee(w,z);
-                
-                Label labelfenetre = new Label("Nombre de fenêtres:");
+                Stage parametreStage = new Stage();
+                GridPane grid = new GridPane();
+                grid.setPadding(new Insets(20));
+                grid.setHgap(10);
+                grid.setVgap(10);
+                Label labfenetre = new Label("Nombre de fenêtres:");
                 TextField textfenetre = new TextField();
                 textfenetre.setPromptText("Nombre");
-                
-                Label labelporte = new Label("Nombre de portes:");
+                Label labporte = new Label("Nombre de portes:");
                 TextField textporte = new TextField();
                 textporte.setPromptText("Nombre");
-                
-                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin);
-            }
+                Label labrevet = new Label("Numero du revetement");
+                TextField textrevet = new TextField();
+                textrevet.setPromptText("Nombre");    
+                Button valider = new Button("Valider");
+                valider.setOnAction(event2 -> {
+                    fenetre = Integer.valueOf(textfenetre.getText());
+                    porte = Integer.valueOf(textporte.getText());
+                    revet = Integer.valueOf(textrevet.getText());
+                    parametreStage.close();});
+                grid.add(labfenetre, 0, 0);
+                grid.add(textfenetre, 1, 0);
+                grid.add(labporte, 0, 1);
+                grid.add(textporte, 1, 1);
+                grid.add(labrevet, 0, 2);
+                grid.add(textrevet, 1, 2);
+                grid.add(valider, 0, 3, 2, 1);
+                Scene scene = new Scene(grid);
+                parametreStage.setScene(scene);
+                parametreStage.setTitle("Parametre");
+                parametreStage.show();              
+                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revet);
+            });}
 
         
         layout.setCenter(root);
@@ -104,47 +116,7 @@ public class App extends Application {
         stage.setTitle("Menu et Quadrillage avec Points");
         stage.show();
     }
-
-    public void parametrefpr (Stage parametreStage) {
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(20));
-        grid.setHgap(10);
-        grid.setVgap(10);
-
-        Label labfenetre = new Label("Nombre de fenêtres:");
-        TextField textfenetre = new TextField();
-        textfenetre.setPromptText("Nombre");
-
-        Label labporte = new Label("Nombre de portes:");
-        TextField textporte = new TextField();
-        textporte.setPromptText("Nombre");
-
-        Label labrevet = new Label("Numero du revetement");
-        TextField textrevet = new TextField();
-        textrevet.setPromptText("Nombre");
-        
-        Button valider = new Button("Valider");
-        valider.setOnAction(event -> {
-            int fenetre = Integer.valueOf(textfenetre.getText());
-            int porte = Integer.valueOf(textporte.getText());
-            int revet = Integer.valueOf(textrevet.getText());
-            parametreStage.close(); // Fermer la fenêtre de dialogue après validation
-        });
-
-        grid.add(labfenetre, 0, 0);
-        grid.add(textfenetre, 1, 0);
-        grid.add(labporte, 0, 1);
-        grid.add(textporte, 1, 1);
-        grid.add(labrevet, 0, 2);
-        grid.add(textrevet, 1, 2);
-        grid.add(valider, 0, 3, 2, 1);
-
-        Scene scene = new Scene(grid);
-        parametreStage.setScene(scene);
-        parametreStage.setTitle("Parametre");
-        parametreStage.show();
-    }
-        
+   
     public static void main(String[] args) {
         launch(args);
     }
