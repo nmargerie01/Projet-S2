@@ -15,13 +15,18 @@ public class Piece {
         this.listemurs=listemurs;}
     
     public double surface() {
-        for 
+        /*for 
         double largeur =  Math.sqrt(((this.sol.coin1.x-this.sol.coin2.x)*(this.sol.coin1.x-this.sol.coin2.x))+((this.sol.coin1.y-this.sol.coin2.y)*(this.sol.coin1.y-this.sol.coin2.y)));
         double longueur = Math.sqrt(((this.sol.coin3.x-this.sol.coin2.x)*(this.sol.coin3.x-this.sol.coin2.x))+((this.sol.coin3.y-this.sol.coin2.y)*(this.sol.coin3.y-this.sol.coin2.y)));
-        double surface=longueur * largeur;
+        double surface=longueur * largeur;*/
+        double surface =3;
         return surface;}
     
     public double montantrevetement(){
-        double montant = this.sol.montantrevetement()+this.plafond.montantrevetement()+this.mur1.montantrevetement()+this.mur2.montantrevetement()+this.mur3.montantrevetement()+this.mur4.montantrevetement();
+        double montantsolplafond = this.sol.montantrevetement()+this.plafond.montantrevetement();
+        double montantmurs = 0;
+        for (int i=0;i<this.listemurs.size();i++){     
+            montantmurs = montantmurs + this.listemurs.get(i).montantrevetement();}
+        double montant = montantmurs + montantsolplafond;
         return montant;}
 }
