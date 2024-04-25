@@ -16,16 +16,15 @@ public class Mur {
         this.nbPorte=p;
         this.revetmur=revetmur;} 
     
-    @Override
-    public String toString() {
-        return "Mur{" +
-                "idMur=" + idMur +
-                ", coin de debut=" + CoinDebut + 
-                ", coin de fin=" + CoinFin +
-                ", nb de fenetre=" + nbFenetre +
-                ", nb de porte=" + nbPorte +
-                ", revetement=" + revetmur +
-                '}';}
+    
+    public void afficher() {
+        System.out.println ("Mur(" +idMur +
+                "," + CoinDebut + 
+                "," + CoinFin +
+                "," + nbFenetre +
+                "," + nbPorte +
+                "," + revetmur +
+                ')');}
     
     public double surface(){
         for (Niveau niveau : Principale.listeNiveau) {
