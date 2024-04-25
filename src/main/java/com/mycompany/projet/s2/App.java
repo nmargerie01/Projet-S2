@@ -202,45 +202,6 @@ public class App extends Application {
                 if (Principale.listeRevetement.get(i).pourPlafond == true) {
                     vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
                 
-                double[] xCoords = new double[4];
-                double[] yCoords = new double[4];
-                for (int i = 0; i < 4; i++) {
-                    xCoords[i] = Coin[i].getCenterX();
-                    yCoords[i] = Coin[i].getCenterY();}
-
-                // Trouver les coordonnées min et max pour créer un rectangle englobant
-                double minX = findMin(xCoords);
-                double minY = findMin(yCoords);
-                double maxX = findMax(xCoords);
-                double maxY = findMax(yCoords);
-
-                // Créer le rectangle représentant la pièce
-                Rectangle piece = new Rectangle(minX, minY, maxX - minX, maxY - minY);
-                piece.setFill(Color.TRANSPARENT);
-                piece.setStroke(Color.BLACK);
-
-                // Afficher la pièce
-                ((Pane) corners[0].getParent()).getChildren().add(piece);
-
-                // Réinitialiser les coins pour permettre la création d'une autre pièce
-                cornerCount = 0;
-    
-
-                private double findMin(double[] arr) {
-                    double min = Double.MAX_VALUE;
-                    for (double val : arr) {
-                        if (val < min) {
-                            min = val;}}
-                    return min;}
-
-                private double findMax(double[] arr) {
-                    double max = Double.MIN_VALUE;
-                    for (double val : arr) {
-                        if (val > max) {
-                            max = val;}}
-                    return max;}
-
-                
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
                 Square square = new Square();
