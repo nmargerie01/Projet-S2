@@ -131,13 +131,13 @@ public class App extends Application {
             parametreStage.close(); // Fermer la fenêtre de dialogue après validation
         });
 
-        grid.add(windowLabel, 0, 0);
-        grid.add(windowField, 1, 0);
-        grid.add(doorLabel, 0, 1);
-        grid.add(doorField, 1, 1);
-        grid.add(coatingLabel, 0, 2);
-        grid.add(coatingChoice, 1, 2);
-        grid.add(submitButton, 0, 3, 2, 1);
+        grid.add(labfenetre, 0, 0);
+        grid.add(textfenetre, 1, 0);
+        grid.add(labporte, 0, 1);
+        grid.add(textporte, 1, 1);
+        grid.add(labrevet, 0, 2);
+        grid.add(textrevet, 1, 2);
+        grid.add(valider, 0, 3, 2, 1);
 
         Scene scene = new Scene(grid);
         parametreStage.setScene(scene);
