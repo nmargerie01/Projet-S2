@@ -104,8 +104,9 @@ public class App extends Application {
                 Scene scene = new Scene(grid);
                 parametreStage.setScene(scene);
                 parametreStage.setTitle("Parametre");
-                parametreStage.show();              
-                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revet);
+                parametreStage.show(); 
+                Revetement revetement = Principale.rechercherevetement(revet);
+                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
             });}
 
         
