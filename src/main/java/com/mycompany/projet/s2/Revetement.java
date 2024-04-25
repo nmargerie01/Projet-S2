@@ -18,38 +18,7 @@ public class Revetement {
         this.pourPlafond = plafond;
         this.prixUnitaire = prix;}
 
-    public void recuprevet (String[] args) {
-        try { 
-            File csvFile = new File("C:\\Users\\natha\\Documents\\NetBeansProjects\\Projet-S2\\src\\main\\java\\com\\mycompany\\projet\\s2\\CatalogueRevetements.txt");
-            FileReader fr = new FileReader(csvFile);
-            BufferedReader br = new BufferedReader(fr); 
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parties = line.split(";");
-                int id = Integer.parseInt(parties[0]);
-                String nom = parties[1];
-                boolean mur = false;
-                if (Integer.valueOf(parties[2]) == 1){
-                    mur = true;}
-                boolean sol = false;
-                if (Integer.valueOf(parties[3]) == 1){
-                    sol = true;}
-                boolean plafond = false;
-                if (Integer.valueOf(parties[4]) == 1){
-                    plafond = true;}
-                double prix = Double.parseDouble(parties[5]);
-
-                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
-                r.toString();
-                Principale.listeRevetement.add(r);}} 
-    
-        catch (FileNotFoundException e){
-            System.out.println("Erreur : le fichier n’existe pas! " + e);} 
-    
-        catch (IOException err){
-            System.out.println("Erreur de lecture du fichier: " + err);}}
-    
-
+ 
     @Override
     public String toString() {
         return "Revetement{" +

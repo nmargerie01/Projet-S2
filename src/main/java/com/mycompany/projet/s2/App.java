@@ -1,5 +1,10 @@
 package com.mycompany.projet.s2;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.*;
 import javafx.geometry.Insets;
@@ -24,6 +29,38 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
+        // Récupération des revetement
+        try { 
+            Principale.listeRevetement.clear();
+            File csvFile = new File("C:\\Users\\natha\\Documents\\NetBeansProjects\\Projet-S2\\src\\main\\java\\com\\mycompany\\projet\\s2\\CatalogueRevetements.txt");
+            FileReader fr = new FileReader(csvFile);
+            BufferedReader br = new BufferedReader(fr); 
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parties = line.split(";");
+                int id = Integer.parseInt(parties[0]);
+                String nom = parties[1];
+                boolean mur = false;
+                if (Integer.valueOf(parties[2]) == 1){
+                    mur = true;}
+                boolean sol = false;
+                if (Integer.valueOf(parties[3]) == 1){
+                    sol = true;}
+                boolean plafond = false;
+                if (Integer.valueOf(parties[4]) == 1){
+                    plafond = true;}
+                double prix = Double.parseDouble(parties[5]);
+
+                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                r.afficher();
+                Principale.listeRevetement.add(r);}} 
+    
+        catch (FileNotFoundException e){
+            System.out.println("Erreur : le fichier n’existe pas! " + e);} 
+    
+        catch (IOException err){
+            System.out.println("Erreur de lecture du fichier: " + err);}
+        
         // Barre de menu
         MenuBar menuBar = new MenuBar();
         Menu file = new Menu("Fichier");
@@ -43,6 +80,10 @@ public class App extends Application {
 
         HBox hbox = new HBox();
         hbox.getChildren().addAll(menuBar, creation);
+        
+        for (int i=0;i<Principale.listeRevetement.size();i++){ 
+            Label label = new Label (Principale.listeRevetement.get(i).afficher());
+            vboxrevet.getChildren().add(label);}
 
         BorderPane layout = new BorderPane();
         Pane root = new Pane();        
@@ -119,34 +160,32 @@ public class App extends Application {
                 doubleclic.bool = true;}});
         
         
-        for (int i=0;i<Principale.listeRevetement.size();i++){                 
-            vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficher()));}}
         
         if (creation.getValue().equals("Mur")){
             vboxrevet.getChildren().clear();
             for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourMur == true) {
-                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}
+                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficher()));}}}
         
         if (creation.getValue().equals("Sol")){
             vboxrevet.getChildren().clear();
             for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourSol == true) {
-                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}
+                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficher()));}}}
     
         if (creation.getValue().equals("Plafond")){
             vboxrevet.getChildren().clear();
             for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}       
+                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficher()));}}}       
         
-        Scene scene = new Scene(layout, cols * cellSize, rows * cellSize);
+        Scene scene = new Scene(layout, (cols * cellSize)+200, rows * cellSize);
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
     }
-   
-    public static void main(String[] args) {
+    
+    public static void main (String[] args) {
         launch(args);
     }
 }
