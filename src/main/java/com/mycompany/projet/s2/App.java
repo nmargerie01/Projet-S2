@@ -19,6 +19,7 @@ public class App extends Application {
     private double x,y,w,z;
     private int fenetre, porte ,revet;
     BooleanData doubleclic = new BooleanData();
+    VBox vboxrevet = new VBox();
    
     @Override
     public void start(Stage stage) throws Exception {
@@ -45,6 +46,7 @@ public class App extends Application {
 
         BorderPane layout = new BorderPane();
         layout.setTop(hbox);
+        layout.setRight(vboxrevet);
 
         Pane root = new Pane();
 
@@ -118,6 +120,24 @@ public class App extends Application {
         
         layout.setCenter(root);
 
+        if (creation.getValue().equals("Mur")){
+            vboxrevet.getChildren().clear();
+            for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                if (Principale.listeRevetement.get(i).pourMur == true) {
+                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}
+        
+        if (creation.getValue().equals("Sol")){
+            vboxrevet.getChildren().clear();
+            for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                if (Principale.listeRevetement.get(i).pourSol == true) {
+                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}
+    
+        if (creation.getValue().equals("Plafond")){
+            vboxrevet.getChildren().clear();
+            for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                if (Principale.listeRevetement.get(i).pourPlafond == true) {
+                    vboxrevet.getChildren().add(new Label ("Principale.listeRevetement.get(i).afficher()"));}}}       
+        
         Scene scene = new Scene(layout, cols * cellSize, rows * cellSize);
         stage.setScene(scene);
         stage.setTitle("Menu et Quadrillage avec Points");
