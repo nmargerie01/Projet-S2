@@ -2,6 +2,7 @@ package com.mycompany.projet.s2;
 
 import javafx.application.Application;
 import javafx.event.*;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -79,10 +80,20 @@ public class App extends Application {
                 y = Math.floor(event.getY() / cellSize) * cellSize;});
             root.setOnMouseReleased(event -> {
                 w = Math.floor(event.getX() / cellSize) * cellSize;
-                z = Math.floor(event.getY() / cellSize) * cellSize;});
-            Line line = new Line (x,y,w,z) ;
-            Coin debut = Principale.recherchecoinparcoordonnee(x,y);
-            Mur mur = new Mur(Principale.listeMur.size()+1,debut,y);
+                z = Math.floor(event.getY() / cellSize) * cellSize;
+                Line line = new Line (x,y,w,z);
+                Coin debut = Principale.recherchecoinparcoordonnee(x,y);
+                Coin fin = Principale.recherchecoinparcoordonnee(w,z);
+                
+                Label labelfenetre = new Label("Nombre de fenêtres:");
+                TextField textfenetre = new TextField();
+                textfenetre.setPromptText("Nombre");
+                
+                Label labelporte = new Label("Nombre de portes:");
+                TextField textporte = new TextField();
+                textporte.setPromptText("Nombre");
+                
+                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin);
             }
 
         
@@ -94,6 +105,46 @@ public class App extends Application {
         stage.show();
     }
 
+    public void parametrefpr (Stage parametreStage) {
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(20));
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        Label labfenetre = new Label("Nombre de fenêtres:");
+        TextField textfenetre = new TextField();
+        textfenetre.setPromptText("Nombre");
+
+        Label labporte = new Label("Nombre de portes:");
+        TextField textporte = new TextField();
+        textporte.setPromptText("Nombre");
+
+        Label labrevet = new Label("Numero du revetement");
+        TextField textrevet = new TextField();
+        textrevet.setPromptText("Nombre");
+        
+        Button valider = new Button("Valider");
+        valider.setOnAction(event -> {
+            int fenetre = Integer.valueOf(textfenetre.getText());
+            int porte = Integer.valueOf(textporte.getText());
+            int revet = Integer.valueOf(textrevet.getText());
+            parametreStage.close(); // Fermer la fenêtre de dialogue après validation
+        });
+
+        grid.add(windowLabel, 0, 0);
+        grid.add(windowField, 1, 0);
+        grid.add(doorLabel, 0, 1);
+        grid.add(doorField, 1, 1);
+        grid.add(coatingLabel, 0, 2);
+        grid.add(coatingChoice, 1, 2);
+        grid.add(submitButton, 0, 3, 2, 1);
+
+        Scene scene = new Scene(grid);
+        parametreStage.setScene(scene);
+        parametreStage.setTitle("Parametre");
+        parametreStage.show();
+    }
+        
     public static void main(String[] args) {
         launch(args);
     }
