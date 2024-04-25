@@ -18,9 +18,9 @@ public class Revetement {
         this.pourPlafond = plafond;
         this.prixUnitaire = prix;}
 
-    public void main(String[] args) {
+    public void recuprevet (String[] args) {
         try { 
-            File csvFile = new File("CatalogueRevetements.txt");
+            File csvFile = new File("C:\\Users\\natha\\Documents\\NetBeansProjects\\Projet-S2\\src\\main\\java\\com\\mycompany\\projet\\s2\\CatalogueRevetements.txt");
             FileReader fr = new FileReader(csvFile);
             BufferedReader br = new BufferedReader(fr); 
             String line;
@@ -40,6 +40,7 @@ public class Revetement {
                 double prix = Double.parseDouble(parties[5]);
 
                 Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                r.toString();
                 Principale.listeRevetement.add(r);}} 
     
         catch (FileNotFoundException e){
@@ -59,5 +60,9 @@ public class Revetement {
                 ", pourPlafond=" + pourPlafond +
                 ", prixUnitaire=" + prixUnitaire +
                 '}';
+    }
+    
+    public String afficher() {
+        return idRevetement+" | " + designation + " - " + prixUnitaire;
     }
 }
