@@ -13,13 +13,13 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException{
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(Fichier);
+        menuBar.getMenus().addAll(fichier);
         menuBar.setUseSystemMenuBar(true);
         
         BorderPane layout = new BorderPane();
         layout.setTop(menuBar);
         
-        Menu Fichier = new Menu("File");
+        Menu fichier = new Menu("Fichier");
         MenuItem item1 = new MenuItem("Ouvrir");
         MenuItem item2 = new MenuItem("Enregistrer");
         MenuItem item3 = new MenuItem("Fermer");
