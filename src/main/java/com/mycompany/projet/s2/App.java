@@ -45,10 +45,11 @@ public class App extends Application {
         hbox.getChildren().addAll(menuBar, creation);
 
         BorderPane layout = new BorderPane();
+        Pane root = new Pane();        
+        
         layout.setTop(hbox);
         layout.setRight(vboxrevet);
-
-        Pane root = new Pane();
+        layout.setCenter(root);
 
         // Quadrillage
         for (int row = 0; row <= rows; row++) {
@@ -118,8 +119,9 @@ public class App extends Application {
                 doubleclic.bool = true;}});
         
         
-        layout.setCenter(root);
-
+        for (int i=0;i<Principale.listeRevetement.size();i++){                 
+            vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficher()));}}
+        
         if (creation.getValue().equals("Mur")){
             vboxrevet.getChildren().clear();
             for (int i=0;i<Principale.listeRevetement.size();i++){                 
@@ -140,7 +142,7 @@ public class App extends Application {
         
         Scene scene = new Scene(layout, cols * cellSize, rows * cellSize);
         stage.setScene(scene);
-        stage.setTitle("Menu et Quadrillage avec Points");
+        stage.setTitle("Devis");
         stage.show();
     }
    
