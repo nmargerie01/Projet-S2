@@ -12,15 +12,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException{
-        Menu Fichier = new Menu("File");
-        MenuItem item1 = new MenuItem("Ouvrir");
-        MenuItem item2 = new MenuItem("Enregistrer");
-        MenuItem item3 = new MenuItem("Fermer");
-        Fichier.getItems().addAll(item1,item2,item3);        
-        
-        ChoiceBox Creation = new ChoiceBox<String>
-                
-        
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(Fichier);
         menuBar.setUseSystemMenuBar(true);
@@ -28,8 +19,11 @@ public class App extends Application {
         BorderPane layout = new BorderPane();
         layout.setTop(menuBar);
         
-        
-
+        Menu Fichier = new Menu("File");
+        MenuItem item1 = new MenuItem("Ouvrir");
+        MenuItem item2 = new MenuItem("Enregistrer");
+        MenuItem item3 = new MenuItem("Fermer");
+        Fichier.getItems().addAll(item1,item2,item3);        
         item1.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent t){
@@ -40,6 +34,14 @@ public class App extends Application {
                 alert.show();
             }
         });
+
+        
+        ChoiceBox Creation = new ChoiceBox<String>
+                
+        
+        
+        
+
 
         
         Scene scene = new Scene (layout, 500,500);
