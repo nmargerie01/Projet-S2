@@ -62,7 +62,6 @@ public class App extends Application {
         
         root.setOnMouseClicked(event -> {
             
-            doubleclic.bool = false;
 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
