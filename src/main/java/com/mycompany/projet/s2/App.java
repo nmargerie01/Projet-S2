@@ -21,7 +21,7 @@ public class App extends Application {
     private double x1,x2,x3,x4,y1,y2,y3,y4,x,y,a,b,c,d;
     BooleanData doubleclic,deuxclic,troisclic,quatreclic = new BooleanData();
     VBox vboxrevet,vboxrevet2,legende = new VBox();
-    Label titre,titre2,lab3,echelle,indication,surfaceausol,chiffresurface,prix,chiffreprix = new Label();
+    Label titre,titre2,lab3,echelle,indication,surfaceausol,chiffresurface,leprix,chiffreprix = new Label();
     TextField text3 = new TextField();
     HBox hbox,hsurfaceausol,hprix = new HBox();
     ChoiceBox<String> creation = new ChoiceBox<>();
@@ -36,16 +36,16 @@ public class App extends Application {
         echelle.setPadding(new Insets(0,20,0,20));
         hsurfaceausol.setPadding(new Insets(200,0,0,0));
         hprix.setPadding(new Insets(80,0,0,0));
-        prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        leprix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         surfaceausol.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         echelle.setText("1carr. = 1m");
         surfaceausol.setText("Surface au sol :");
-        prix.setText("Prix :");
+        leprix.setText("Prix :");
         echelle.setStyle("-fx-font-weight: bold");
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
-        chiffreprix.setText("0");
+        chiffresurface.setText("0");
         chiffreprix.setText("0");
         doubleclic.bool = false;
         deuxclic.bool = false;
@@ -132,8 +132,8 @@ public class App extends Application {
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         hsurfaceausol.getChildren().addAll(surfaceausol,new Label(" "),chiffresurface);
-        hprix.getChildren().addAll(prix,new Label(" "),chiffreprix);
-        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2,surfaceausol,prix);
+        hprix.getChildren().addAll(leprix,new Label(" "),chiffreprix);
+        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2,surfaceausol,leprix);
         legende.setPadding(new Insets (20));
     }
     private void Legendemur(){
@@ -173,9 +173,9 @@ public class App extends Application {
     private void Coin(){
         Circle circle = new Circle(x, y, pointSize, Color.BLACK);
         root.getChildren().add(circle);
-        Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
-        Principale.listeCoin.add(c);
-        c.afficher();
+        Coin k = new Coin(Principale.listeCoin.size() + 1, x, y);
+        Principale.listeCoin.add(k);
+        k.afficher();
     }
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
