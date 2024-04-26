@@ -172,6 +172,12 @@ public class Principale {
                 return mur;}}
         return null;}
     
+        public static Mur recherchemurparcoordonnee (double x, double y,double w, double z){
+        for (Mur mur : listeMur) {
+            if ((mur.CoinDebut.x == x) && (mur.CoinDebut.y == y) && (mur.CoinFin.x == w) && (mur.CoinFin.y == z))
+                return mur;}
+        return null;}
+    
     public Sol recherchesol (int id) {
         for (Sol sol : listeSol) {
             if (sol.idSol == id) {

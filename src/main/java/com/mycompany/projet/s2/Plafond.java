@@ -27,6 +27,15 @@ public class Plafond {
                 ", revplafond=" + revplafond +
                 '}';}
     
+    public void afficher() {
+        System.out.println ("Plafond(" +idPlafond +
+                "," + coin1 + 
+                "," + coin2 +
+                "," + coin3 +
+                "," + coin4 +
+                "," + revplafond +
+                ')');
+    }
     public double surface() {
         double l,L,surface;
         l=Math.sqrt(((this.coin1.x-this.coin2.x)*(this.coin1.x-this.coin2.x))+((this.coin1.y-this.coin2.y)*(this.coin1.y-this.coin2.y)));

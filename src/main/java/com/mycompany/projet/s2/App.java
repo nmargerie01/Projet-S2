@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -23,9 +24,9 @@ public class App extends Application {
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3;
     BooleanData doubleclic = new BooleanData();
-    BooleanData tripleclic = new BooleanData();
+    BooleanData deuxclic = new BooleanData();
+    BooleanData troisclic = new BooleanData();
     BooleanData quatreclic = new BooleanData();
-    BooleanData dernierclic = new BooleanData();
     VBox vboxrevet = new VBox();
     Label titre = new Label();
     VBox vboxrevet2 = new VBox();
@@ -123,7 +124,11 @@ public class App extends Application {
                 root.getChildren().add(circle);
                 Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
                 Principale.listeCoin.add(c);
-                doubleclic.bool = false;}
+                c.afficher();
+                doubleclic.bool = false;
+                deuxclic.bool = false;
+                troisclic.bool = false;
+                quatreclic.bool = false;}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur") && (doubleclic.bool == true)){
@@ -137,6 +142,7 @@ public class App extends Application {
                 Revetement revetement = Principale.rechercherevetement(p3);
                 Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,p1,p2,revetement);
                 Principale.listeMur.add(mur);
+                mur.afficher();
                 doubleclic.bool = false;}
                 
             if (creation.getValue().equals("Mur")){
@@ -145,20 +151,59 @@ public class App extends Application {
                 doubleclic.bool = true;}
         
             // Creation d'une piece
+            if (creation.getValue().equals("Piece") && (deuxclic.bool = false)){
+                x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                deuxclic.bool = false;
+                troisclic.bool = true;}
+            
+            if (creation.getValue().equals("Piece") && (troisclic.bool = false)){
+                x3 = Math.floor(event.getX() / cellSize) * cellSize;
+                y3 = Math.floor(event.getY() / cellSize) * cellSize;
+                troisclic.bool = false;
+                quatreclic.bool = true;}
+            
+            if (creation.getValue().equals("Piece") && (quatreclic.bool = false)){
+                x4 = Math.floor(event.getX() / cellSize) * cellSize;
+                y4 = Math.floor(event.getY() / cellSize) * cellSize;
+                quatreclic.bool = false;
+                Polygon rectangle = new Polygon(x1, y1, x2, y2, x3, y3, x4, y4);
+                rectangle.setFill(Color.BLUE);
+                root.getChildren().add(rectangle);
+                ArrayList<Mur> listemurs = new ArrayList<>(); 
+                Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
+                Coin coin2 = Principale.recherchecoinparcoordonnee(x2, y2);
+                Coin coin3 = Principale.recherchecoinparcoordonnee(x3, y3);
+                Coin coin4 = Principale.recherchecoinparcoordonnee(x4, y4);
+                Mur mur1 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                Mur mur2 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                Mur mur3 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                listemurs.add(mur1);
+                listemurs.add(mur2);
+                listemurs.add(mur3);
+                listemurs.add(mur4);
+                fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond"," ");
+                Revetement revsol = Principale.rechercherevetement(p1);
+                Revetement revplafond = Principale.rechercherevetement(p2);                
+                Sol sol = new Sol(Principale.listeSol.size()+1,coin1,coin2,coin3,coin4,revsol);
+                Principale.listeSol.add(sol);
+                sol.afficher();
+                Plafond plafond = new Plafond(Principale.listePlafond.size()+1,coin1,coin2,coin3,coin4,revplafond);
+                Principale.listePlafond.add(plafond);
+                plafond.afficher();
+                Piece p = new Piece(Principale.listePiece.size()+1,sol,plafond,listemurs);
+                Principale.listePiece.add(p) ;
+                p.}
+            
             if (creation.getValue().equals("Piece")){
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                Rectangle square = new Rectangle();
-                root.getChildren().add(square);
-                Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
-                Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
+                deuxclic.bool = true;}
+
+            // Légende   
                 
-                
-                    
-                }
-        
-            if (creation.getValue().equals("Coin")){
-                
+            if (creation.getValue().equals("Coin")){           
                 vboxrevet.getChildren().clear();
                 titre.setText("Tout les revetement"); 
                 vboxrevet2.getChildren().clear();
@@ -168,7 +213,6 @@ public class App extends Application {
                     vboxrevet.getChildren().add(label);}}
             
             if (creation.getValue().equals("Mur")){
-
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de mur"); 
                 vboxrevet2.getChildren().clear();
@@ -177,20 +221,17 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourMur == true) {
                         vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
             
-            if (creation.getValue().equals("Piece")){
-                
+            if (creation.getValue().equals("Piece")){             
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de sol"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                     if (Principale.listeRevetement.get(i).pourSol == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
-                
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}                
                 vboxrevet2.getChildren().clear();
                 titre2.setText("Revetement de plafond"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                     if (Principale.listeRevetement.get(i).pourPlafond == true) {
                         vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
-    
         
         
         Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
@@ -237,7 +278,7 @@ public class App extends Application {
         Scene scene = new Scene(grid);
         fenetreparametre.setScene(scene);
         fenetreparametre.setTitle("Parametre");
-        fenetreparametre.show();}
+        fenetreparametre.showAndWait();}
     
     public static void main (String[] args) {
         launch(args);

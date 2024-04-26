@@ -13,4 +13,6 @@ public class Coin {
     public String toString(){
         return idCoin+"("+x+","+y+")" ;
     }
-}
+    public void afficher(){
+        System.out.println(idCoin+"("+x+","+y+")"); 
+}}
