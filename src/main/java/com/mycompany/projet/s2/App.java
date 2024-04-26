@@ -35,33 +35,24 @@ public class App extends Application {
     TextField text3 = new TextField();
     HBox hbox = new HBox();
     ChoiceBox<String> creation = new ChoiceBox<>();
+    BorderPane layout = new BorderPane();
+    Pane root = new Pane(); 
+    VBox legende = new VBox();
 
-
-
-   
+    
     @Override
     public void start(Stage stage) throws Exception {
         
         Recuperationdesrevetement();
-        
         Barredemenu();
-             
+        Quadrillage();
+        Legende();
         
-        for (int i=0;i<Principale.listeRevetement.size();i++){ 
-            Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-            vboxrevet.getChildren().add(label);}        
-        vboxrevet2.getChildren().clear();
-        titre2.setText("");
-        titre.setText("Tout les revetement"); 
-        titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-        titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-
         doubleclic.bool = true;
         deuxclic.bool = false;
         troisclic.bool = false;
         quatreclic.bool = false;
-        VBox legende = new VBox(titre,vboxrevet,titre2,vboxrevet2);
-        legende.setPadding(new Insets (20));
+        
         
         BorderPane layout = new BorderPane();
         Pane root = new Pane(); 
@@ -69,12 +60,7 @@ public class App extends Application {
         layout.setRight(legende);
         layout.setCenter(root);
 
-        // Quadrillage
-        for (int row = 0; row <= rows; row++) {
-            for (int col = 0; col <= cols; col++) {
-                double varx = col * cellSize;
-                double vary = row * cellSize;
-                root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
+       
         
         root.setOnMouseClicked(event -> {
                                 
@@ -206,6 +192,31 @@ if (creation.getValue().equals("Mur")) {
         stage.show();
     }
    
+    private void Legende(){
+        for (int i=0;i<Principale.listeRevetement.size();i++){ 
+            Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
+            vboxrevet.getChildren().add(label);}        
+        vboxrevet2.getChildren().clear();
+        titre2.setText("");
+        titre.setText("Tout les revetement"); 
+        titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+
+        doubleclic.bool = true;
+        deuxclic.bool = false;
+        troisclic.bool = false;
+        quatreclic.bool = false;
+        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
+        legende.setPadding(new Insets (20));
+    }
+    private void Quadrillage(){
+        for (int row = 0; row <= rows; row++) {
+            for (int col = 0; col <= cols; col++) {
+                double varx = col * cellSize;
+                double vary = row * cellSize;
+                root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
+    }
+    
     private void Barredemenu(){
     MenuItem item1 = new MenuItem("Ouvrir");
         MenuItem item2 = new MenuItem("Enregistrer");
