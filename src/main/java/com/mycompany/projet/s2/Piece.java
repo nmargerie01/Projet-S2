@@ -6,7 +6,7 @@ public class Piece {
     int idPiece;
     Sol sol;
     Plafond plafond;
-    ArrayList<Mur> listemurs = new ArrayList<>();    
+    static ArrayList<Mur> listemurs = new ArrayList<>();    
     
     Piece (int id, Sol sol, Plafond plafond, ArrayList<Mur> listemurs){
         this.idPiece = id;
@@ -29,4 +29,12 @@ public class Piece {
             montantmurs = montantmurs + this.listemurs.get(i).montantrevetement();}
         double montant = montantmurs + montantsolplafond;
         return montant;}
+    
+    public void aficher() {
+        System.out.println ("Piece(" +idPiece +
+                "," + sol + 
+                "," + plafond +
+                "," + listemurs +
+                ')');
+    }
 }
