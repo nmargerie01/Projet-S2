@@ -95,9 +95,7 @@ public class App extends Application {
                 x4 = Math.floor(event.getX() / cellSize) * cellSize;
                 y4 = Math.floor(event.getY() / cellSize) * cellSize;
                 quatreclic.bool = false;
-                Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
-                rectangle.setFill(Color.GOLD);
-                root.getChildren().add(rectangle);
+                
                 ArrayList<Mur> listemurs = new ArrayList<>(); 
                 Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
                 Coin coin2 = Principale.recherchecoinparcoordonnee(x2, y2);
@@ -122,7 +120,10 @@ public class App extends Application {
                 plafond.afficher();
                 Piece p = new Piece(Principale.listePiece.size()+1,sol,plafond,listemurs);
                 Principale.listePiece.add(p) ;
-                p.afficher();}
+                p.afficher();
+                Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
+                rectangle.setFill(Color.GOLD);
+                root.getChildren().add(rectangle);}
             
             if (troisclic.bool == true){
                 x3 = Math.floor(event.getX() / cellSize) * cellSize;
