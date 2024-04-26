@@ -60,6 +60,7 @@ public class App extends Application {
                 double prix = Double.parseDouble(parties[5]);
 
                 Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                r.afficher();
                 Principale.listeRevetement.add(r);}} 
     
         catch (FileNotFoundException e){
@@ -132,6 +133,7 @@ public class App extends Application {
                 root.getChildren().add(line);
                 Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
                 Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
+                fenetreparametre ("Mur","Nb de fenetres","Nb de portes","n° du revetement");
                 Revetement revetement = Principale.rechercherevetement(p3);
                 Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,p1,p2,revetement);
                 Principale.listeMur.add(mur);
@@ -189,7 +191,7 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourPlafond == true) {
                         vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
     
-       
+        
         
         Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
         stage.setScene(scene);
