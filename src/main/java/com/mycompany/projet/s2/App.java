@@ -191,9 +191,9 @@ public class App extends Application {
     private void Coin(){
         Circle circle = new Circle(x, y, pointSize, Color.BLACK);
         root.getChildren().add(circle);
-        Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
-        Principale.listeCoin.add(c);
-        c.afficher();
+        Coin k = new Coin(Principale.listeCoin.size() + 1, x, y);
+        Principale.listeCoin.add(k);
+        k.afficher();
     }
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
@@ -236,9 +236,9 @@ public class App extends Application {
                 boolean plafond = false;
                 if (Integer.valueOf(parties[4]) == 1){
                     plafond = true;}
-                double prix = Double.parseDouble(parties[5]);
+                double leprix = Double.parseDouble(parties[5]);
 
-                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                Revetement r = new Revetement(id, nom, mur, sol, plafond, leprix);
                 r.afficher();
                 Principale.listeRevetement.add(r);}} 
     
