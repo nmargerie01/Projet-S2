@@ -23,6 +23,7 @@ public class App extends Application {
     private final int pointSize = 2; 
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3;
+    private double x, y;
     BooleanData doubleclic = new BooleanData();
     BooleanData deuxclic = new BooleanData();
     BooleanData troisclic = new BooleanData();
@@ -48,7 +49,6 @@ public class App extends Application {
         Quadrillage();
         Legende();
         
-        doubleclic.bool = false;
         deuxclic.bool = false;
         troisclic.bool = false;
         quatreclic.bool = false;
@@ -61,25 +61,29 @@ public class App extends Application {
        
         
         root.setOnMouseClicked(event -> {
-                                
+            
+            doubleclic.bool = false;
+
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                x = Math.floor(event.getX() / cellSize) * cellSize;
+                y = Math.floor(event.getY() / cellSize) * cellSize;
                 Coin();}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
                 if (!doubleclic.bool){
-                x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                y2 = Math.floor(event.getY() / cellSize) * cellSize;
-                fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
-                Mur();
-                doubleclic.bool = false;}       
-            else {
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                doubleclic.bool = true;}
+                    x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                    fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
+                    Mur();
+                    lablabmur.setText("Coin CACA");
+                    doubleclic.bool = false;}       
+                else {
+                    x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                    lablabmur.setText("Coin 2");
+                    doubleclic.bool = true;}
 }
 
         
@@ -200,9 +204,9 @@ public class App extends Application {
         Principale.listeMur.add(mur);
         mur.afficher();}
     private void Coin(){
-        Circle circle = new Circle(x1, y1, pointSize, Color.BLACK);
+        Circle circle = new Circle(x, y, pointSize, Color.BLACK);
         root.getChildren().add(circle);
-        Coin c = new Coin(Principale.listeCoin.size() + 1, x1, y1);
+        Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
         Principale.listeCoin.add(c);
         c.afficher();
     }
