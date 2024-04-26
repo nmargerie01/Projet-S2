@@ -1,11 +1,7 @@
 package com.mycompany.projet.s2;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -42,33 +38,24 @@ public class App extends Application {
     VBox legende = new VBox();
     Label echelle = new Label();
     Label indication = new Label();
+    Label surfaceausol = new Label();
+    Label chiffresurface = new Label();
+    Label prix = new Label();
+    Label chiffreprix = new Label();
+    HBox hsurfaceausol = new HBox();
+    HBox hprix = new HBox();
+
     
     @Override
     public void start(Stage stage) throws Exception {
-        
+        Initialisation();
         Recuperationdesrevetement();
         Barredemenu();
         Quadrillage();
         Legende();
-        
-        indication.setPadding(new Insets(0,0,0,20));
-        echelle.setPadding(new Insets(0,20,0,20));
-        echelle.setText("1carr. = 1m");
-        echelle.setStyle("-fx-font-weight: bold");
-        layout.setTop(hbox);
-        layout.setRight(legende);
-        layout.setCenter(root);
-        
-        doubleclic.bool = false;
-        deuxclic.bool = false;
-        troisclic.bool = false;
-        quatreclic.bool = false;
-        
-       
-        
+
         root.setOnMouseClicked(event -> {
             
-
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
                 Legende();
@@ -79,7 +66,7 @@ public class App extends Application {
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
-                      
+                Legendemur();      
                 if (doubleclic.bool == true){
                     c = Math.floor(event.getX() / cellSize) * cellSize;
                     d = Math.floor(event.getY() / cellSize) * cellSize;
@@ -125,27 +112,33 @@ public class App extends Application {
                     indication.setText("Selectionner le 2eme coin de la piece");
                     deuxclic.bool = true;}}
 
-               
-                
-            
-            
-            if (creation.getValue().equals("Mur")){
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de mur"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourMur == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
-            
-            
-        
-        Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
-        stage.setScene(scene);
-        stage.setTitle("Devis");
-        stage.show();
+    Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
+    stage.setScene(scene);
+    stage.setTitle("Devis");
+    stage.show();
     });}
    
+    private void Initialisation(){
+        indication.setPadding(new Insets(0,0,0,20));
+        echelle.setPadding(new Insets(0,20,0,20));
+        hsurfaceausol.setPadding(new Insets(200,0,0,0));
+        hprix.setPadding(new Insets(80,0,0,0));
+        prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        surfaceausol.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        echelle.setText("1carr. = 1m");
+        surfaceausol.setText("Surface au sol :");
+        prix.setText("Prix :");
+        echelle.setStyle("-fx-font-weight: bold");
+        layout.setTop(hbox);
+        layout.setRight(legende);
+        layout.setCenter(root);
+        chiffreprix.setText("0");
+        chiffreprix.setText("0");
+        doubleclic.bool = false;
+        deuxclic.bool = false;
+        troisclic.bool = false;
+        quatreclic.bool = false;
+    }
     private void Legende(){
         for (int i=0;i<Principale.listeRevetement.size();i++){ 
             Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
@@ -155,7 +148,9 @@ public class App extends Application {
         titre.setText("Tout les revetement"); 
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
+        hsurfaceausol.getChildren().addAll(surfaceausol,new Label(" "),chiffresurface);
+        hprix.getChildren().addAll(prix,new Label(" "),chiffreprix);
+        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2,surfaceausol,prix);
         legende.setPadding(new Insets (20));
     }
     private void Legendemur(){
