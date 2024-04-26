@@ -38,7 +38,7 @@ public class App extends Application {
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
-    
+    Label lablabmur = new Label();
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -48,7 +48,7 @@ public class App extends Application {
         Quadrillage();
         Legende();
         
-        doubleclic.bool = true;
+        doubleclic.bool = false;
         deuxclic.bool = false;
         troisclic.bool = false;
         quatreclic.bool = false;
@@ -71,15 +71,15 @@ public class App extends Application {
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
                 if (!doubleclic.bool){
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                doubleclic.bool = true;}       
-            else {
                 x2 = Math.floor(event.getX() / cellSize) * cellSize;
                 y2 = Math.floor(event.getY() / cellSize) * cellSize;
                 fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                 Mur();
-                doubleclic.bool = false;}
+                doubleclic.bool = false;}       
+            else {
+                x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                doubleclic.bool = true;}
 }
 
         
@@ -225,8 +225,8 @@ public class App extends Application {
         
         creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
-
-        hbox.getChildren().addAll(menuBar, creation);}
+        lablabmur.setText("Coin 1");
+        hbox.getChildren().addAll(menuBar, creation,lablabmur);}
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
