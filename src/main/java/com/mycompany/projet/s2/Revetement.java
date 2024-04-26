@@ -1,6 +1,5 @@
 package com.mycompany.projet.s2;
 
-import java.io.*;
 
 public class Revetement {
     int idRevetement;
