@@ -30,7 +30,7 @@ public class Piece {
         double montant = montantmurs + montantsolplafond;
         return montant;}
     
-    public void aficher() {
+    public void afficher() {
         System.out.println ("Piece(" +idPiece +
                 "," + sol + 
                 "," + plafond +

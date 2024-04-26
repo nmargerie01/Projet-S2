@@ -194,7 +194,7 @@ public class App extends Application {
                 plafond.afficher();
                 Piece p = new Piece(Principale.listePiece.size()+1,sol,plafond,listemurs);
                 Principale.listePiece.add(p) ;
-                p.}
+                p.afficher();}
             
             if (creation.getValue().equals("Piece")){
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
