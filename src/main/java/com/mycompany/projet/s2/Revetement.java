@@ -34,5 +34,12 @@ public class Revetement {
     public String afficherlegende() {
         return idRevetement+" | " + designation + " - " + prixUnitaire;
     }
-    
-    }
+    public String afficher() {
+        return "Revetement(" + idRevetement +
+                "," + designation + 
+                "," + pourMur +
+                "," + pourSol +
+                "," + pourPlafond +
+                "," + prixUnitaire +
+                ')';
+    }}
