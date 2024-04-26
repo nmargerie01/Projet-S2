@@ -168,13 +168,6 @@ public class App extends Application {
                 parametreStage.show();}
                 
             if (creation.getValue().equals("Mur")){
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de mur"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourMur == true) {
-                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
                 doubleclic.bool = true;}
@@ -232,22 +225,32 @@ public class App extends Application {
                 vboxrevet2.getChildren().clear();
                 titre2.setText("");
                 for (int i=0;i<Principale.listeRevetement.size();i++){ 
-                Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-                vboxrevet.getChildren().add(label);}}
+                    Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
+                    vboxrevet.getChildren().add(label);}}
             
-            if (creation.getValue().equals("Plafond")){
+            if (creation.getValue().equals("Mur")){
+
+                vboxrevet.getChildren().clear();
+                titre.setText("Revetement de mur"); 
+                vboxrevet2.getChildren().clear();
+                titre2.setText("");
+                for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                    if (Principale.listeRevetement.get(i).pourMur == true) {
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+            
+            if (creation.getValue().equals("Piece")){
                 
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de sol"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourSol == true) {
-                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+                    if (Principale.listeRevetement.get(i).pourSol == true) {
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
                 
                 vboxrevet2.getChildren().clear();
                 titre2.setText("Revetement de plafond"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                    vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
+                    if (Principale.listeRevetement.get(i).pourPlafond == true) {
+                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
     
        
         
