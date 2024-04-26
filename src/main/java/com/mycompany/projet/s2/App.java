@@ -54,7 +54,7 @@ public class App extends Application {
         indication.setPadding(new Insets(0,0,0,20));
         echelle.setPadding(new Insets(0,20,0,20));
         echelle.setText("1carr. = 1m");
-        echelle.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        echelle.setStyle("-fx-font-weight: bold");
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -71,6 +71,7 @@ public class App extends Application {
 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
+                Legende();
                 x = Math.floor(event.getX() / cellSize) * cellSize;
                 y = Math.floor(event.getY() / cellSize) * cellSize;
                 indication.setText("Cliquer pour mettre un coin");
@@ -95,45 +96,38 @@ public class App extends Application {
         
             // Creation d'une piece
             if (creation.getValue().equals("Piece")){
+                Legendepiece();
+                if (quatreclic.bool == true){
+                    x4 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y4 = Math.floor(event.getY() / cellSize) * cellSize;
+                    quatreclic.bool = false;
+                    fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
+                    indication.setText("Selectionner le 1eme coin de la piece");
+                    Piece();}
             
-            if (quatreclic.bool == true){
-                x4 = Math.floor(event.getX() / cellSize) * cellSize;
-                y4 = Math.floor(event.getY() / cellSize) * cellSize;
-                quatreclic.bool = false;
-                fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
-                indication.setText("Selectionner le 1eme coin de la piece");
-                Piece();}
+                else if (troisclic.bool == true){
+                    x3 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y3 = Math.floor(event.getY() / cellSize) * cellSize;
+                    troisclic.bool = false;
+                    quatreclic.bool = true;
+                    indication.setText("Selectionner le 4eme coin de la piece");}
             
-            else if (troisclic.bool == true){
-                x3 = Math.floor(event.getX() / cellSize) * cellSize;
-                y3 = Math.floor(event.getY() / cellSize) * cellSize;
-                troisclic.bool = false;
-                quatreclic.bool = true;
-                indication.setText("Selectionner le 4eme coin de la piece");}
+                else if (deuxclic.bool == true){
+                    x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                    indication.setText("Selectionner le 3eme coin de la piece");
+                    deuxclic.bool = false;
+                    troisclic.bool = true;}
             
-            else if (deuxclic.bool == true){
-                x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                y2 = Math.floor(event.getY() / cellSize) * cellSize;
-                indication.setText("Selectionner le 3eme coin de la piece");
-                deuxclic.bool = false;
-                troisclic.bool = true;}
-            
-            else{
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                indication.setText("Selectionner le 2eme coin de la piece");
-                deuxclic.bool = true;}}
+                else{
+                    x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                    y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                    indication.setText("Selectionner le 2eme coin de la piece");
+                    deuxclic.bool = true;}}
 
-            // Légende   
+               
                 
-            if (creation.getValue().equals("Coin")){           
-                vboxrevet.getChildren().clear();
-                titre.setText("Tout les revetement"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){ 
-                    Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-                    vboxrevet.getChildren().add(label);}}
+            
             
             if (creation.getValue().equals("Mur")){
                 vboxrevet.getChildren().clear();
@@ -144,24 +138,13 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourMur == true) {
                         vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
             
-            if (creation.getValue().equals("Piece")){             
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de sol"); 
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourSol == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}                
-                vboxrevet2.getChildren().clear();
-                titre2.setText("Revetement de plafond"); 
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
-        
+            
         
         Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
-    }
+    });}
    
     private void Legende(){
         for (int i=0;i<Principale.listeRevetement.size();i++){ 
@@ -172,14 +155,29 @@ public class App extends Application {
         titre.setText("Tout les revetement"); 
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-
-        doubleclic.bool = true;
-        deuxclic.bool = false;
-        troisclic.bool = false;
-        quatreclic.bool = false;
         legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
     }
+    private void Legendemur(){
+        vboxrevet.getChildren().clear();
+        titre.setText("Revetement de mur"); 
+        vboxrevet2.getChildren().clear();
+        titre2.setText("");
+            for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                if (Principale.listeRevetement.get(i).pourMur == true) {
+                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}    
+    private void Legendepiece(){
+        vboxrevet.getChildren().clear();
+        titre.setText("Revetement de sol"); 
+        for (int i=0;i<Principale.listeRevetement.size();i++){                 
+            if (Principale.listeRevetement.get(i).pourSol == true) {
+                vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}                
+        vboxrevet2.getChildren().clear();
+        titre2.setText("Revetement de plafond"); 
+        for (int i=0;i<Principale.listeRevetement.size();i++){                 
+            if (Principale.listeRevetement.get(i).pourPlafond == true) {
+                vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));
+    }}}
     private void Piece (){
                 Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
                 rectangle.setFill(Color.BEIGE);
