@@ -38,7 +38,7 @@ public class App extends Application {
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
-
+    
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -53,9 +53,7 @@ public class App extends Application {
         troisclic.bool = false;
         quatreclic.bool = false;
         
-        
-        BorderPane layout = new BorderPane();
-        Pane root = new Pane(); 
+               
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -75,30 +73,17 @@ public class App extends Application {
                 c.afficher();}
             
             // Creation d'un mur
-            // Création d'un mur
-if (creation.getValue().equals("Mur")) {
-    if (!doubleclic.bool) {
-        // Premier clic
-        x1 = Math.floor(event.getX() / cellSize) * cellSize;
-        y1 = Math.floor(event.getY() / cellSize) * cellSize;
-        doubleclic.bool = true;
-    } else {
-        // Deuxième clic
-        x2 = Math.floor(event.getX() / cellSize) * cellSize;
-        y2 = Math.floor(event.getY() / cellSize) * cellSize;
-        // Créer le mur avec les deux points
-        Line line = new Line(x1, y1, x2, y2);
-        root.getChildren().add(line);
-        Coin debut = Principale.recherchecoinparcoordonnee(x1, y1);
-        Coin fin = Principale.recherchecoinparcoordonnee(x2, y2);
-        fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
-        Revetement revetement = Principale.rechercherevetement(p3);
-        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
-        Principale.listeMur.add(mur);
-        mur.afficher();
-        // Réinitialiser pour le prochain mur
-        doubleclic.bool = false;
-    }
+            if (creation.getValue().equals("Mur")) {
+                if (!doubleclic.bool){
+                x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                doubleclic.bool = true;}       
+            else {
+                x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
+                Mur();
+                doubleclic.bool = false;}
 }
 
         
@@ -209,6 +194,15 @@ if (creation.getValue().equals("Mur")) {
         legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
     }
+    private void Mur(){
+        Line line = new Line(x1, y1, x2, y2);
+        root.getChildren().add(line);
+        Coin debut = Principale.recherchecoinparcoordonnee(x1, y1);
+        Coin fin = Principale.recherchecoinparcoordonnee(x2, y2);
+        Revetement revetement = Principale.rechercherevetement(p3);
+        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
+        Principale.listeMur.add(mur);
+        mur.afficher();}
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
@@ -216,7 +210,6 @@ if (creation.getValue().equals("Mur")) {
                 double vary = row * cellSize;
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
-    
     private void Barredemenu(){
     MenuItem item1 = new MenuItem("Ouvrir");
         MenuItem item2 = new MenuItem("Enregistrer");
@@ -231,7 +224,6 @@ if (creation.getValue().equals("Mur")) {
         creation.setValue("Coin");
 
         hbox.getChildren().addAll(menuBar, creation);}
-    
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
@@ -263,7 +255,6 @@ if (creation.getValue().equals("Mur")) {
     
         catch (IOException err){
             System.out.println("Erreur de lecture du fichier: " + err);}}
-        
     private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
         Stage fenetreparametre = new Stage();
         fenetreparametre.setTitle(title);
@@ -303,7 +294,6 @@ if (creation.getValue().equals("Mur")) {
         fenetreparametre.setScene(scene);
         fenetreparametre.setTitle("Parametre");
         fenetreparametre.showAndWait();}
-    
     public static void main (String[] args) {
         launch(args);
     }
