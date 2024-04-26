@@ -49,9 +49,6 @@ public class App extends Application {
         Quadrillage();
         Legende();
         
-        deuxclic.bool = false;
-        troisclic.bool = false;
-        quatreclic.bool = false;
         
                
         layout.setTop(hbox);
@@ -59,7 +56,10 @@ public class App extends Application {
         layout.setCenter(root);
         
         doubleclic.bool = false;
-
+        deuxclic.bool = false;
+        troisclic.bool = false;
+        quatreclic.bool = false;
+        
        
         
         root.setOnMouseClicked(event -> {
@@ -89,24 +89,14 @@ public class App extends Application {
 
         
             // Creation d'une piece
-            if (creation.getValue().equals("Piece") && (!deuxclic.bool)){
-                x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                y2 = Math.floor(event.getY() / cellSize) * cellSize;
-                deuxclic.bool = false;
-                troisclic.bool = true;}
+            if (creation.getValue().equals("Piece")){
             
-            if (creation.getValue().equals("Piece") && (!troisclic.bool)){
-                x3 = Math.floor(event.getX() / cellSize) * cellSize;
-                y3 = Math.floor(event.getY() / cellSize) * cellSize;
-                troisclic.bool = false;
-                quatreclic.bool = true;}
-            
-            if (creation.getValue().equals("Piece") && (!quatreclic.bool)){
+            if (quatreclic.bool == true){
                 x4 = Math.floor(event.getX() / cellSize) * cellSize;
                 y4 = Math.floor(event.getY() / cellSize) * cellSize;
                 quatreclic.bool = false;
-                Polygon rectangle = new Polygon(x1, y1, x2, y2, x3, y3, x4, y4);
-                rectangle.setFill(Color.BLUE);
+                Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
+                rectangle.setFill(Color.GOLD);
                 root.getChildren().add(rectangle);
                 ArrayList<Mur> listemurs = new ArrayList<>(); 
                 Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
@@ -121,7 +111,7 @@ public class App extends Application {
                 listemurs.add(mur2);
                 listemurs.add(mur3);
                 listemurs.add(mur4);
-                fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond"," ");
+                fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
                 Revetement revsol = Principale.rechercherevetement(p1);
                 Revetement revplafond = Principale.rechercherevetement(p2);                
                 Sol sol = new Sol(Principale.listeSol.size()+1,coin1,coin2,coin3,coin4,revsol);
@@ -134,10 +124,22 @@ public class App extends Application {
                 Principale.listePiece.add(p) ;
                 p.afficher();}
             
-            if (creation.getValue().equals("Piece")){
+            if (troisclic.bool == true){
+                x3 = Math.floor(event.getX() / cellSize) * cellSize;
+                y3 = Math.floor(event.getY() / cellSize) * cellSize;
+                troisclic.bool = false;
+                quatreclic.bool = true;}
+            
+            if (deuxclic.bool == true){
+                x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                deuxclic.bool = false;
+                troisclic.bool = true;}
+            
+            else{
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                deuxclic.bool = true;}
+                deuxclic.bool = true;}}
 
             // Légende   
                 
@@ -280,9 +282,11 @@ public class App extends Application {
         TextField text2 = new TextField();      
         text2.setPromptText("Nombre");
         
-        if ((parametre3) != (" ")){
+        if ((parametre3) != ("")){
         lab3.setText(parametre3);       
-        text3.setPromptText("Nombre");}
+        text3.setPromptText("Nombre");
+        grid.add(lab3, 0, 2);
+        grid.add(text3, 1, 2);}
         
         Button valider = new Button("Valider");
         valider.setOnAction(event2 -> {
@@ -295,8 +299,6 @@ public class App extends Application {
         grid.add(text1, 1, 0);
         grid.add(lab2, 0, 1);
         grid.add(text2, 1, 1);
-        grid.add(lab3, 0, 2);
-        grid.add(text3, 1, 2);
         grid.add(valider, 0, 3, 2, 1);
         Scene scene = new Scene(grid);
         fenetreparametre.setScene(scene);
