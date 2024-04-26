@@ -40,7 +40,8 @@ public class App extends Application {
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
-    Label lablabmur = new Label();
+    Label echelle = new Label();
+    Label indication = new Label();
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -50,8 +51,10 @@ public class App extends Application {
         Quadrillage();
         Legende();
         
-        
-               
+        indication.setPadding(new Insets(0,0,0,20));
+        echelle.setPadding(new Insets(0,20,0,20));
+        echelle.setText("1carr. = 1m");
+        echelle.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -70,6 +73,7 @@ public class App extends Application {
             if (creation.getValue().equals("Coin")) {
                 x = Math.floor(event.getX() / cellSize) * cellSize;
                 y = Math.floor(event.getY() / cellSize) * cellSize;
+                indication.setText("Cliquer pour mettre un coin");
                 Coin();}
             
             // Creation d'un mur
@@ -80,12 +84,12 @@ public class App extends Application {
                     d = Math.floor(event.getY() / cellSize) * cellSize;
                     fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                     Mur();
-                    lablabmur.setText("Coin 1");
+                    indication.setText("Selectionner le 1er coin du mur");
                     doubleclic.bool = false;}       
                 else {
                     a = Math.floor(event.getX() / cellSize) * cellSize;
                     b = Math.floor(event.getY() / cellSize) * cellSize;
-                    lablabmur.setText("Coin 2");
+                    indication.setText("Selectionner le 2eme coin du mur");
                     doubleclic.bool = true;}}
 
         
@@ -96,29 +100,28 @@ public class App extends Application {
                 x4 = Math.floor(event.getX() / cellSize) * cellSize;
                 y4 = Math.floor(event.getY() / cellSize) * cellSize;
                 quatreclic.bool = false;
-                lablabmur.setText("fINI");
                 fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
-                Piece();
-                }
+                indication.setText("Selectionner le 1eme coin de la piece");
+                Piece();}
             
             else if (troisclic.bool == true){
                 x3 = Math.floor(event.getX() / cellSize) * cellSize;
                 y3 = Math.floor(event.getY() / cellSize) * cellSize;
                 troisclic.bool = false;
                 quatreclic.bool = true;
-                lablabmur.setText("Coin 4");}
+                indication.setText("Selectionner le 4eme coin de la piece");}
             
             else if (deuxclic.bool == true){
                 x2 = Math.floor(event.getX() / cellSize) * cellSize;
                 y2 = Math.floor(event.getY() / cellSize) * cellSize;
-                lablabmur.setText("Coin 3");
+                indication.setText("Selectionner le 3eme coin de la piece");
                 deuxclic.bool = false;
                 troisclic.bool = true;}
             
             else{
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                lablabmur.setText("Coin 2");
+                indication.setText("Selectionner le 2eme coin de la piece");
                 deuxclic.bool = true;}}
 
             // Légende   
@@ -179,7 +182,7 @@ public class App extends Application {
     }
     private void Piece (){
                 Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
-                rectangle.setFill(Color.GOLD);
+                rectangle.setFill(Color.BEIGE);
                 root.getChildren().add(rectangle);
                 }
     private void Mur(){
@@ -217,8 +220,8 @@ public class App extends Application {
         
         creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
-        lablabmur.setText("Coin 1");
-        hbox.getChildren().addAll(menuBar, creation,lablabmur);}
+        indication.setText("Indication");
+        hbox.getChildren().addAll(menuBar, creation,echelle,indication);}
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
