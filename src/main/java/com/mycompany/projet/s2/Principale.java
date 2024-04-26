@@ -174,8 +174,10 @@ public class Principale {
     
         public static Mur recherchemurparcoordonnee (double x, double y,double w, double z){
         for (Mur mur : listeMur) {
-            if ((mur.CoinDebut.x == x) && (mur.CoinDebut.y == y) && (mur.CoinFin.x == w) && (mur.CoinFin.y == z))
+            if ((mur.CoinDebut.x == x) && (mur.CoinDebut.y == y) && (mur.CoinFin.x == w) && (mur.CoinFin.y == z)){
                 return mur;}
+            else if ((mur.CoinFin.x == x) && (mur.CoinFin.y == y) && (mur.CoinDebut.x == w) && (mur.CoinDebut.y == z)){
+                return mur;}}
         return null;}
     
     public Sol recherchesol (int id) {
