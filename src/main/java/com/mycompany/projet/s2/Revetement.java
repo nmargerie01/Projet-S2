@@ -33,7 +33,7 @@ public class Revetement {
     public String afficherlegende() {
         return idRevetement+" | " + designation + " - " + prixUnitaire;
     }
-    public String afficher() {
+    public void afficher() {
         System.out.println("Revetement(" + idRevetement +
                 "," + designation + 
                 "," + pourMur +
@@ -41,4 +41,5 @@ public class Revetement {
                 "," + pourPlafond +
                 "," + prixUnitaire +
                 ')');
-    }}
+    }
+}
