@@ -250,7 +250,9 @@ public class App extends Application {
                 titre2.setText("Revetement de plafond"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                     if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
+                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
+            
+            });
     
        
         
