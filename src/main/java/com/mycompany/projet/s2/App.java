@@ -21,7 +21,7 @@ public class App extends Application {
     private final int cellSize = 10; 
     private final int pointSize = 2; 
     private double x1,x2,x3,x4,y1,y2,y3,y4;
-    private int fenetre, porte ,revet;
+    private int p1, p2 ,p3;
     BooleanData doubleclic = new BooleanData();
     BooleanData tripleclic = new BooleanData();
     BooleanData quatreclic = new BooleanData();
@@ -30,6 +30,8 @@ public class App extends Application {
     Label titre = new Label();
     VBox vboxrevet2 = new VBox();
     Label titre2 = new Label();
+    Label lab3 = new Label();       
+    TextField text3 = new TextField(); 
 
    
     @Override
@@ -128,41 +130,10 @@ public class App extends Application {
                 root.getChildren().add(line);
                 Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
                 Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
-                Stage parametreStage = new Stage();
-                GridPane grid = new GridPane();
-                grid.setPadding(new Insets(20));
-                grid.setHgap(10);
-                grid.setVgap(10);
-                Label labfenetre = new Label("Nombre de fenêtres:");
-                TextField textfenetre = new TextField();
-                textfenetre.setPromptText("Nombre");
-                Label labporte = new Label("Nombre de portes:");
-                TextField textporte = new TextField();
-                textporte.setPromptText("Nombre");
-                Label labrevet = new Label("Numero du revetement");
-                TextField textrevet = new TextField();
-                textrevet.setPromptText("Nombre");    
-                Button valider = new Button("Valider");
-                valider.setOnAction(event2 -> {
-                    fenetre = Integer.valueOf(textfenetre.getText());
-                    porte = Integer.valueOf(textporte.getText());
-                    revet = Integer.valueOf(textrevet.getText());
-                    parametreStage.close();
-                    doubleclic.bool = false;
-                    Revetement revetement = Principale.rechercherevetement(revet);
-                    Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
-                    mur.afficher();});
-                grid.add(labfenetre, 0, 0);
-                grid.add(textfenetre, 1, 0);
-                grid.add(labporte, 0, 1);
-                grid.add(textporte, 1, 1);
-                grid.add(labrevet, 0, 2);
-                grid.add(textrevet, 1, 2);
-                grid.add(valider, 0, 3, 2, 1);
-                Scene scene = new Scene(grid);
-                parametreStage.setScene(scene);
-                parametreStage.setTitle("Parametre");
-                parametreStage.show();}
+                Revetement revetement = Principale.rechercherevetement(p3);
+                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,p1,p2,revetement);
+                Principale.listeMur.add(mur);
+                doubleclic.bool = false;}
                 
             if (creation.getValue().equals("Mur")){
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
@@ -179,41 +150,8 @@ public class App extends Application {
                 Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
                 
                 
-                Stage parametreStage = new Stage();
-                GridPane grid = new GridPane();
-                grid.setPadding(new Insets(20));
-                grid.setHgap(10);
-                grid.setVgap(10);
-                Label labfenetre = new Label("Nombre de fenêtres:");
-                TextField textfenetre = new TextField();
-                textfenetre.setPromptText("Nombre");
-                Label labporte = new Label("Nombre de portes:");
-                TextField textporte = new TextField();
-                textporte.setPromptText("Nombre");
-                Label labrevet = new Label("Numero du revetement");
-                TextField textrevet = new TextField();
-                textrevet.setPromptText("Nombre");    
-                Button valider = new Button("Valider");
-                valider.setOnAction(event2 -> {
-                    fenetre = Integer.valueOf(textfenetre.getText());
-                    porte = Integer.valueOf(textporte.getText());
-                    revet = Integer.valueOf(textrevet.getText());
-                    parametreStage.close();
-                    doubleclic.bool = false;
-                    Revetement revetement = Principale.rechercherevetement(revet);
-                    Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
-                    mur.afficher();});
-                grid.add(labfenetre, 0, 0);
-                grid.add(textfenetre, 1, 0);
-                grid.add(labporte, 0, 1);
-                grid.add(textporte, 1, 1);
-                grid.add(labrevet, 0, 2);
-                grid.add(textrevet, 1, 2);
-                grid.add(valider, 0, 3, 2, 1);
-                Scene scene = new Scene(grid);
-                parametreStage.setScene(scene);
-                parametreStage.setTitle("Parametre");
-                parametreStage.show();}
+                    
+                }
         
             if (creation.getValue().equals("Coin")){
                 
@@ -257,18 +195,45 @@ public class App extends Application {
         stage.show();
     }
     
-    private void fenetreparametrefpr (String title, String message) {
-        Stage fenetreparametrefpr = new Stage();
-        fenetreparametrefpr.initModality(Modality.APPLICATION_MODAL); // Bloque les interactions avec les autres fenêtres jusqu'à ce que cette fenêtre soit fermée
-        fenetreparametrefpr.setTitle(title);
+    private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
+        Stage fenetreparametre = new Stage();
+        fenetreparametre.setTitle(title);
         
-        Button closeButton = new Button("Close");
-        closeButton.setOnAction(event -> fenetreparametrefpr.close());
-
-        StackPane layout = new StackPane(closeButton);
-        Scene scene = new Scene(layout, 250, 150);
-        fenetreparametrefpr.setScene(scene);
-        fenetreparametrefpr.show();
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(20));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        
+        Label lab1 = new Label(parametre1);       
+        TextField text1 = new TextField();      
+        text1.setPromptText("Nombre");
+                
+        Label lab2 = new Label(parametre2);       
+        TextField text2 = new TextField();      
+        text2.setPromptText("Nombre");
+        
+        if (parametre3 != " "){
+        lab3.setText(parametre3);       
+        text3.setPromptText("Nombre");}
+        
+        Button valider = new Button("Valider");
+        valider.setOnAction(event2 -> {
+            p1 = Integer.valueOf(text1.getText());
+            p2 = Integer.valueOf(text2.getText());
+            p3 = Integer.valueOf(text3.getText());
+            fenetreparametre.close();
+            doubleclic.bool = false;});
+        grid.add(lab1, 0, 0);
+        grid.add(text1, 1, 0);
+        grid.add(lab2, 0, 1);
+        grid.add(text2, 1, 1);
+        grid.add(lab3, 0, 2);
+        grid.add(text3, 1, 2);
+        grid.add(valider, 0, 3, 2, 1);
+        Scene scene = new Scene(grid);
+        fenetreparametre.setScene(scene);
+        fenetreparametre.setTitle("Parametre");
+        fenetreparametre.show();}
     
     public static void main (String[] args) {
         launch(args);
