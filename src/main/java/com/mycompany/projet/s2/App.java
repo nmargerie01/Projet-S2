@@ -272,7 +272,7 @@ public class App extends Application {
         TextField text2 = new TextField();      
         text2.setPromptText("Nombre");
         
-        if (parametre3 != " "){
+        if ((parametre3) != (" ")){
         lab3.setText(parametre3);       
         text3.setPromptText("Nombre");}
         
