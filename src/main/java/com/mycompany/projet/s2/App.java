@@ -57,6 +57,8 @@ public class App extends Application {
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
+        
+        doubleclic.bool = false;
 
        
         
@@ -71,19 +73,19 @@ public class App extends Application {
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
-                if (!doubleclic.bool){
+                      
+                if (doubleclic.bool == true){
                     x2 = Math.floor(event.getX() / cellSize) * cellSize;
                     y2 = Math.floor(event.getY() / cellSize) * cellSize;
                     fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                     Mur();
-                    lablabmur.setText("Coin CACA");
+                    lablabmur.setText("Coin 1");
                     doubleclic.bool = false;}       
                 else {
                     x1 = Math.floor(event.getX() / cellSize) * cellSize;
                     y1 = Math.floor(event.getY() / cellSize) * cellSize;
                     lablabmur.setText("Coin 2");
-                    doubleclic.bool = true;}
-}
+                    doubleclic.bool = true;}}
 
         
             // Creation d'une piece
