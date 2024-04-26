@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javafx.application.Application;
-import javafx.event.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -68,18 +67,16 @@ public class App extends Application {
             System.out.println("Erreur de lecture du fichier: " + err);}
         
         // Barre de menu
-        MenuBar menuBar = new MenuBar();
+        
+        MenuItem item1 = new MenuItem("Ouvrir");
+        MenuItem item2 = new MenuItem("Enregistrer");
+        MenuItem item3 = new MenuItem("Fermer");
         Menu file = new Menu("Fichier");
-
+        file.getItems().addAll(item1, item2, item3);
+        MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(file);
         menuBar.setUseSystemMenuBar(true);
-
-        MenuItem item1 = new MenuItem("Open");
-        MenuItem item2 = new MenuItem("Save");
-        MenuItem item3 = new MenuItem("Exit");
-
-        file.getItems().addAll(item1, item2, item3);
-
+        
         ChoiceBox<String> creation = new ChoiceBox<>();
         creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
@@ -89,17 +86,17 @@ public class App extends Application {
         
         for (int i=0;i<Principale.listeRevetement.size();i++){ 
             Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-            vboxrevet.getChildren().add(label);}
-
-        BorderPane layout = new BorderPane();
-        Pane root = new Pane(); 
-        
+            vboxrevet.getChildren().add(label);}        
         vboxrevet2.getChildren().clear();
         titre2.setText("");
         titre.setText("Tout les revetement"); 
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        
         VBox legende = new VBox(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
+        
+        BorderPane layout = new BorderPane();
+        Pane root = new Pane(); 
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -236,7 +233,7 @@ public class App extends Application {
                 titre2.setText("");
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                     if (Principale.listeRevetement.get(i).pourMur == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
             
             if (creation.getValue().equals("Piece")){
                 
@@ -250,9 +247,7 @@ public class App extends Application {
                 titre2.setText("Revetement de plafond"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                     if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
-            
-            });
+                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
     
        
         
@@ -261,6 +256,19 @@ public class App extends Application {
         stage.setTitle("Devis");
         stage.show();
     }
+    
+    private void fenetreparametrefpr (String title, String message) {
+        Stage fenetreparametrefpr = new Stage();
+        fenetreparametrefpr.initModality(Modality.APPLICATION_MODAL); // Bloque les interactions avec les autres fenêtres jusqu'à ce que cette fenêtre soit fermée
+        fenetreparametrefpr.setTitle(title);
+        
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(event -> fenetreparametrefpr.close());
+
+        StackPane layout = new StackPane(closeButton);
+        Scene scene = new Scene(layout, 250, 150);
+        fenetreparametrefpr.setScene(scene);
+        fenetreparametrefpr.show();
     
     public static void main (String[] args) {
         launch(args);
