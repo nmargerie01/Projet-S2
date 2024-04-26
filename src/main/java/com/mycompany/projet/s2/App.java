@@ -21,9 +21,12 @@ public class App extends Application {
     private final int cols = 100; 
     private final int cellSize = 10; 
     private final int pointSize = 2; 
-    private double x,y,w,z;
+    private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int fenetre, porte ,revet;
     BooleanData doubleclic = new BooleanData();
+    BooleanData tripleclic = new BooleanData();
+    BooleanData quatreclic = new BooleanData();
+    BooleanData dernierclic = new BooleanData();
     VBox vboxrevet = new VBox();
     Label titre = new Label();
     VBox vboxrevet2 = new VBox();
@@ -112,13 +115,6 @@ public class App extends Application {
                     
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                vboxrevet.getChildren().clear();
-                titre.setText("Tout les revetement"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){ 
-                Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-                vboxrevet.getChildren().add(label);}
                 double x = Math.floor(event.getX() / cellSize) * cellSize;
                 double y = Math.floor(event.getY() / cellSize) * cellSize;
                 Circle circle = new Circle(x, y, pointSize, Color.BLACK);
@@ -128,20 +124,13 @@ public class App extends Application {
                 doubleclic.bool = false;}
             
             // Creation d'un mur
-            if ((creation.getValue().equals("Mur")) && (doubleclic.bool == true)){
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de mur"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourMur == true) {
-                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
-                w = Math.floor(event.getX() / cellSize) * cellSize;
-                z = Math.floor(event.getY() / cellSize) * cellSize;
-                Line line = new Line (x,y,w,z);
+            if (creation.getValue().equals("Mur") && (doubleclic.bool == true)){
+                x2 = Math.floor(event.getX() / cellSize) * cellSize;
+                y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                Line line = new Line (x1,y1,x2,y2);
                 root.getChildren().add(line);
-                Coin debut = Principale.recherchecoinparcoordonnee(x,y);
-                Coin fin = Principale.recherchecoinparcoordonnee(w,z);
+                Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
+                Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
                 Stage parametreStage = new Stage();
                 GridPane grid = new GridPane();
                 grid.setPadding(new Insets(20));
@@ -178,7 +167,7 @@ public class App extends Application {
                 parametreStage.setTitle("Parametre");
                 parametreStage.show();}
                 
-            if ((creation.getValue()) == "Mur"){
+            if (creation.getValue().equals("Mur")){
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de mur"); 
                 vboxrevet2.getChildren().clear();
@@ -186,75 +175,81 @@ public class App extends Application {
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourMur == true) {
                     vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
-                x = Math.floor(event.getX() / cellSize) * cellSize;
-                y = Math.floor(event.getY() / cellSize) * cellSize;
-                doubleclic.bool = true;}});
+                x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                doubleclic.bool = true;}
         
             // Creation d'une piece
-            if ((creation.getValue().equals("Piece"))){
+            if (creation.getValue().equals("Piece")){
+                x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                Rectangle square = new Rectangle();
+                root.getChildren().add(square);
+                Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
+                Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
+                
+                
+                Stage parametreStage = new Stage();
+                GridPane grid = new GridPane();
+                grid.setPadding(new Insets(20));
+                grid.setHgap(10);
+                grid.setVgap(10);
+                Label labfenetre = new Label("Nombre de fenêtres:");
+                TextField textfenetre = new TextField();
+                textfenetre.setPromptText("Nombre");
+                Label labporte = new Label("Nombre de portes:");
+                TextField textporte = new TextField();
+                textporte.setPromptText("Nombre");
+                Label labrevet = new Label("Numero du revetement");
+                TextField textrevet = new TextField();
+                textrevet.setPromptText("Nombre");    
+                Button valider = new Button("Valider");
+                valider.setOnAction(event2 -> {
+                    fenetre = Integer.valueOf(textfenetre.getText());
+                    porte = Integer.valueOf(textporte.getText());
+                    revet = Integer.valueOf(textrevet.getText());
+                    parametreStage.close();
+                    doubleclic.bool = false;
+                    Revetement revetement = Principale.rechercherevetement(revet);
+                    Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
+                    mur.afficher();});
+                grid.add(labfenetre, 0, 0);
+                grid.add(textfenetre, 1, 0);
+                grid.add(labporte, 0, 1);
+                grid.add(textporte, 1, 1);
+                grid.add(labrevet, 0, 2);
+                grid.add(textrevet, 1, 2);
+                grid.add(valider, 0, 3, 2, 1);
+                Scene scene = new Scene(grid);
+                parametreStage.setScene(scene);
+                parametreStage.setTitle("Parametre");
+                parametreStage.show();}
+        
+            if (creation.getValue().equals("Coin")){
+                
+                vboxrevet.getChildren().clear();
+                titre.setText("Tout les revetement"); 
+                vboxrevet2.getChildren().clear();
+                titre2.setText("");
+                for (int i=0;i<Principale.listeRevetement.size();i++){ 
+                Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
+                vboxrevet.getChildren().add(label);}}
+            
+            if (creation.getValue().equals("Plafond")){
+                
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de sol"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourSol == true) {
                     vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+                
+                vboxrevet2.getChildren().clear();
                 titre2.setText("Revetement de plafond"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
                 if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                    vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
-                
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                Square square = new Square();
-                root.getChildren().add(square);
-                Coin debut = Principale.recherchecoinparcoordonnee(x,y);
-                Coin fin = Principale.recherchecoinparcoordonnee(w,z);
-                Stage parametreStage = new Stage();
-                GridPane grid = new GridPane();
-                grid.setPadding(new Insets(20));
-                grid.setHgap(10);
-                grid.setVgap(10);
-                Label labfenetre = new Label("Nombre de fenêtres:");
-                TextField textfenetre = new TextField();
-                textfenetre.setPromptText("Nombre");
-                Label labporte = new Label("Nombre de portes:");
-                TextField textporte = new TextField();
-                textporte.setPromptText("Nombre");
-                Label labrevet = new Label("Numero du revetement");
-                TextField textrevet = new TextField();
-                textrevet.setPromptText("Nombre");    
-                Button valider = new Button("Valider");
-                valider.setOnAction(event2 -> {
-                    fenetre = Integer.valueOf(textfenetre.getText());
-                    porte = Integer.valueOf(textporte.getText());
-                    revet = Integer.valueOf(textrevet.getText());
-                    parametreStage.close();
-                    doubleclic.bool = false;
-                    Revetement revetement = Principale.rechercherevetement(revet);
-                    Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,fenetre,porte,revetement);
-                    mur.afficher();});
-                grid.add(labfenetre, 0, 0);
-                grid.add(textfenetre, 1, 0);
-                grid.add(labporte, 0, 1);
-                grid.add(textporte, 1, 1);
-                grid.add(labrevet, 0, 2);
-                grid.add(textrevet, 1, 2);
-                grid.add(valider, 0, 3, 2, 1);
-                Scene scene = new Scene(grid);
-                parametreStage.setScene(scene);
-                parametreStage.setTitle("Parametre");
-                parametreStage.show();}
-        
-        if (creation.getValue().equals("Sol")){
-            vboxrevet.getChildren().clear();
-            for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourSol == true) {
-                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}
+                    vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
     
-        if (creation.getValue().equals("Plafond")){
-            vboxrevet.getChildren().clear();
-            for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                    vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}       
+       
         
         Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
         stage.setScene(scene);
