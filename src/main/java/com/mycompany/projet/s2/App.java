@@ -93,6 +93,8 @@ public class App extends Application {
         titre2.setText("");
         titre.setText("Tout les revetement"); 
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+
         
         VBox legende = new VBox(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
