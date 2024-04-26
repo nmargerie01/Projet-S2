@@ -32,61 +32,20 @@ public class App extends Application {
     VBox vboxrevet2 = new VBox();
     Label titre2 = new Label();
     Label lab3 = new Label();       
-    TextField text3 = new TextField(); 
+    TextField text3 = new TextField();
+    HBox hbox = new HBox();
+    ChoiceBox<String> creation = new ChoiceBox<>();
+
+
 
    
     @Override
     public void start(Stage stage) throws Exception {
         
-        // Récupération des revetement
-        try { 
-            Principale.listeRevetement.clear();
-            File csvFile = new File("C:\\Users\\natha\\Documents\\NetBeansProjects\\Projet-S2\\src\\main\\java\\com\\mycompany\\projet\\s2\\CatalogueRevetements.txt");
-            FileReader fr = new FileReader(csvFile);
-            BufferedReader br = new BufferedReader(fr); 
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parties = line.split(";");
-                int id = Integer.parseInt(parties[0]);
-                String nom = parties[1];
-                boolean mur = false;
-                if (Integer.valueOf(parties[2]) == 1){
-                    mur = true;}
-                boolean sol = false;
-                if (Integer.valueOf(parties[3]) == 1){
-                    sol = true;}
-                boolean plafond = false;
-                if (Integer.valueOf(parties[4]) == 1){
-                    plafond = true;}
-                double prix = Double.parseDouble(parties[5]);
-
-                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
-                r.afficher();
-                Principale.listeRevetement.add(r);}} 
-    
-        catch (FileNotFoundException e){
-            System.out.println("Erreur : le fichier n’existe pas! " + e);} 
-    
-        catch (IOException err){
-            System.out.println("Erreur de lecture du fichier: " + err);}
+        Recuperationdesrevetement();
         
-        // Barre de menu
-        
-        MenuItem item1 = new MenuItem("Ouvrir");
-        MenuItem item2 = new MenuItem("Enregistrer");
-        MenuItem item3 = new MenuItem("Fermer");
-        Menu file = new Menu("Fichier");
-        file.getItems().addAll(item1, item2, item3);
-        MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(file);
-        menuBar.setUseSystemMenuBar(true);
-        
-        ChoiceBox<String> creation = new ChoiceBox<>();
-        creation.getItems().addAll("Coin", "Mur", "Piece");
-        creation.setValue("Coin");
-
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(menuBar, creation);
+        Barredemenu();
+             
         
         for (int i=0;i<Principale.listeRevetement.size();i++){ 
             Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
@@ -97,7 +56,10 @@ public class App extends Application {
         titre.setStyle("-fx-font-weight: bold; -fx-underline: true;");
         titre2.setStyle("-fx-font-weight: bold; -fx-underline: true;");
 
-        
+        doubleclic.bool = true;
+        deuxclic.bool = false;
+        troisclic.bool = false;
+        quatreclic.bool = false;
         VBox legende = new VBox(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
         
@@ -115,7 +77,7 @@ public class App extends Application {
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
         
         root.setOnMouseClicked(event -> {
-                    
+                                
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
                 double x = Math.floor(event.getX() / cellSize) * cellSize;
@@ -124,46 +86,50 @@ public class App extends Application {
                 root.getChildren().add(circle);
                 Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
                 Principale.listeCoin.add(c);
-                c.afficher();
-                doubleclic.bool = false;
-                deuxclic.bool = false;
-                troisclic.bool = false;
-                quatreclic.bool = false;}
+                c.afficher();}
             
             // Creation d'un mur
-            if (creation.getValue().equals("Mur") && (doubleclic.bool == true)){
-                x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                y2 = Math.floor(event.getY() / cellSize) * cellSize;
-                Line line = new Line (x1,y1,x2,y2);
-                root.getChildren().add(line);
-                Coin debut = Principale.recherchecoinparcoordonnee(x1,y1);
-                Coin fin = Principale.recherchecoinparcoordonnee(x2,y2);
-                fenetreparametre ("Mur","Nb de fenetres","Nb de portes","n° du revetement");
-                Revetement revetement = Principale.rechercherevetement(p3);
-                Mur mur = new Mur(Principale.listeMur.size()+1,debut,fin,p1,p2,revetement);
-                Principale.listeMur.add(mur);
-                mur.afficher();
-                doubleclic.bool = false;}
-                
-            if (creation.getValue().equals("Mur")){
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                doubleclic.bool = true;}
+            // Création d'un mur
+if (creation.getValue().equals("Mur")) {
+    if (!doubleclic.bool) {
+        // Premier clic
+        x1 = Math.floor(event.getX() / cellSize) * cellSize;
+        y1 = Math.floor(event.getY() / cellSize) * cellSize;
+        doubleclic.bool = true;
+    } else {
+        // Deuxième clic
+        x2 = Math.floor(event.getX() / cellSize) * cellSize;
+        y2 = Math.floor(event.getY() / cellSize) * cellSize;
+        // Créer le mur avec les deux points
+        Line line = new Line(x1, y1, x2, y2);
+        root.getChildren().add(line);
+        Coin debut = Principale.recherchecoinparcoordonnee(x1, y1);
+        Coin fin = Principale.recherchecoinparcoordonnee(x2, y2);
+        fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
+        Revetement revetement = Principale.rechercherevetement(p3);
+        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
+        Principale.listeMur.add(mur);
+        mur.afficher();
+        // Réinitialiser pour le prochain mur
+        doubleclic.bool = false;
+    }
+}
+
         
             // Creation d'une piece
-            if (creation.getValue().equals("Piece") && (deuxclic.bool = false)){
+            if (creation.getValue().equals("Piece") && (!deuxclic.bool)){
                 x2 = Math.floor(event.getX() / cellSize) * cellSize;
                 y2 = Math.floor(event.getY() / cellSize) * cellSize;
                 deuxclic.bool = false;
                 troisclic.bool = true;}
             
-            if (creation.getValue().equals("Piece") && (troisclic.bool = false)){
+            if (creation.getValue().equals("Piece") && (!troisclic.bool)){
                 x3 = Math.floor(event.getX() / cellSize) * cellSize;
                 y3 = Math.floor(event.getY() / cellSize) * cellSize;
                 troisclic.bool = false;
                 quatreclic.bool = true;}
             
-            if (creation.getValue().equals("Piece") && (quatreclic.bool = false)){
+            if (creation.getValue().equals("Piece") && (!quatreclic.bool)){
                 x4 = Math.floor(event.getX() / cellSize) * cellSize;
                 y4 = Math.floor(event.getY() / cellSize) * cellSize;
                 quatreclic.bool = false;
@@ -239,7 +205,54 @@ public class App extends Application {
         stage.setTitle("Devis");
         stage.show();
     }
+   
+    private void Barredemenu(){
+    MenuItem item1 = new MenuItem("Ouvrir");
+        MenuItem item2 = new MenuItem("Enregistrer");
+        MenuItem item3 = new MenuItem("Fermer");
+        Menu file = new Menu("Fichier");
+        file.getItems().addAll(item1, item2, item3);
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().addAll(file);
+        menuBar.setUseSystemMenuBar(true);
+        
+        creation.getItems().addAll("Coin", "Mur", "Piece");
+        creation.setValue("Coin");
+
+        hbox.getChildren().addAll(menuBar, creation);}
     
+    private void Recuperationdesrevetement(){
+        try { 
+            Principale.listeRevetement.clear();
+            File csvFile = new File("C:\\Users\\natha\\Documents\\NetBeansProjects\\Projet-S2\\src\\main\\java\\com\\mycompany\\projet\\s2\\CatalogueRevetements.txt");
+            FileReader fr = new FileReader(csvFile);
+            BufferedReader br = new BufferedReader(fr); 
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parties = line.split(";");
+                int id = Integer.parseInt(parties[0]);
+                String nom = parties[1];
+                boolean mur = false;
+                if (Integer.valueOf(parties[2]) == 1){
+                    mur = true;}
+                boolean sol = false;
+                if (Integer.valueOf(parties[3]) == 1){
+                    sol = true;}
+                boolean plafond = false;
+                if (Integer.valueOf(parties[4]) == 1){
+                    plafond = true;}
+                double prix = Double.parseDouble(parties[5]);
+
+                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                r.afficher();
+                Principale.listeRevetement.add(r);}} 
+    
+        catch (FileNotFoundException e){
+            System.out.println("Erreur : le fichier n’existe pas! " + e);} 
+    
+        catch (IOException err){
+            System.out.println("Erreur de lecture du fichier: " + err);}}
+        
     private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
         Stage fenetreparametre = new Stage();
         fenetreparametre.setTitle(title);
