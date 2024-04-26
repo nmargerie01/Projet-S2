@@ -64,13 +64,9 @@ public class App extends Application {
                                 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                double x = Math.floor(event.getX() / cellSize) * cellSize;
-                double y = Math.floor(event.getY() / cellSize) * cellSize;
-                Circle circle = new Circle(x, y, pointSize, Color.BLACK);
-                root.getChildren().add(circle);
-                Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
-                Principale.listeCoin.add(c);
-                c.afficher();}
+                x1 = Math.floor(event.getX() / cellSize) * cellSize;
+                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                Coin();}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
@@ -203,6 +199,13 @@ public class App extends Application {
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
         mur.afficher();}
+    private void Coin(){
+        Circle circle = new Circle(x1, y1, pointSize, Color.BLACK);
+        root.getChildren().add(circle);
+        Coin c = new Coin(Principale.listeCoin.size() + 1, x1, y1);
+        Principale.listeCoin.add(c);
+        c.afficher();
+    }
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
