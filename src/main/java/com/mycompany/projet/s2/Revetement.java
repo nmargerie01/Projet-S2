@@ -34,11 +34,11 @@ public class Revetement {
         return idRevetement+" | " + designation + " - " + prixUnitaire;
     }
     public String afficher() {
-        return "Revetement(" + idRevetement +
+        System.out.println("Revetement(" + idRevetement +
                 "," + designation + 
                 "," + pourMur +
                 "," + pourSol +
                 "," + pourPlafond +
                 "," + prixUnitaire +
-                ')';
+                ')');
     }}
