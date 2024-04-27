@@ -51,6 +51,7 @@ public class App extends Application {
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
+    Button creerappart = new Button("Creer un appart");
 
     
     @Override
@@ -164,7 +165,6 @@ public class App extends Application {
                     Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
                     vboxrevet.getChildren().add(label);}
                 indication.setText("Selection toutes les pièces, puis appuyer sur le bouton");
-                Button creerappart = new Button("Creer un appart");
                 creerappart.setPadding(new Insets(0,0,0,5));
                 hbox.getChildren().addAll(menuBar, creation,level,niveaux,creerappart,echelle,indication);              
                 for (int h=0;h<listedesrecpiece.size();h++){
@@ -192,6 +192,11 @@ public class App extends Application {
                         
             });
         
+        creerappart.setOnAction(event4 -> {
+            Appart a = new Appart(Principale.listeAppart.size()+1,i,listedespiecechoisie);
+            listedespiecechoisie.clear();
+            Principale.listeAppart.add(a);
+            a.afficher();});
         
         Scene scene = new Scene(layout, (cols * 10)+220, rows * 10);
         stage.setScene(scene);
