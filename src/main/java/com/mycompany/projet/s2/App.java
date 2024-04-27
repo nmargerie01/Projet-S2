@@ -49,6 +49,7 @@ public class App extends Application {
     Button niveaux = new Button("Niveau +");
     int i = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
+    ArrayList<Polygon> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
 
     
@@ -78,6 +79,7 @@ public class App extends Application {
 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
+                Barredemenu();
                 vboxrevet.getChildren().clear();
                 titre.setText("Tout les revetement"); 
                 vboxrevet2.getChildren().clear();
@@ -92,6 +94,7 @@ public class App extends Application {
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
+                Barredemenu();
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de mur"); 
                 vboxrevet2.getChildren().clear();
@@ -115,6 +118,7 @@ public class App extends Application {
         
             // Creation d'une piece
             if (creation.getValue().equals("Piece")){
+                Barredemenu();
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de sol"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
@@ -150,6 +154,8 @@ public class App extends Application {
                     indication.setText("Selectionner le 2eme coin de la piece");}}
 
             if (creation.getValue().equals("Appart")){
+                double X = event.getX();
+                double Y = event.getY();
                 vboxrevet.getChildren().clear();
                 titre.setText("Tout les revetement"); 
                 vboxrevet2.getChildren().clear();
@@ -159,9 +165,37 @@ public class App extends Application {
                     vboxrevet.getChildren().add(label);}
                 indication.setText("Selection toutes les pièces, puis appuyer sur le bouton");
                 Button creerappart = new Button("Creer un appart");
-                hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);
-
-            }
+                creerappart.setPadding(new Insets(0,0,0,5));
+                hbox.getChildren().addAll(menuBar, creation,level,niveaux,creerappart,echelle,indication);              
+                for (int h=0;h<listedesrecpiece.size();h++){
+                    Polygon rectangle = listedesrecpiece.get(h);
+                    x1 = rectangle.getPoints().get(0);
+                    y1 = rectangle.getPoints().get(1);
+                    x2 = rectangle.getPoints().get(2);
+                    y2 = rectangle.getPoints().get(3);
+                    x3 = rectangle.getPoints().get(4);
+                    y3 = rectangle.getPoints().get(5);
+                    x4 = rectangle.getPoints().get(6);
+                    y4 = rectangle.getPoints().get(7);
+                    double X1 = Math.min(Math.min(x1, x2), Math.min(x3, x4));
+                    double Y1 = Math.min(Math.min(y1, y2), Math.min(y3, y4));
+                    double X2 = Math.max(Math.max(x1, x2), Math.max(x3, x4));
+                    double Y2 = Math.max(Math.max(y1, y2), Math.max(y3, y4));
+                    Mur mur1 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                    Mur mur2 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                    Mur mur3 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                    Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+                    if (X >= X1 && X <= X2 && Y >= Y1 && Y <= Y2){
+                        for (Piece piece : Principale.listePiece){
+                            if (piece.listemurs.contains(mur1) && piece.listemurs.contains(mur2) && piece.listemurs.contains(mur3) && piece.listemurs.contains(mur4)) {
+                                
+                            }
+                        }
+                    
+                }
+        
+    
+            }}
             });
         
         
@@ -214,7 +248,7 @@ public class App extends Application {
         Piece p = new Piece(Principale.listePiece.size()+1,sol,plafond,listemurs);
         Principale.listePiece.add(p) ;
         Polygon rectangle = new Polygon(x1,y1,x2,y2,x3,y3,x4,y4);
-        rectangle.setFill(Color.GOLD);
+        rectangle.setFill(Color.GREY);
         listedesrecpiece.add(rectangle);
         root.getChildren().add(rectangle);
         p.afficher();
@@ -269,6 +303,9 @@ public class App extends Application {
         echelle.setStyle("-fx-font-weight: bold");
         indication.setText("Indication");
         indication.setPadding(new Insets(5,0,0,20));
+        creation.setPadding(new Insets(0,0,0,5));
+        level.setPadding(new Insets(0,0,0,5));
+        niveaux.setPadding(new Insets(0,0,0,5));
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
     private void Recuperationdesrevetement(){
         try { 
