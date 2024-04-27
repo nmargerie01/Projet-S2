@@ -39,7 +39,14 @@ public class App extends Application {
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
-    Label lablabmur = new Label();
+    Label echelle = new Label();
+    Label indication = new Label();
+    Label surfaceausol = new Label();
+    Label chiffresurface = new Label();
+    Label prix = new Label();
+    Label chiffreprix = new Label();
+    HBox hsurfaceausol = new HBox();
+    HBox hprix = new HBox();
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -69,6 +76,7 @@ public class App extends Application {
             if (creation.getValue().equals("Coin")) {
                 x = Math.floor(event.getX() / cellSize) * cellSize;
                 y = Math.floor(event.getY() / cellSize) * cellSize;
+                indication.setText("Cliquer pour mettre un coin");                    
                 Coin();}
             
             // Creation d'un mur
@@ -79,12 +87,12 @@ public class App extends Application {
                     y2 = Math.floor(event.getY() / cellSize) * cellSize;
                     fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                     Mur();
-                    lablabmur.setText("Coin 1");
+                    indication.setText("Selectionner le 1er coin du mur");                    
                     doubleclic.bool = false;}       
                 else {
                     x1 = Math.floor(event.getX() / cellSize) * cellSize;
                     y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                    lablabmur.setText("Coin 2");
+                    indication.setText("Selectionner le 2eme coin du mur");
                     doubleclic.bool = true;}}
 
         
@@ -95,7 +103,7 @@ public class App extends Application {
                 x4 = Math.floor(event.getX() / cellSize) * cellSize;
                 y4 = Math.floor(event.getY() / cellSize) * cellSize;
                 quatreclic.bool = false;
-                
+                indication.setText("Selectionner le 1eme coin de la piece");
                 ArrayList<Mur> listemurs = new ArrayList<>(); 
                 Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
                 Coin coin2 = Principale.recherchecoinparcoordonnee(x2, y2);
@@ -125,13 +133,14 @@ public class App extends Application {
                 root.getChildren().add(rectangle);
                 p.afficher();}
             
-            if (troisclic.bool == true){
+            else if (troisclic.bool == true){
                 x3 = Math.floor(event.getX() / cellSize) * cellSize;
                 y3 = Math.floor(event.getY() / cellSize) * cellSize;
                 troisclic.bool = false;
-                quatreclic.bool = true;}
+                quatreclic.bool = true;
+                indication.setText("Selectionner le 4eme coin de la piece");}
             
-            if (deuxclic.bool == true){
+            else if (deuxclic.bool == true){
                 x2 = Math.floor(event.getX() / cellSize) * cellSize;
                 y2 = Math.floor(event.getY() / cellSize) * cellSize;
                 deuxclic.bool = false;
