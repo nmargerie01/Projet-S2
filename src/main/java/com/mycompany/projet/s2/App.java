@@ -19,8 +19,6 @@ public class App extends Application {
 
     private final int rows = 60; 
     private final int cols = 100; 
-    private final int cellSize = 10; 
-    private final int pointSize = 2; 
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3;
     private double x, y;
@@ -38,7 +36,7 @@ public class App extends Application {
     ChoiceBox<String> creation = new ChoiceBox<>();
     ChoiceBox<String> level = new ChoiceBox<>();
     BorderPane layout = new BorderPane();
-    Pane root = new Pane(); 
+    static Pane root = new Pane(); 
     VBox legende = new VBox();
     Label echelle = new Label();
     Label indication = new Label();
@@ -48,6 +46,8 @@ public class App extends Application {
     Label chiffreprix = new Label();
     HBox hsurfaceausol = new HBox();
     HBox hprix = new HBox();
+    Button niveaux = new Button("Niveau +");
+    int i = 1;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -75,8 +75,8 @@ public class App extends Application {
 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                x = Math.floor(event.getX() / cellSize) * cellSize;
-                y = Math.floor(event.getY() / cellSize) * cellSize;
+                x = Math.floor(event.getX() / 10) * 10;
+                y = Math.floor(event.getY() / 10) * 10;
                 indication.setText("Cliquer pour mettre un coin");                    
                 Coin();}
             
@@ -84,15 +84,15 @@ public class App extends Application {
             if (creation.getValue().equals("Mur")) {
                       
                 if (doubleclic.bool == true){
-                    x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                    y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                    x2 = Math.floor(event.getX() / 10) * 10;
+                    y2 = Math.floor(event.getY() / 10) * 10;
                     fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                     Mur();
                     indication.setText("Selectionner le 1er coin du mur");                    
                     doubleclic.bool = false;}       
                 else {
-                    x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                    y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                    x1 = Math.floor(event.getX() / 10) * 10;
+                    y1 = Math.floor(event.getY() / 10) * 10;
                     indication.setText("Selectionner le 2eme coin du mur");
                     doubleclic.bool = true;}}
 
@@ -101,8 +101,8 @@ public class App extends Application {
             if (creation.getValue().equals("Piece")){
             
             if (quatreclic.bool == true){
-                x4 = Math.floor(event.getX() / cellSize) * cellSize;
-                y4 = Math.floor(event.getY() / cellSize) * cellSize;
+                x4 = Math.floor(event.getX() / 10) * 10;
+                y4 = Math.floor(event.getY() / 10) * 10;
                 quatreclic.bool = false;
                 indication.setText("Selectionner le 1eme coin de la piece");
                 ArrayList<Mur> listemurs = new ArrayList<>(); 
@@ -135,22 +135,22 @@ public class App extends Application {
                 p.afficher();}
             
             else if (troisclic.bool == true){
-                x3 = Math.floor(event.getX() / cellSize) * cellSize;
-                y3 = Math.floor(event.getY() / cellSize) * cellSize;
+                x3 = Math.floor(event.getX() / 10) * 10;
+                y3 = Math.floor(event.getY() / 10) * 10;
                 troisclic.bool = false;
                 quatreclic.bool = true;
                 indication.setText("Selectionner le 4eme coin de la piece");}
             
             else if (deuxclic.bool == true){
-                x2 = Math.floor(event.getX() / cellSize) * cellSize;
-                y2 = Math.floor(event.getY() / cellSize) * cellSize;
+                x2 = Math.floor(event.getX() / 10) * 10;
+                y2 = Math.floor(event.getY() / 10) * 10;
                 deuxclic.bool = false;
                 troisclic.bool = true;
                 indication.setText("Selectionner le 3eme coin de la piece");}
             
             else{
-                x1 = Math.floor(event.getX() / cellSize) * cellSize;
-                y1 = Math.floor(event.getY() / cellSize) * cellSize;
+                x1 = Math.floor(event.getX() / 10) * 10;
+                y1 = Math.floor(event.getY() / 10) * 10;
                 deuxclic.bool = true;
                 indication.setText("Selectionner le 2eme coin de la piece");}}
 
@@ -187,7 +187,7 @@ public class App extends Application {
                         vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}}});
         
         
-        Scene scene = new Scene(layout, (cols * cellSize)+220, rows * cellSize);
+        Scene scene = new Scene(layout, (cols * 10)+220, rows * 10);
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
@@ -220,7 +220,7 @@ public class App extends Application {
         Principale.listeMur.add(mur);
         mur.afficher();}
     private void Coin(){
-        Circle circle = new Circle(x, y, pointSize, Color.BLACK);
+        Circle circle = new Circle(x, y, 2, Color.BLACK);
         root.getChildren().add(circle);
         Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
         Principale.listeCoin.add(c);
@@ -229,8 +229,8 @@ public class App extends Application {
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
-                double varx = col * cellSize;
-                double vary = row * cellSize;
+                double varx = col * 10;
+                double vary = row * 10;
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
     private void Barredemenu(){
@@ -245,14 +245,22 @@ public class App extends Application {
         
         creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
-        level.getItems().add("1");
-        level.setValue("1");
+        level.getItems().add("Niveau "+i);
+        level.setValue("Niveau "+i);
+        niveaux.setOnAction(event3 -> {
+            i++;
+            level.getItems().add("Niveau "+i);
+            root.getChildren().clear();
+            Quadrillage();
+            Niveau levelgris = Principale.rechercheniveau(i-1);
+            levelgris.Niveau.rewritelevel();
+        });
         echelle.setText("1carr. = 1m");
         echelle.setPadding(new Insets(5,0,0,20));
         echelle.setStyle("-fx-font-weight: bold");
         indication.setText("Indication");
         indication.setPadding(new Insets(5,0,0,20));
-        hbox.getChildren().addAll(menuBar, creation,level,echelle,indication);}
+        hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
