@@ -49,7 +49,7 @@ public class App extends Application {
     Button niveaux = new Button("Niveau +");
     int i = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
-    ArrayList<Polygon> listedespiecechoisie = new ArrayList<>();
+    ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
 
     
@@ -188,14 +188,8 @@ public class App extends Application {
                     if (X >= X1 && X <= X2 && Y >= Y1 && Y <= Y2){
                         for (Piece piece : Principale.listePiece){
                             if (piece.listemurs.contains(mur1) && piece.listemurs.contains(mur2) && piece.listemurs.contains(mur3) && piece.listemurs.contains(mur4)) {
-                                
-                            }
-                        }
-                    
-                }
-        
-    
-            }}
+                                listedespiecechoisie.add(piece);}}}}}
+                        
             });
         
         
