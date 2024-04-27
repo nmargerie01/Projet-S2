@@ -36,6 +36,7 @@ public class App extends Application {
     TextField text3 = new TextField();
     HBox hbox = new HBox();
     ChoiceBox<String> creation = new ChoiceBox<>();
+    ChoiceBox<String> level = new ChoiceBox<>();
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
@@ -144,12 +145,14 @@ public class App extends Application {
                 x2 = Math.floor(event.getX() / cellSize) * cellSize;
                 y2 = Math.floor(event.getY() / cellSize) * cellSize;
                 deuxclic.bool = false;
-                troisclic.bool = true;}
+                troisclic.bool = true;
+                indication.setText("Selectionner le 3eme coin de la piece");}
             
             else{
                 x1 = Math.floor(event.getX() / cellSize) * cellSize;
                 y1 = Math.floor(event.getY() / cellSize) * cellSize;
-                deuxclic.bool = true;}}
+                deuxclic.bool = true;
+                indication.setText("Selectionner le 2eme coin de la piece");}}
 
             // Légende   
                 
@@ -242,8 +245,14 @@ public class App extends Application {
         
         creation.getItems().addAll("Coin", "Mur", "Piece");
         creation.setValue("Coin");
-        lablabmur.setText("Coin 1");
-        hbox.getChildren().addAll(menuBar, creation,lablabmur);}
+        level.getItems().add("1");
+        level.setValue("1");
+        echelle.setText("1carr. = 1m");
+        echelle.setPadding(new Insets(5,0,0,20));
+        echelle.setStyle("-fx-font-weight: bold");
+        indication.setText("Indication");
+        indication.setPadding(new Insets(5,0,0,20));
+        hbox.getChildren().addAll(menuBar, creation,level,echelle,indication);}
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
