@@ -33,6 +33,7 @@ public class App extends Application {
     TextField text3 = new TextField();
     HBox hbox = new HBox();
     ChoiceBox<String> creation = new ChoiceBox<>();
+    ChoiceBox<String> level = new ChoiceBox<>();
     BorderPane layout = new BorderPane();
     Pane root = new Pane(); 
     VBox legende = new VBox();
@@ -44,6 +45,11 @@ public class App extends Application {
     Label chiffreprix = new Label();
     HBox hsurfaceausol = new HBox();
     HBox hprix = new HBox();
+    MenuItem item1 = new MenuItem("Ouvrir");
+    MenuItem item2 = new MenuItem("Enregistrer");
+    MenuItem item3 = new MenuItem("Fermer");
+    Menu file = new Menu("Fichier");
+    MenuBar menuBar = new MenuBar();
 
     
     @Override
@@ -74,7 +80,6 @@ public class App extends Application {
         troisclic.bool = false;
         quatreclic.bool = false;
         
-       
         
         root.setOnMouseClicked(event -> {
             
@@ -203,12 +208,9 @@ public class App extends Application {
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
     private void Barredemenu(){
-    MenuItem item1 = new MenuItem("Ouvrir");
-        MenuItem item2 = new MenuItem("Enregistrer");
-        MenuItem item3 = new MenuItem("Fermer");
-        Menu file = new Menu("Fichier");
+    
         file.getItems().addAll(item1, item2, item3);
-        MenuBar menuBar = new MenuBar();
+        
         menuBar.getMenus().addAll(file);
         menuBar.setUseSystemMenuBar(true);
         
