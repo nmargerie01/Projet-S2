@@ -11,6 +11,9 @@ public class Appart {
         this.idNiveauAppartement = niveau;
         this.pieces = pieces;}
     
+    public void afficher(){
+        System.out.println ("Appart("+idAppart+","+idNiveauAppartement+","+pieces+')');}
+    
     public double surface(){
         double surface = 0;
         for (int i=0;i<this.pieces.size();i++){     

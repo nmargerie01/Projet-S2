@@ -154,7 +154,7 @@ public class Principale {
         Niveau n = new Niveau (idn, hsp, listeapparts);
         listeNiveau.add(n);}
     
-    public Coin recherchecoin (int id) {
+    public static Coin recherchecoin (int id) {
         for (Coin coin : listeCoin) {
             if (coin.idCoin == id) {
                 return coin;}}
@@ -166,13 +166,13 @@ public class Principale {
                 return coin;}}
         return null;}
     
-    public Mur recherchemur (int id) {
+    public static Mur recherchemur (int id) {
         for (Mur mur : listeMur) {
             if (mur.idMur == id) {
                 return mur;}}
         return null;}
     
-        public static Mur recherchemurparcoordonnee (double x, double y,double w, double z){
+    public static Mur recherchemurparcoordonnee (double x, double y,double w, double z){
         for (Mur mur : listeMur) {
             if ((mur.CoinDebut.x == x) && (mur.CoinDebut.y == y) && (mur.CoinFin.x == w) && (mur.CoinFin.y == z)){
                 return mur;}
@@ -180,7 +180,7 @@ public class Principale {
                 return mur;}}
         return null;}
     
-    public Sol recherchesol (int id) {
+    public static Sol recherchesol (int id) {
         for (Sol sol : listeSol) {
             if (sol.idSol == id) {
                 return sol;}}
@@ -192,27 +192,31 @@ public class Principale {
                 return revetement;}}
         return null;}
     
-    public Plafond rechercheplafond (int id) {
+    public static Plafond rechercheplafond (int id) {
         for (Plafond plafond : listePlafond) {
             if (plafond.idPlafond == id) {
                 return plafond;}}
         return null;}
     
-    public Piece recherchepiece (int id) {
+    public static Piece recherchepiece (int id) {
         for (Piece piece : listePiece) {
             if (piece.idPiece == id) {
                 return piece;}}
         return null;}
     
-    public Appart rechercheappart (int id) {
+    public static Appart rechercheappart (int id) {
         for (Appart appart : listeAppart) {
             if (appart.idAppart == id) {
                 return appart;}}
         return null;}
     
-    public Niveau rechercheniveau (int id) {
+    public static Niveau rechercheniveau (int id) {
         for (Niveau niveau : listeNiveau) {
             if (niveau.idNiveau == id) {
                 return niveau;}}
         return null;}
+    
+    
+    }
+    
 }

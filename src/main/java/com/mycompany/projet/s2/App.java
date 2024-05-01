@@ -80,7 +80,7 @@ public class App extends Application {
 
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                Barredemenu();
+                hbox.getChildren().remove(creerappart);
                 vboxrevet.getChildren().clear();
                 titre.setText("Tout les revetement"); 
                 vboxrevet2.getChildren().clear();
@@ -95,7 +95,7 @@ public class App extends Application {
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
-                Barredemenu();
+                hbox.getChildren().remove(creerappart);
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de mur"); 
                 vboxrevet2.getChildren().clear();
@@ -119,7 +119,7 @@ public class App extends Application {
         
             // Creation d'une piece
             if (creation.getValue().equals("Piece")){
-                Barredemenu();
+                hbox.getChildren().remove(creerappart);
                 vboxrevet.getChildren().clear();
                 titre.setText("Revetement de sol"); 
                 for (int i=0;i<Principale.listeRevetement.size();i++){                 
@@ -165,8 +165,7 @@ public class App extends Application {
                     Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
                     vboxrevet.getChildren().add(label);}
                 indication.setText("Selection toutes les pièces, puis appuyer sur le bouton");
-                creerappart.setPadding(new Insets(0,0,0,5));
-                hbox.getChildren().addAll(menuBar, creation,level,niveaux,creerappart,echelle,indication);              
+                hbox.getChildren().add(creerappart);              
                 for (int h=0;h<listedesrecpiece.size();h++){
                     Polygon rectangle = listedesrecpiece.get(h);
                     x1 = rectangle.getPoints().get(0);
@@ -197,6 +196,15 @@ public class App extends Application {
             listedespiecechoisie.clear();
             Principale.listeAppart.add(a);
             a.afficher();});
+        
+        niveaux.setOnAction(event3 -> {
+            i++;
+            level.getItems().add("Niveau "+i);
+            level.setValue("Niveau "+i);
+            root.getChildren().clear();
+            Quadrillage();
+            Niveau levelgris = Principale.rechercheniveau(i-1);
+            levelgris.rewritelevel();});
         
         Scene scene = new Scene(layout, (cols * 10)+220, rows * 10);
         stage.setScene(scene);
@@ -250,6 +258,7 @@ public class App extends Application {
         rectangle.setFill(Color.GREY);
         listedesrecpiece.add(rectangle);
         root.getChildren().add(rectangle);
+        rectangle.toBack();
         p.afficher();
     }
     private void Mur(){
@@ -284,27 +293,21 @@ public class App extends Application {
         menuBar.getMenus().addAll(file);
         menuBar.setUseSystemMenuBar(true);
         
-        creation.getItems().addAll("Coin", "Mur", "Piece");
+        creation.getItems().addAll("Coin", "Mur", "Piece", "Appart");
         creation.setValue("Coin");
+        creation.setPadding(new Insets(0,0,0,5));
+        
         level.getItems().add("Niveau "+i);
         level.setValue("Niveau "+i);
-        niveaux.setOnAction(event3 -> {
-            i++;
-            level.getItems().add("Niveau "+i);
-            root.getChildren().clear();
-            Quadrillage();
-            Niveau levelgris = Principale.rechercheniveau(i-1);
-            levelgris.rewritelevel();
-            level.setValue("Niveau "+i);
-        });
+        level.setPadding(new Insets(0,0,0,5));
+        
         echelle.setText("1carr. = 1m");
         echelle.setPadding(new Insets(5,0,0,20));
         echelle.setStyle("-fx-font-weight: bold");
+        
         indication.setText("Indication");
-        indication.setPadding(new Insets(5,0,0,20));
-        creation.setPadding(new Insets(0,0,0,5));
-        level.setPadding(new Insets(0,0,0,5));
-        niveaux.setPadding(new Insets(0,0,0,5));
+        indication.setPadding(new Insets(5,20,0,20));
+        
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
     private void Recuperationdesrevetement(){
         try { 
