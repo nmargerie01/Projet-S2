@@ -15,6 +15,7 @@ import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.stage.Stage;
 
+
 public class App extends Application {
 
     private final int rows = 60; 
