@@ -13,6 +13,8 @@ public class Principale {
     static ArrayList <Niveau> listeNiveau = new ArrayList<>();
     static ArrayList <Batiment> listeBatiment = new ArrayList<>();
     static ArrayList <Revetement> listeRevetement = new ArrayList<>();
+    static double chiffresurface;
+    static double chiffreprix;
 
 
     public void creationcoin (){
