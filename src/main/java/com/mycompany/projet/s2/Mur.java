@@ -37,7 +37,7 @@ public class Mur {
             int p=this.nbPorte;
             double d=Math.sqrt(((this.CoinDebut.x-this.CoinFin.x)*(this.CoinDebut.x-this.CoinFin.x))+((this.CoinDebut.y-this.CoinFin.y)*(this.CoinDebut.y-this.CoinFin.y)));
             double surface=((d*h)-((f*1.44)+(p*1.68)));
-            return surface;}}}}}
+            return surface/10;}}}}}
         return 0;}
     
     public double montantrevetement(){

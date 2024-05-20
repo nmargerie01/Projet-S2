@@ -42,10 +42,12 @@ public class App extends Application {
     Label indication = new Label();
     double chiffresurface = 0;
     double chiffreprix = 0;
-    Label surface= new Label("Surface au sol : ");
-    Label prix= new Label("Prix : ");
-    HBox hsurfaceausol = new HBox(surface,chiffresurface,new Label (" m²"));
-    HBox hprix = new HBox(prix,chiffreprix,new Label (" €"));
+    Label surface = new Label("Surface au sol :");
+    Label prix = new Label("Prix :");
+    Label chiffresurfaceLabel = new Label(" "+String.valueOf(chiffresurface));
+    Label chiffreprixLabel = new Label(" "+String.valueOf(chiffreprix));   
+    HBox hsurfaceausol = new HBox(surface, chiffresurfaceLabel, new Label(" m²"));
+    HBox hprix = new HBox(prix, chiffreprixLabel, new Label(" €"));
     Button niveaux = new Button("Niveau +");
     int i= 1;
     int n = 1;
@@ -278,6 +280,7 @@ public class App extends Application {
         Revetement revetement = Principale.rechercherevetement(p3);
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
+        chiffreprix = chiffreprix+(mur.surface()*revetement.prixUnitaire);
         mur.afficher();}
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
