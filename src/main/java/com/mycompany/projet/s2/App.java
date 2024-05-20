@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     private final int rows = 120; 
-    private final int cols = 190; 
+    private final int cols = 200; 
     private final int tcase = 5;
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3, h;
@@ -300,7 +300,7 @@ public class App extends Application {
         level.setValue("Niveau "+i);
         level.setPadding(new Insets(0,0,0,5));
         
-        echelle.setText("1carr. = 1m");
+        echelle.setText("1carr. = 50cm");
         echelle.setPadding(new Insets(5,0,0,20));
         echelle.setStyle("-fx-font-weight: bold");
         

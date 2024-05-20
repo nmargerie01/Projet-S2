@@ -31,7 +31,7 @@ public class Revetement {
     }
     
     public String afficherlegende() {
-        return idRevetement+" | " + designation + " - " + prixUnitaire;
+        return idRevetement+" | " + designation + " - " + prixUnitaire + " €/m²";
     }
     public void afficher() {
         System.out.println("Revetement(" + idRevetement +
