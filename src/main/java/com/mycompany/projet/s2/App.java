@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private final int rows = 120; 
-    private final int cols = 200; 
-    private final int tcase = 200;
+    private final int rows = 60; 
+    private final int cols = 100; 
+    private final int tcase = 10;
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3, h;
     private double x, y;
