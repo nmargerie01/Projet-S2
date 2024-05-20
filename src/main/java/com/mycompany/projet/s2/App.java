@@ -40,12 +40,12 @@ public class App extends Application {
     VBox legende = new VBox();
     Label echelle = new Label();
     Label indication = new Label();
-    Label chiffresurface = new Label();
-    Label chiffreprix = new Label();
+    double chiffresurface = 0;
+    double chiffreprix = 0;
     Label surface= new Label("Surface au sol : ");
     Label prix= new Label("Prix : ");
-    HBox hsurfaceausol = new HBox(surface,chiffresurface);
-    HBox hprix = new HBox(prix,chiffreprix);
+    HBox hsurfaceausol = new HBox(surface,chiffresurface,new Label (" m²"));
+    HBox hprix = new HBox(prix,chiffreprix,new Label (" €"));
     Button niveaux = new Button("Niveau +");
     int i= 1;
     int n = 1;
