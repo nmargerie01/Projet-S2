@@ -48,7 +48,7 @@ public class App extends Application {
     HBox hsurfaceausol = new HBox();
     HBox hprix = new HBox();
     Button niveaux = new Button("Niveau +");
-    int i = 1;
+    int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
@@ -62,7 +62,9 @@ public class App extends Application {
         Barredemenu();
         Quadrillage();
         Legende();
-                       
+        Niveau premierniv = new Niveau();
+        premierniv.idNiveau = 1;
+               
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -198,12 +200,12 @@ public class App extends Application {
             a.afficher();});
         
         niveaux.setOnAction(event3 -> {
-            i++;
-            level.getItems().add("Niveau "+i);
-            level.setValue("Niveau "+i);
+            n++;
+            level.getItems().add("Niveau "+n);
+            level.setValue("Niveau "+n);
             root.getChildren().clear();
             Quadrillage();
-            Niveau levelgris = Principale.rechercheniveau(i-1);
+            Niveau levelgris = Principale.rechercheniveau(n-1);
             levelgris.rewritelevel();});
         
         Scene scene = new Scene(layout, (cols * tcase)+240, rows * tcase);
@@ -385,7 +387,7 @@ public class App extends Application {
 
     private void fenetreniveau () {
         Stage fenetreniveau = new Stage();
-        fenetreniveau.setTitle("Hauteur sous plafond du niveau "+i);
+        fenetreniveau.setTitle("Hauteur sous plafond du niveau "+n);
         
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20));
@@ -400,7 +402,7 @@ public class App extends Application {
         valider.setOnAction(event5 -> {
             h = Integer.valueOf(text.getText());
             fenetreniveau.close();
-            Principale.listeNiveau.get(i).hauteurSousPlafond=h;});
+            Principale.listeNiveau.get(n).hauteurSousPlafond=h;});
         grid.add(lab, 0, 0);
         grid.add(text, 1, 0);
         grid.add(valider, 0, 3, 2, 1);
