@@ -21,7 +21,7 @@ public class App extends Application {
     private final int cols = 200; 
     private final int tcase = 5;
     private double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
-    private int p1, p2 ,p3;
+    private int p1, p2 ,p3,n;
     BooleanData doubleclic = new BooleanData();
     BooleanData deuxclic = new BooleanData();
     BooleanData troisclic = new BooleanData();
@@ -47,7 +47,7 @@ public class App extends Application {
     HBox hsurfaceausol = new HBox();
     HBox hprix = new HBox();
     Button niveaux = new Button("Niveau +");
-    int i,n = 1;
+    int i= 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
@@ -204,6 +204,8 @@ public class App extends Application {
             root.getChildren().clear();
             Quadrillage();
             Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,Niveau.appartements);
+            niveau.afficher();
+            Niveau.appartements.clear();
             Niveau levelgris = Principale.rechercheniveau(n-1);
             levelgris.rewritelevel();});
         
@@ -341,7 +343,6 @@ public class App extends Application {
     
         catch (FileNotFoundException e){
             System.out.println("Erreur : le fichier n’existe pas! " + e);} 
-    
         catch (IOException err){
             System.out.println("Erreur de lecture du fichier: " + err);}}
     private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
@@ -399,7 +400,7 @@ public class App extends Application {
                      
         Button valider = new Button("Valider");
         valider.setOnAction(event5 -> {
-            h = Integer.valueOf(text.getText());
+            h = Double.parseDouble(text.getText());
             fenetreniveau.close();
             Principale.listeNiveau.get(n).hauteurSousPlafond=h;});
         grid.add(lab, 0, 0);
