@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private final int rows = 60; 
-    private final int cols = 100; 
-    private final int tcase = 10;
+    private final int rows = 120; 
+    private final int cols = 200; 
+    private final int tcase = 5;
     private double x1,x2,x3,x4,y1,y2,y3,y4;
     private int p1, p2 ,p3, h;
     private double x, y;
@@ -279,8 +279,8 @@ public class App extends Application {
     private void Quadrillage(){
         for (int row = 0; row <= rows; row++) {
             for (int col = 0; col <= cols; col++) {
-                double varx = col * 5;
-                double vary = row * 5;
+                double varx = col * tcase;
+                double vary = row * tcase;
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
     private void Barredemenu(){
@@ -308,6 +308,7 @@ public class App extends Application {
         indication.setPadding(new Insets(5,20,0,20));
         
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
+
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
