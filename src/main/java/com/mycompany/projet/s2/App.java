@@ -401,7 +401,7 @@ public class App extends Application {
         valider.setOnAction(event5 -> {
             h = Integer.valueOf(text.getText());
             fenetreniveau.close();
-            doubleclic.bool = false;});
+            Principale.listeNiveau.get(i).hauteurSousPlafond=h;});
         grid.add(lab, 0, 0);
         grid.add(text, 1, 0);
         grid.add(valider, 0, 3, 2, 1);
