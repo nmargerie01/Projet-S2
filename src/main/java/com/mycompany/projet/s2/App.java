@@ -21,7 +21,7 @@ public class App extends Application {
     private final int cols = 200; 
     private final int tcase = 5;
     private double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
-    private int p1, p2 ,p3,n;
+    private int p1, p2 ,p3;
     BooleanData doubleclic = new BooleanData();
     BooleanData deuxclic = new BooleanData();
     BooleanData troisclic = new BooleanData();
@@ -40,14 +40,17 @@ public class App extends Application {
     VBox legende = new VBox();
     Label echelle = new Label();
     Label indication = new Label();
-    Label surfaceausol = new Label();
     Label chiffresurface = new Label();
-    Label prix = new Label();
     Label chiffreprix = new Label();
-    HBox hsurfaceausol = new HBox();
-    HBox hprix = new HBox();
+    Label surface = new Label("Surface au sol : ");
+    Label prix = new Label("Prix : ");
+    surface.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+    prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+    HBox hsurfaceausol = new HBox(surface,chiffresurface);
+    HBox hprix = new HBox(prix,chiffreprix);
     Button niveaux = new Button("Niveau +");
     int i= 1;
+    int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
@@ -165,8 +168,8 @@ public class App extends Application {
                     vboxrevet.getChildren().add(label);}
                 indication.setText("Selection toutes les pièces, puis appuyer sur le bouton");
                 hbox.getChildren().add(creerappart);              
-                for (int h=0;h<listedesrecpiece.size();h++){
-                    Polygon rectangle = listedesrecpiece.get(h);
+                for (int i=0;h<listedesrecpiece.size();i++){
+                    Polygon rectangle = listedesrecpiece.get(i);
                     x1 = rectangle.getPoints().get(0);
                     y1 = rectangle.getPoints().get(1);
                     x2 = rectangle.getPoints().get(2);
@@ -232,6 +235,7 @@ public class App extends Application {
         quatreclic.bool = false;
         legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
+        
     }
     private void Piece(){
         ArrayList<Mur> listemurs = new ArrayList<>(); 
@@ -274,7 +278,6 @@ public class App extends Application {
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
         mur.afficher();}
-
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
         root.getChildren().add(circle);
@@ -302,8 +305,8 @@ public class App extends Application {
         creation.setValue("Coin");
         creation.setPadding(new Insets(0,0,0,5));
         
-        level.getItems().add("Niveau "+i);
-        level.setValue("Niveau "+i);
+        level.getItems().add("Niveau "+n);
+        level.setValue("Niveau "+n);
         level.setPadding(new Insets(0,0,0,5));
         
         echelle.setText("1carr. = 50cm");
@@ -314,7 +317,6 @@ public class App extends Application {
         indication.setPadding(new Insets(5,20,0,20));
         
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
-
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
@@ -384,7 +386,6 @@ public class App extends Application {
         fenetreparametre.setScene(scene);
         fenetreparametre.setTitle("Parametre");
         fenetreparametre.showAndWait();}
-
     private void fenetreniveau () {
         Stage fenetreniveau = new Stage();
         fenetreniveau.setTitle("Hauteur sous plafond du niveau "+n);
