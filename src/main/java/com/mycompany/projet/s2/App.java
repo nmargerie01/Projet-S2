@@ -205,7 +205,7 @@ public class App extends Application {
             Niveau levelgris = Principale.rechercheniveau(i-1);
             levelgris.rewritelevel();});
         
-        Scene scene = new Scene(layout, (cols * tcase)+220, rows * tcase);
+        Scene scene = new Scene(layout, (cols * tcase)+240, rows * tcase);
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
