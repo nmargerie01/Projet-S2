@@ -62,8 +62,7 @@ public class App extends Application {
         Barredemenu();
         Quadrillage();
         Legende();
-        fenetreniveau();
-               
+                       
         layout.setTop(hbox);
         layout.setRight(legende);
         layout.setCenter(root);
@@ -204,7 +203,6 @@ public class App extends Application {
             level.setValue("Niveau "+i);
             root.getChildren().clear();
             Quadrillage();
-            level
             Niveau levelgris = Principale.rechercheniveau(i-1);
             levelgris.rewritelevel();});
         
@@ -212,6 +210,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
+        fenetreniveau();
     }
    
     private void Legende(){
