@@ -62,6 +62,7 @@ public class App extends Application {
         Barredemenu();
         Quadrillage();
         Legende();
+        fenetreniveau();
                
         layout.setTop(hbox);
         layout.setRight(legende);
@@ -194,6 +195,7 @@ public class App extends Application {
             Appart a = new Appart(Principale.listeAppart.size()+1,i,listedespiecechoisie);
             listedespiecechoisie.clear();
             Principale.listeAppart.add(a);
+            Niveau.appartements.add(a);
             a.afficher();});
         
         niveaux.setOnAction(event3 -> {
@@ -202,6 +204,7 @@ public class App extends Application {
             level.setValue("Niveau "+i);
             root.getChildren().clear();
             Quadrillage();
+            level
             Niveau levelgris = Principale.rechercheniveau(i-1);
             levelgris.rewritelevel();});
         
@@ -269,6 +272,7 @@ public class App extends Application {
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
         mur.afficher();}
+
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
         root.getChildren().add(circle);
@@ -379,6 +383,7 @@ public class App extends Application {
         fenetreparametre.setScene(scene);
         fenetreparametre.setTitle("Parametre");
         fenetreparametre.showAndWait();}
+
     private void fenetreniveau () {
         Stage fenetreniveau = new Stage();
         fenetreniveau.setTitle("Hauteur sous plafond du niveau "+i);

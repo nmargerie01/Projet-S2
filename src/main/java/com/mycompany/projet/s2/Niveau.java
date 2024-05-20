@@ -16,6 +16,11 @@ public class Niveau {
         this.idNiveau=id;
         this.hauteurSousPlafond=hsp;
         this.appartements=listedesappartements;} 
+
+    public void afficher() {
+        System.out.println ("Niveau(" +idNiveau +
+                "," + hauteurSousPlafond + 
+                "," + appartements);}
     
     public double surface(){
         double surface = 0;
