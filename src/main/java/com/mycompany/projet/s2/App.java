@@ -61,8 +61,7 @@ public class App extends Application {
         Barredemenu();
         Quadrillage();
         Legende();
-        Niveau premierniv = new Niveau();
-        premierniv.idNiveau = 1;
+        
                
         layout.setTop(hbox);
         layout.setRight(legende);
@@ -204,6 +203,7 @@ public class App extends Application {
             level.setValue("Niveau "+n);
             root.getChildren().clear();
             Quadrillage();
+            Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,Niveau.appartements);
             Niveau levelgris = Principale.rechercheniveau(n-1);
             levelgris.rewritelevel();});
         
