@@ -40,12 +40,10 @@ public class App extends Application {
     VBox legende = new VBox();
     Label echelle = new Label();
     Label indication = new Label();
-    double chiffresurface = 0;
-    double chiffreprix = 0;
     Label surface = new Label("Surface au sol :");
     Label prix = new Label("Prix :");
-    Label chiffresurfaceLabel = new Label(" "+String.valueOf(chiffresurface));
-    Label chiffreprixLabel = new Label(" "+String.valueOf(chiffreprix));   
+    Label chiffresurfaceLabel = new Label(" "+String.valueOf(Principale.chiffresurface));
+    Label chiffreprixLabel = new Label(" "+String.valueOf(Principale.chiffreprix));   
     HBox hsurfaceausol = new HBox(surface, chiffresurfaceLabel, new Label(" m²"));
     HBox hprix = new HBox(prix, chiffreprixLabel, new Label(" €"));
     Button niveaux = new Button("Niveau +");
@@ -79,7 +77,6 @@ public class App extends Application {
         
         root.setOnMouseClicked(event -> {
             
-
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
                 hbox.getChildren().remove(creerappart);
@@ -280,7 +277,8 @@ public class App extends Application {
         Revetement revetement = Principale.rechercherevetement(p3);
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
-        chiffreprix = chiffreprix+(mur.surface()*revetement.prixUnitaire);
+        Principale.chiffreprix = Principale.chiffreprix+(mur.surface()*revetement.prixUnitaire);
+        updatePrixAndSurface();
         mur.afficher();}
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
@@ -414,6 +412,10 @@ public class App extends Application {
         Scene scene = new Scene(grid);
         fenetreniveau.setScene(scene);
         fenetreniveau.showAndWait();}
+    private void updatePrixAndSurface() {
+        chiffresurfaceLabel.setText(" " + String.valueOf(Principale.chiffresurface));
+        chiffreprixLabel.setText(" " + String.valueOf(Principale.chiffreprix));
+}
     public static void main (String[] args) {
         launch(args);
     }
