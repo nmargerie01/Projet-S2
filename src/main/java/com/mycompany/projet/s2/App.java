@@ -20,9 +20,8 @@ public class App extends Application {
     private final int rows = 120; 
     private final int cols = 200; 
     private final int tcase = 5;
-    private double x1,x2,x3,x4,y1,y2,y3,y4;
-    private int p1, p2 ,p3, h;
-    private double x, y;
+    private double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
+    private int p1, p2 ,p3;
     BooleanData doubleclic = new BooleanData();
     BooleanData deuxclic = new BooleanData();
     BooleanData troisclic = new BooleanData();
@@ -48,7 +47,7 @@ public class App extends Application {
     HBox hsurfaceausol = new HBox();
     HBox hprix = new HBox();
     Button niveaux = new Button("Niveau +");
-    int n = 1;
+    int i,n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
@@ -193,7 +192,7 @@ public class App extends Application {
             });
         
         creerappart.setOnAction(event4 -> {
-            Appart a = new Appart(Principale.listeAppart.size()+1,i,listedespiecechoisie);
+            Appart a = new Appart(Principale.listeAppart.size()+1,n,listedespiecechoisie);
             listedespiecechoisie.clear();
             Principale.listeAppart.add(a);
             Niveau.appartements.add(a);
