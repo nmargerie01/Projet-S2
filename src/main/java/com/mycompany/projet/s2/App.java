@@ -42,10 +42,8 @@ public class App extends Application {
     Label indication = new Label();
     Label chiffresurface = new Label();
     Label chiffreprix = new Label();
-    Label surface = new Label("Surface au sol : ");
-    Label prix = new Label("Prix : ");
-    surface.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-    prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+    Label surface= new Label("Surface au sol : ");
+    Label prix= new Label("Prix : ");
     HBox hsurfaceausol = new HBox(surface,chiffresurface);
     HBox hprix = new HBox(prix,chiffreprix);
     Button niveaux = new Button("Niveau +");
@@ -233,9 +231,12 @@ public class App extends Application {
         deuxclic.bool = false;
         troisclic.bool = false;
         quatreclic.bool = false;
-        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
+        surface.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        hsurfaceausol.setPadding(new Insets(50,0,0,0));
+        hprix.setPadding(new Insets(30,0,0,0));
+        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2,hsurfaceausol,hprix);
         legende.setPadding(new Insets (20));
-        
     }
     private void Piece(){
         ArrayList<Mur> listemurs = new ArrayList<>(); 
