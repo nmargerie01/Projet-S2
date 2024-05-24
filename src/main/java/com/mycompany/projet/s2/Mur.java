@@ -32,7 +32,8 @@ public class Mur {
         double p = App.p2;
         double h = Principale.listeNiveau.get(App.n).hauteurSousPlafond;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
-        return surface/10;}
+        surface = surface * 0,02;
+    }
     
     public double montantrevetement(){
         double montant = this.revetmur.prixUnitaire*this.surface();
