@@ -10,7 +10,7 @@ public class Coin {
         this.y=y;}
 
     
-    @Override
+    
     public int toInt(){
         return idCoin;
     }
