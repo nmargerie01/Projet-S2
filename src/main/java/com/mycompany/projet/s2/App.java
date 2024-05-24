@@ -274,13 +274,15 @@ public class App extends Application {
         root.getChildren().add(line);
         Coin debut = Principale.recherchecoinparcoordonnee(x1, y1);
         Coin fin = Principale.recherchecoinparcoordonnee(x2, y2);
-        Revetement revetement = Principale.rechercherevetement(p3);
-        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
+        ArrayList revetmur = new ArrayList();
+        revetmur.add(p3);
+        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetmur);
         Principale.listeMur.add(mur);
-        System.out.println(mur.surface);
-        Principale.chiffreprix = Principale.chiffreprix+(mur.surface()*revetement.prixUnitaire);
-        updatePrixAndSurface();
-        mur.afficher();}
+        //Principale.chiffreprix = Principale.chiffreprix+(mur.surface()*revetement.prixUnitaire);
+        //updatePrixAndSurface();
+        mur.afficher();
+        System.out.println(mur.surface());}
+    
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
         root.getChildren().add(circle);
@@ -320,6 +322,7 @@ public class App extends Application {
         indication.setPadding(new Insets(5,20,0,20));
         
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
+    
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
@@ -350,6 +353,7 @@ public class App extends Application {
             System.out.println("Erreur : le fichier n’existe pas! " + e);} 
         catch (IOException err){
             System.out.println("Erreur de lecture du fichier: " + err);}}
+    
     private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
         Stage fenetreparametre = new Stage();
         fenetreparametre.setTitle(title);
