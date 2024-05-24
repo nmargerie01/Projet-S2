@@ -311,7 +311,7 @@ public class App extends Application {
         level.setValue("Niveau "+n);
         level.setPadding(new Insets(0,0,0,5));
         
-        echelle.setText("1carr. = 50cm");
+        echelle.setText("1carr. = 10cm");
         echelle.setPadding(new Insets(5,0,0,20));
         echelle.setStyle("-fx-font-weight: bold");
         
