@@ -20,7 +20,7 @@ public class App extends Application {
     private final int rows = 120; 
     private final int cols = 200; 
     private final int tcase = 5;
-    private double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
+    static double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
     private int p1, p2 ,p3;
     BooleanData doubleclic = new BooleanData();
     BooleanData deuxclic = new BooleanData();
