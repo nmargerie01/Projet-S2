@@ -17,7 +17,7 @@ public class Principale {
     static double chiffreprix;
 
 
-    public void creationcoin (){
+    /*public void creationcoin (){
         System.out.println("Identifiant:");
         int idc=Lire.i();
         System.out.println("Abscisse:");
@@ -154,7 +154,7 @@ public class Principale {
                 a = false;}}
         
         Niveau n = new Niveau (idn, hsp, listeapparts);
-        listeNiveau.add(n);}
+        listeNiveau.add(n);}*/
     
     public static Coin recherchecoin (int id) {
         for (Coin coin : listeCoin) {

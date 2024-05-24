@@ -21,9 +21,9 @@ public class Appart {
             surface = surface + this.pieces.get(i).surface();}
         return surface;}
     
-    public double montantrevetement(){
+    /*public double montantrevetement(){
         double montant = 0;
         for (int i=0;i<this.pieces.size();i++){     
             montant = montant + this.pieces.get(i).montantrevetement();}
-        return montant;}
+        return montant;}*/
 }

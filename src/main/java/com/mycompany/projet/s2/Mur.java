@@ -8,7 +8,7 @@ public class Mur {
     Coin CoinFin;
     int nbFenetre;
     int nbPorte;
-    static ArrayList revetmur = new ArrayList();
+    ArrayList revetmur = new ArrayList();
     
     Mur (int id,Coin a,Coin b,int f,int p, ArrayList revetmur){
         this.idMur=id;
@@ -34,7 +34,7 @@ public class Mur {
         double h = 2;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
         surface=surface*(2/100);
-        return surface;}
+        return surface;}}
     
     /*public double montantrevetement(){
         double montant = this.revetmur.prixUnitaire*this.surface();

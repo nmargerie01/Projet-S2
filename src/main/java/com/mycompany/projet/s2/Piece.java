@@ -22,13 +22,13 @@ public class Piece {
         double surface =3;
         return surface;}
     
-    public double montantrevetement(){
+   /* public double montantrevetement(){
         double montantsolplafond = this.sol.montantrevetement()+this.plafond.montantrevetement();
         double montantmurs = 0;
         for (int i=0;i<this.listemurs.size();i++){     
             montantmurs = montantmurs + this.listemurs.get(i).montantrevetement();}
         double montant = montantmurs + montantsolplafond;
-        return montant;}
+        return montant;}*/
     
     public void afficher() {
         System.out.println ("Piece(" +idPiece +
