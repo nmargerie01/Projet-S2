@@ -28,9 +28,11 @@ public class Mur {
     
     public double surface(){    
         double d=Math.sqrt(((App.x1-App.x2)*(App.x1-App.x2))+((App.y1-App.y2)*(App.y1-App.y2)));
+        double f = App.p1;
+        double p = App.p2;
+        double h = Principale.listeNiveau.get(App.n).hauteurSousPlafond;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
-        return surface/10;}}}}}
-        return 0;}
+        return surface/10;}
     
     public double montantrevetement(){
         double montant = this.revetmur.prixUnitaire*this.surface();
