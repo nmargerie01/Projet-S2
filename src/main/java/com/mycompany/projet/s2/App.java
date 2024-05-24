@@ -277,6 +277,7 @@ public class App extends Application {
         Revetement revetement = Principale.rechercherevetement(p3);
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetement);
         Principale.listeMur.add(mur);
+        System.out.println(mur.surface);
         Principale.chiffreprix = Principale.chiffreprix+(mur.surface()*revetement.prixUnitaire);
         updatePrixAndSurface();
         mur.afficher();}
