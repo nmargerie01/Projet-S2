@@ -1,20 +1,22 @@
 package com.mycompany.projet.s2;
 
+import java.util.ArrayList;
+
 public class Plafond {
     int idPlafond;
     Coin coin1;
     Coin coin2;
     Coin coin3;
     Coin coin4;
-    Revetement revplafond;
+    ArrayList<Revetement> revetplafond = new ArrayList<>();
 
-    Plafond (int id,Coin a, Coin b, Coin c, Coin d, Revetement revplafond){
+    Plafond (int id,Coin a, Coin b, Coin c, Coin d, ArrayList<Revetement> revetplafond){
         this.idPlafond=id;
         this.coin1=a; 
         this.coin2=b;
         this.coin3=c;
         this.coin4=d;
-        this.revplafond=revplafond;} 
+        this.revetplafond=revetplafond;} 
 
    
     public void afficher() {
@@ -23,7 +25,7 @@ public class Plafond {
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
                 ";" + coin4.idCoin +
-                ";" + revplafond);
+                ";" + revetplafond);
     }
     public double surface() {
         double l,L,surface;
@@ -33,6 +35,11 @@ public class Plafond {
         return surface;}
     
     public double montantrevetement(){
-        double montant = this.revplafond.prixUnitaire*this.surface();
+        int taille = this.revetplafond.size();
+        double montant = 0;
+        for (int i = 1; i<=taille ; i++){
+            montant = montant + this.revetplafond.get(i).prix*this.surface();
+        }
+        
         return montant;}
 }
