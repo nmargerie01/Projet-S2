@@ -252,8 +252,10 @@ public class App extends Application {
         listemurs.add(mur3);
         listemurs.add(mur4);
         fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
-        Revetement revsol = Principale.rechercherevetement(p1);
-        Revetement revplafond = Principale.rechercherevetement(p2);                
+        ArrayList<Revetement> revsol = new ArrayList<>();
+        revsol.add(Principale.rechercherevetement(p1));
+        ArrayList<Revetement> revplafond = new ArrayList<>();
+        revplafond.add(Principale.rechercherevetement(p2));                
         Sol sol = new Sol(Principale.listeSol.size()+1,coin1,coin2,coin3,coin4,revsol);
         Principale.listeSol.add(sol);
         sol.afficher();
