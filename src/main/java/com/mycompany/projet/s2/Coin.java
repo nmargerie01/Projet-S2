@@ -9,12 +9,12 @@ public class Coin {
         this.x=x;
         this.y=y;}
 
-    /*
+    
     @Override
-    public String toString(){
-        return idCoin+"("+x+","+y+")" ;
+    public int toInt(){
+        return idCoin;
     }
-    */
+    
     
     public void afficher(){
         System.out.println("Coin;"+idCoin+";"+x+";"+y); 
