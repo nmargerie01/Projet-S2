@@ -48,7 +48,7 @@ public class App extends Application {
     HBox hprix = new HBox(prix, chiffreprixLabel, new Label(" €"));
     Button niveaux = new Button("Niveau +");
     int i= 1;
-    int n = 1;
+    static int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
