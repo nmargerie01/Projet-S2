@@ -21,8 +21,8 @@ public class Mur {
     
     public void afficher() {
         System.out.println ("Mur;" +idMur +
-                ";" + CoinDebut + 
-                ";" + CoinFin +
+                ";" + CoinDebut.idCoin + 
+                ";" + CoinFin.idCoin +
                 ";" + nbFenetre +
                 ";" + nbPorte +
                 ";" + revetmur);}

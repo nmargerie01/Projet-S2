@@ -30,11 +30,9 @@ public class Piece {
         double montant = montantmurs + montantsolplafond;
         return montant;}*/
     
-    public void afficher() {
-        System.out.println ("Piece(" +idPiece +
-                "," + sol + 
-                "," + plafond +
-                "," + listemurs +
-                ')');
-    }
+    public void afficher(){
+        System.out.println ("Piece;" +idPiece +
+                ";" + sol.idSol + 
+                ";" + plafond.idPlafond +
+                ";" + listemurs);}
 }

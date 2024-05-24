@@ -16,26 +16,14 @@ public class Sol {
         this.coin4=d;
         this.revsol=revsol;} 
 
-    @Override
-    public String toString() {
-        return "Sol{" +
-                "idSol=" + idSol +
-                ", coin1=" + coin1 + 
-                ", coin2=" + coin2 +
-                ", coin3=" + coin3 +
-                ", coin4=" + coin4 +
-                ", revsol=" + revsol +
-                '}';
-    }
-    
+        
     public void afficher() {
-        System.out.println ("Sol(" +idSol +
-                "," + coin1 + 
-                "," + coin2 +
-                "," + coin3 +
-                "," + coin4 +
-                "," + revsol +
-                ')');
+        System.out.println ("Sol;" +idSol +
+                ";" + coin1.idCoin + 
+                ";" + coin2.idCoin +
+                ";" + coin3.idCoin +
+                ";" + coin4.idCoin +
+                ";" + revsol);
     }
     
     public double surface() {

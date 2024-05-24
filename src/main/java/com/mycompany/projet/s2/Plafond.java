@@ -16,25 +16,14 @@ public class Plafond {
         this.coin4=d;
         this.revplafond=revplafond;} 
 
-    @Override
-    public String toString() {
-        return "Plafond{" +
-                "idPlafond=" + idPlafond +
-                ", coin1=" + coin1 + 
-                ", coin2=" + coin2 +
-                ", coin3=" + coin3 +
-                ", coin4=" + coin4 +
-                ", revplafond=" + revplafond +
-                '}';}
-    
+   
     public void afficher() {
-        System.out.println ("Plafond(" +idPlafond +
-                "," + coin1 + 
-                "," + coin2 +
-                "," + coin3 +
-                "," + coin4 +
-                "," + revplafond +
-                ')');
+        System.out.println ("Plafond;" +idPlafond +
+                ";" + coin1.idCoin + 
+                ";" + coin2.idCoin +
+                ";" + coin3.idCoin +
+                ";" + coin4.idCoin +
+                ";" + revplafond);
     }
     public double surface() {
         double l,L,surface;

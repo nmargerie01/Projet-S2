@@ -10,12 +10,7 @@ public class Coin {
         this.y=y;}
 
     
-    
-    public int toInt(){
-        return idCoin;
-    }
-    
-    
+        
     public void afficher(){
         System.out.println("Coin;"+idCoin+";"+x+";"+y); 
 }}
