@@ -10,9 +10,9 @@ public class Batiment {
         this.idBatiment=id;
         this.niveaux=listedesniveaux;} 
     
-    public double devisbatiment(){
+    /*public double devisbatiment(){
         double devis = 0;
         for (int i=0;i<this.niveaux.size();i++){     
             devis = devis + this.niveaux.get(i).montantrevetement();}
-        return devis;}
+        return devis;}*/
 }

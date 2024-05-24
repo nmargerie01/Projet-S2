@@ -28,11 +28,11 @@ public class Niveau {
             surface = surface + this.appartements.get(i).surface();}
         return surface;}
     
-    public double montantrevetement(){
+    /*public double montantrevetement(){
         double montant = 0;
         for (int i=0;i<this.appartements.size();i++){     
             montant = montant + this.appartements.get(i).montantrevetement();}
-        return montant;}
+        return montant;}*/
     
     public void rewritelevel(){
         for ( Appart ap : this.appartements){
