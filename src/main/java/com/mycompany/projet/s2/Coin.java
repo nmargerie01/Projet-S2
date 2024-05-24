@@ -9,8 +9,6 @@ public class Coin {
         this.x=x;
         this.y=y;}
 
-    
-        
     public void afficher(){
         System.out.println("Coin;"+idCoin+";"+x+";"+y); 
 }}

@@ -1,20 +1,22 @@
 package com.mycompany.projet.s2;
 
+import java.util.ArrayList;
+
 public class Sol {
    int idSol;
     Coin coin1;
     Coin coin2;
     Coin coin3;
     Coin coin4;
-    Revetement revsol;
+    ArrayList<Revetement> revetsol = new ArrayList<>();
 
-    Sol (int id,Coin a, Coin b, Coin c, Coin d, Revetement revsol){
+    Sol (int id,Coin a, Coin b, Coin c, Coin d, ArrayList<Revetement> revetsol){
         this.idSol=id;
         this.coin1=a; 
         this.coin2=b;
         this.coin3=c;
         this.coin4=d;
-        this.revsol=revsol;} 
+        this.revetsol=revetsol;} 
 
         
     public void afficher() {
@@ -23,7 +25,7 @@ public class Sol {
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
                 ";" + coin4.idCoin +
-                ";" + revsol);
+                ";" + revetsol);
     }
     
     public double surface() {
@@ -34,6 +36,9 @@ public class Sol {
         return surface;}
     
     public double montantrevetement(){
-        double montant = this.revsol.prixUnitaire*this.surface();
+        int taille = this.revetsol.size();
+        double montant = 0;
+        for (int i = 1; i<=taille ; i++){
+            montant = montant + this.revetsol.get(i).idRevetement*this.surface();}
         return montant;} 
 }

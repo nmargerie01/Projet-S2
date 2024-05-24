@@ -38,8 +38,6 @@ public class Plafond {
         int taille = this.revetplafond.size();
         double montant = 0;
         for (int i = 1; i<=taille ; i++){
-            montant = montant + this.revetplafond.get(i).prix*this.surface();
-        }
-        
+            montant = montant + this.revetplafond.get(i).idRevetement*this.surface();}
         return montant;}
 }
