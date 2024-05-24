@@ -3,7 +3,8 @@ package com.mycompany.projet.s2;
 import java.util.ArrayList;
 
 public class Appart {
-    int idAppart,idNiveauAppartement;
+    int idAppart;
+    int idNiveauAppartement;
     ArrayList<Piece> pieces = new ArrayList<> ();
     
     Appart (int id, int niveau, ArrayList<Piece> pieces){
