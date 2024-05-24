@@ -26,18 +26,10 @@ public class Mur {
                 "," + revetmur +
                 ')');}
     
-    public double surface(){
-        for (Niveau niveau : Principale.listeNiveau) {
-        for (Appart appart : Niveau.appartements) {
-        for (Piece piece : appart.pieces) {
-        for (Mur mur : piece.listemurs) {
-        if (mur == this) {
-            double h = niveau.hauteurSousPlafond;
-            int f=this.nbFenetre;
-            int p=this.nbPorte;
-            double d=Math.sqrt(((this.CoinDebut.x-this.CoinFin.x)*(this.CoinDebut.x-this.CoinFin.x))+((this.CoinDebut.y-this.CoinFin.y)*(this.CoinDebut.y-this.CoinFin.y)));
-            double surface=((d*h)-((f*1.44)+(p*1.68)));
-            return surface/10;}}}}}
+    public double surface(){    
+        double d=Math.sqrt(((App.x1-App.x2)*(App.x1-App.x2))+((App.y1-App.y2)*(App.y1-App.y2)));
+        double surface=((d*h)-((f*1.44)+(p*1.68)));
+        return surface/10;}}}}}
         return 0;}
     
     public double montantrevetement(){
