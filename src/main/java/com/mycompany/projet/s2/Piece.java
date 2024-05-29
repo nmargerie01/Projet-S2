@@ -6,7 +6,7 @@ public class Piece {
     int idPiece;
     Sol sol;
     Plafond plafond;
-    ArrayList listemurs = new ArrayList();    
+    ArrayList<int> listemurs = new ArrayList<>();    
     
     Piece (int id, Sol sol, Plafond plafond, ArrayList listemurs){
         this.idPiece = id;
