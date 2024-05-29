@@ -1,6 +1,5 @@
 package com.mycompany.projet.s2;
 
-import static com.mycompany.projet.s2.Piece.listemurs;
 import java.util.ArrayList;
 
 public class Plafond {

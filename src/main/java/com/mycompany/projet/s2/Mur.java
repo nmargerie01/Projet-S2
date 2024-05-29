@@ -1,6 +1,5 @@
 package com.mycompany.projet.s2;
 
-import static com.mycompany.projet.s2.Piece.listemurs;
 import java.util.ArrayList;
 
 public class Mur {
@@ -21,13 +20,12 @@ public class Mur {
     
     
     public void afficher() {
-        System.out.print ("Mur;" +idMur +
+        System.out.println ("Mur;" +idMur +
                 ";" + CoinDebut.idCoin + 
                 ";" + CoinFin.idCoin +
                 ";" + nbFenetre +
-                ";" + nbPorte);
-        for (int k=0;k <= revetmur.size();k++){
-                System.out.print(";" + revetmur.get(k));}}
+                ";" + nbPorte +
+                ";" + revetmur);}
     
     public double surface(){    
         double d=Math.sqrt(((App.x1-App.x2)*(App.x1-App.x2))+((App.y1-App.y2)*(App.y1-App.y2)));
