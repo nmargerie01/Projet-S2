@@ -31,8 +31,9 @@ public class Piece {
         return montant;}*/
     
     public void afficher(){
-        System.out.println ("Piece;" +idPiece +
+        System.out.print ("Piece;" +idPiece +
                 ";" + sol.idSol + 
-                ";" + plafond.idPlafond +
-                ";" + listemurs);}
+                ";" + plafond.idPlafond);
+        for (int k=0;k <= listemurs.size();k++){
+                System.out.print(";" + listemurs.get(k));}}
 }
