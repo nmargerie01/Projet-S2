@@ -37,7 +37,8 @@ public class Niveau {
     public void rewritelevel(){
         for ( Appart ap : this.appartements){
             for (Piece pi : ap.pieces){
-                for (Mur mu : pi.listemurs){
+                for (int k=0; k<= pi.listemurs.size();k++){
+                    Mur mu = Principale.recherchemur(pi.listemurs.get(k)); 
                     Coin cd = mu.CoinDebut;
                     Coin cf = mu.CoinFin;
                     double x = cd.x;
