@@ -243,10 +243,10 @@ public class App extends Application {
         Coin coin2 = Principale.recherchecoinparcoordonnee(x2, y2);
         Coin coin3 = Principale.recherchecoinparcoordonnee(x3, y3);
         Coin coin4 = Principale.recherchecoinparcoordonnee(x4, y4);
-        Mur mur1 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
-        Mur mur2 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
-        Mur mur3 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
-        Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
+        Mur mur1 = Principale.recherchemurparcoordonnee(x1, y1, x2, y2);
+        Mur mur2 = Principale.recherchemurparcoordonnee(x3, y3, x2, y2);
+        Mur mur3 = Principale.recherchemurparcoordonnee(x3, y3, x4, y4);
+        Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x4, y4);
         listemurs.add(mur1);
         listemurs.add(mur2);
         listemurs.add(mur3);
