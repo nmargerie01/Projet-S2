@@ -25,10 +25,8 @@ public class Sol {
                 ";" + coin1.idCoin + 
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
-                ";" + coin4.idCoin);
-        for (int k=0;k <= revetsol.size();k++){
-                System.out.print(";" + revetsol.get(k).idRevetement);}
-    }
+                ";" + coin4.idCoin +
+                ";" + revetsol);}
     
     public double surface() {
         double l,L,surface;
