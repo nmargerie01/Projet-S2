@@ -25,10 +25,9 @@ public class Plafond {
                 ";" + coin1.idCoin + 
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
-                ";" + coin4.idCoin);
-        for (int k=0;k <= revetplafond.size();k++){
-                System.out.print(";" + revetplafond.get(k).idRevetement);}
-    }
+                ";" + coin4.idCoin+
+                ";" + revetplafond);}
+    
     public double surface() {
         double l,L,surface;
         l=Math.sqrt(((this.coin1.x-this.coin2.x)*(this.coin1.x-this.coin2.x))+((this.coin1.y-this.coin2.y)*(this.coin1.y-this.coin2.y)));
