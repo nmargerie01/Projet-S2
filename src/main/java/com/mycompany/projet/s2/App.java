@@ -238,7 +238,7 @@ public class App extends Application {
         legende.setPadding(new Insets (20));
     }
     private void Piece(){
-        ArrayList<Mur> listemurs = new ArrayList<>(); 
+        ArrayList listemurs = new ArrayList(); 
         Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
         Coin coin2 = Principale.recherchecoinparcoordonnee(x2, y2);
         Coin coin3 = Principale.recherchecoinparcoordonnee(x3, y3);
@@ -247,15 +247,15 @@ public class App extends Application {
         Mur mur2 = Principale.recherchemurparcoordonnee(x3, y3, x2, y2);
         Mur mur3 = Principale.recherchemurparcoordonnee(x3, y3, x4, y4);
         Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x4, y4);
-        listemurs.add(mur1);
-        listemurs.add(mur2);
-        listemurs.add(mur3);
-        listemurs.add(mur4);
+        listemurs.add(mur1.idMur);
+        listemurs.add(mur2.idMur);
+        listemurs.add(mur3.idMur);
+        listemurs.add(mur4.idMur);
         fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
-        ArrayList<Revetement> revsol = new ArrayList<>();
-        revsol.add(Principale.rechercherevetement(p1));
-        ArrayList<Revetement> revplafond = new ArrayList<>();
-        revplafond.add(Principale.rechercherevetement(p2));                
+        ArrayList revsol = new ArrayList();
+        revsol.add(p1);
+        ArrayList revplafond = new ArrayList();
+        revplafond.add(p2);                
         Sol sol = new Sol(Principale.listeSol.size()+1,coin1,coin2,coin3,coin4,revsol);
         Principale.listeSol.add(sol);
         sol.afficher();
