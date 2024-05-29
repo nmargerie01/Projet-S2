@@ -1,5 +1,6 @@
 package com.mycompany.projet.s2;
 
+import static com.mycompany.projet.s2.Piece.listemurs;
 import java.util.ArrayList;
 
 public class Plafond {
@@ -20,12 +21,13 @@ public class Plafond {
 
    
     public void afficher() {
-        System.out.println ("Plafond;" +idPlafond +
+        System.out.print ("Plafond;" +idPlafond +
                 ";" + coin1.idCoin + 
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
-                ";" + coin4.idCoin +
-                ";" + revetplafond);
+                ";" + coin4.idCoin);
+        for (int k=0;k <= revetplafond.size();k++){
+                System.out.print(";" + revetplafond.get(k).idRevetement);}
     }
     public double surface() {
         double l,L,surface;

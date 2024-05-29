@@ -35,5 +35,5 @@ public class Piece {
                 ";" + sol.idSol + 
                 ";" + plafond.idPlafond);
         for (int k=0;k <= listemurs.size();k++){
-                System.out.print(";" + listemurs.get(k));}}
+                System.out.print(";" + listemurs.get(k).idMur);}}
 }

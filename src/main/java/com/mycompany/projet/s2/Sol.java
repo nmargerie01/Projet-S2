@@ -1,5 +1,6 @@
 package com.mycompany.projet.s2;
 
+import static com.mycompany.projet.s2.Piece.listemurs;
 import java.util.ArrayList;
 
 public class Sol {
@@ -20,12 +21,13 @@ public class Sol {
 
         
     public void afficher() {
-        System.out.println ("Sol;" +idSol +
+        System.out.print ("Sol;" +idSol +
                 ";" + coin1.idCoin + 
                 ";" + coin2.idCoin +
                 ";" + coin3.idCoin +
-                ";" + coin4.idCoin +
-                ";" + revetsol);
+                ";" + coin4.idCoin);
+        for (int k=0;k <= revetsol.size();k++){
+                System.out.print(";" + revetsol.get(k).idRevetement);}
     }
     
     public double surface() {
