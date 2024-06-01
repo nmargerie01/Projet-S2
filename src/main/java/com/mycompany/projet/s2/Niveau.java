@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Niveau {
     int idNiveau;
     double hauteurSousPlafond;
-    static ArrayList <Appartement> listeAppartements  = new ArrayList<>();
+    ArrayList <Appartement> listeAppartements  = new ArrayList<>();
 
     Niveau (int idNiveau, double hauteurSousPlafond, ArrayList<Appartement> listeAppartements){
         this.idNiveau=idNiveau;
