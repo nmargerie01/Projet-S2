@@ -11,6 +11,13 @@ public class Niveau {
         this.idNiveau=idNiveau;
         this.hauteurSousPlafond=hauteurSousPlafond;
         this.listeAppartements=listeAppartements;} 
+    
+    @Override
+    public String toString() {
+        String listeAppartementsid = "";
+        for (int i=0; i<= this.listeAppartements.size(); i++){
+            listeAppartementsid += ";"+this.listeAppartements.get(i).idAppartement;}
+        return "Niveau;"+idNiveau +";"+hauteurSousPlafond+listeAppartementsid;}
 
     public void afficher() {
         String listeAppartementsid = "";
