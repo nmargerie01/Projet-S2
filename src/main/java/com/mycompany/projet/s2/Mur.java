@@ -25,7 +25,7 @@ public class Mur {
     public void afficher() {
         String listeRevetementsid = "";
         for (int i=0; i<= listeRevetements.size(); i++){
-            listeRevetementsid=listeRevetementsid+listeRevetements.get(i)+";";}
+            listeRevetementsid=listeRevetementsid+listeRevetements.get(i).idRevetement+";";}
         System.out.println ("Mur;"+idMur+";"+CoinDebut.idCoin+";"+CoinFin.idCoin+";"+nbreFenetres+";"+nbrePortes+";"+listeRevetementsid);}
     
     public double surface(){   
@@ -39,9 +39,11 @@ public class Mur {
         double h = App.h ;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
         surface=surface*(2/100);
-        return surface;}}
+        return surface;}
     
-    /*public double montantrevetement(){
-        double montant = this.revetmur.prixUnitaire*this.surface();
-        return montant;}
-}*/
+    public double montantRevetement(){
+        double prixRevetementtotal = 0;
+        for (int i=0; i<= this.listeRevetements.size(); i++){
+            prixRevetementtotal=prixRevetementtotal+this.listeRevetements.get(i).prixUnitaire;} 
+        double montant = prixRevetementtotal*this.surface();
+        return montant;}}
