@@ -22,7 +22,7 @@ public class Batiment {
                 idBatiment +
                 listeNiveauxid);}
     
-    public String sauvegarder(){
+    public File sauvegarder(){
         String sauvegarde = "";
         sauvegarde += this.afficher()+"\n";
         for (int i=0;i<=listeNiveaux.size();i++){
