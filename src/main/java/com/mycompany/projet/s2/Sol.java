@@ -34,7 +34,7 @@ public class Sol {
         surface=l*L;
         return surface;}
     
-    public double montantrevetement(){
+    public double montantRevetement(){
         int taille = this.revetsol.size();
         double montant = 0;
         for (int i = 1; i<=taille ; i++){

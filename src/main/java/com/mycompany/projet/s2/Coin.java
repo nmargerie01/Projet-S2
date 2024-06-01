@@ -8,7 +8,10 @@ public class Coin {
         this.idCoin=id;
         this.x=x;
         this.y=y;}
+    
+    @Override
+    public String toString(){
+        return "Coin;"+idCoin+";"+x+";"+y;}
 
     public void afficher(){
-        System.out.println("Coin;"+idCoin+";"+x+";"+y); 
-}}
+        System.out.println("Coin;"+idCoin+";"+x+";"+y);}}

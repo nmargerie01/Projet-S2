@@ -7,7 +7,7 @@ public class Revetement {
     boolean pourMur;
     boolean pourSol;
     boolean pourPlafond;
-    static double prixUnitaire;
+    double prixUnitaire;
 
     Revetement(int id, String nom, boolean mur, boolean sol, boolean plafond, double prix) {
         this.idRevetement = id;
