@@ -1,8 +1,6 @@
 package com.mycompany.projet.s2;
 
-import static com.mycompany.projet.s2.App.root;
 import java.util.ArrayList;
-import javafx.scene.*;
 
 public class Niveau {
     int idNiveau;
