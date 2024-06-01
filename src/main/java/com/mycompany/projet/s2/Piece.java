@@ -14,25 +14,6 @@ public class Piece {
         this.plafond = plafond;
         this.listeMurs=listeMurs;}
     
-    public double surface() {
-        int pixelsParMetre = 50;
-        if (this.listeMurs == null || this.listeMurs.isEmpty()) {
-            return 0.0;}
-        double surface = 0.0;
-        int n = this.listeMurs.size();
-        for (int i = 0; i < n; i++) {
-            Coin c1 = this.listeMurs.get(i).CoinDebut;
-            Coin c2 = this.listeMurs.get((i + 1) % n).CoinDebut;
-            surface += (c1.x* c2.y) - (c2.x * c1.y);}
-        surface = Math.abs(surface) / 2.0;
-        return surface / (pixelsParMetre * pixelsParMetre);}
-        
-   public double montantRevetement(){
-        double montant = this.sol.montantRevetement()+this.plafond.montantRevetement();
-        for (int i=0;i<this.listeMurs.size();i++){     
-            montant += this.listeMurs.get(i).montantRevetement();}
-        return montant;}
-    
     public void afficher(){
         String listeMursid = "";
         for (int i=0; i<= this.listeMurs.size(); i++){
@@ -42,4 +23,15 @@ public class Piece {
                 sol+";"+
                 plafond+
                 listeMursid);}
+    
+    public double surface() {
+        return sol.surface();}
+        
+   public double montantRevetement(){
+        double montant = this.sol.montantRevetement()+this.plafond.montantRevetement();
+        for (int i=0;i<this.listeMurs.size();i++){     
+            montant += this.listeMurs.get(i).montantRevetement();}
+        return montant;}
+    
+    
 }
