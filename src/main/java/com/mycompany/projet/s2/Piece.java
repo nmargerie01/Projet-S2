@@ -28,18 +28,18 @@ public class Piece {
         return surface / (pixelsParMetre * pixelsParMetre);}
         
    public double montantRevetement(){
-        double montantsolplafond = this.sol.montantRevetement()+this.plafond.montantRevetement();
-        double montantmurs = 0;
+        double montant = this.sol.montantRevetement()+this.plafond.montantRevetement();
         for (int i=0;i<this.listeMurs.size();i++){     
-            montantmurs = montantmurs + this.listeMurs.get(i).montantRevetement();}
-        double montant = montantmurs + montantsolplafond;
+            montant += this.listeMurs.get(i).montantRevetement();}
         return montant;}
     
     public void afficher(){
-        System.out.print ("Piece;" +idPiece +
-                ";" + sol.idSol + 
-                ";" + plafond.idPlafond);
-        for (int k = 0; k<= listeMurs.size();k++){
-            System.out.print (";" + listeMurs.get(k).idMur);}
-        }
+        String listeMursid = "";
+        for (int i=0; i<= this.listeMurs.size(); i++){
+            listeMursid += ";"+listeMurs.get(i).idMur;}
+        System.out.println ("Piece;"+
+                idPiece+";"+
+                sol+";"+
+                plafond+
+                listeMursid);}
 }

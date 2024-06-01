@@ -24,9 +24,15 @@ public class Mur {
     
     public void afficher() {
         String listeRevetementsid = "";
-        for (int i=0; i<= listeRevetements.size(); i++){
-            listeRevetementsid=listeRevetementsid+listeRevetements.get(i).idRevetement+";";}
-        System.out.println ("Mur;"+idMur+";"+CoinDebut.idCoin+";"+CoinFin.idCoin+";"+nbreFenetres+";"+nbrePortes+";"+listeRevetementsid);}
+        for (int i=0; i<= this.listeRevetements.size(); i++){
+            listeRevetementsid += ";"+this.listeRevetements.get(i).idRevetement;}
+        System.out.println ("Mur;"+
+                idMur+";"+
+                CoinDebut.idCoin+";"+
+                CoinFin.idCoin+";"+
+                nbreFenetres+";"+
+                nbrePortes+
+                listeRevetementsid);}
     
     public double surface(){   
         double x1 = this.CoinDebut.x;
