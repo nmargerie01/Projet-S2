@@ -9,7 +9,7 @@ public class Principale {
     static ArrayList <Sol> listeSol = new ArrayList<>();
     static ArrayList <Plafond> listePlafond = new ArrayList<>();
     static ArrayList <Piece> listePiece = new ArrayList<>();
-    static ArrayList <Appart> listeAppart = new ArrayList<>();
+    static ArrayList <Appartement> listeAppartement = new ArrayList<>();
     static ArrayList <Niveau> listeNiveau = new ArrayList<>();
     static ArrayList <Batiment> listeBatiment = new ArrayList<>();
     static ArrayList <Revetement> listeRevetement = new ArrayList<>();

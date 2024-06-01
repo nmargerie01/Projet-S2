@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    static String cheminacces;
+
     private final int rows = 120; 
     private final int cols = 200; 
     private final int tcase = 5;
@@ -53,6 +55,7 @@ public class App extends Application {
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     MenuBar menuBar = new MenuBar();
     Button creerappart = new Button("Creer un appart");
+    static String nomDeSauvegarde;
 
     
     @Override

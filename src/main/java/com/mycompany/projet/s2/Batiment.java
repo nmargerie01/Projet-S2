@@ -1,10 +1,15 @@
 package com.mycompany.projet.s2;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class Batiment {
     int idBatiment;
@@ -55,9 +60,47 @@ public class Batiment {
         catch (IOException e) {
             System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());}}
 
-    /*lireBatiment()
+    public void lireBatiment(){
+         List<String> lignes = new ArrayList<>();
+
+        try {
+            File csvFile = new File(App.cheminacces);
+            FileReader fr = new FileReader(csvFile);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                lignes.add(line);}
+            Collections.reverse(lignes);
+
+            for (String ligne : lignes) {
+                String[] parties = ligne.split(";");
+                int n = parties.length;
+                String objet = parties[0];
+                        
+                if (objet.contains("Coin")){
+                    int id = Integer.parseInt(parties[1]);
+                    double x = Double.parseDouble(parties[2]);
+                    double y = Double.parseDouble(parties[3]);
+                    Coin c = new Coin(id, x, y);
+                    Principale.listeCoin.add(c);}
+
+                else if (objet.contains("Mur")){
+                    int id = Integer.parseInt(parties[1]);
+                    double x = Double.parseDouble(parties[2]);
+                    double y = Double.parseDouble(parties[3]);
+                    Coin c = new Coin(id, x, y);
+                    Principale.listeCoin.add(c);}
+
+                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
+                r.afficher();
+                Principale.listeRevetement.add(r);}}
+    
+        catch (FileNotFoundException e){
+            System.out.println("Erreur : le fichier n’existe pas! " + e);} 
+        catch (IOException err){
+            System.out.println("Erreur de lecture du fichier: " + err);}}}
     devisBatiment()
-    */
+    
     
     
     /*public double devisbatiment(){
