@@ -14,6 +14,13 @@ public class Batiment {
         this.idBatiment=idBatiment;
         this.listeNiveaux=listeNiveaux;} 
     
+    @Override
+    public String toString(){
+        String listeNiveauxid = "";
+        for (int i=0; i<= this.listeNiveaux.size(); i++){
+            listeNiveauxid += ";"+this.listeNiveaux.get(i).idNiveau;}
+        return "Batiment;"+idBatiment+listeNiveauxid;}
+    
     public void afficher(){
         String listeNiveauxid = "";
         for (int i=0; i<= this.listeNiveaux.size(); i++){
@@ -22,13 +29,23 @@ public class Batiment {
                 idBatiment +
                 listeNiveauxid);}
     
-    public File sauvegarder(){
+    public void sauvegarder() throws IOException{
         String sauvegarde = "";
-        sauvegarde += this.afficher()+"\n";
+        sauvegarde += this.toString()+"\n";
         for (int i=0;i<=listeNiveaux.size();i++){
-            sauvegarde += listeNiveaux.get(i).afficher();
-            
-        }
+            sauvegarde += listeNiveaux.get(i).toString()+"\n";
+            Niveau n = listeNiveaux.get(i);
+            for (int j=0;j<=n.listeAppartements.size();j++){
+                sauvegarde += n.listeAppartements.get(j).toString()+"\n";
+                Appartement a = n.listeAppartements.get(j);
+                for (int k=0;k<=a.listePieces.size();k++){
+                    sauvegarde += a.listePieces.get(k).toString()+"\n";
+                    Piece p = a.listePieces.get(k);
+                    for (int l=0;l<=p.listeMurs.size();l++){
+                        sauvegarde += p.listeMurs.get(l).toString()+"\n";
+                        sauvegarde += p.listeMurs.get(l).CoinDebut.toString()+"\n";
+                        sauvegarde += p.listeMurs.get(l).CoinFin.toString()+"\n";}}}}
+                        
         File fichier = new File(App.nomDeSauvegarde);
         fichier.createNewFile();
 
@@ -38,10 +55,9 @@ public class Batiment {
         catch (IOException e) {
             System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());}}
 
-    
-    lireBatiment()
+    /*lireBatiment()
     devisBatiment()
-    
+    */
     
     
     /*public double devisbatiment(){
