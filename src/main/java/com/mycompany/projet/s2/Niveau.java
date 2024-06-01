@@ -2,39 +2,40 @@ package com.mycompany.projet.s2;
 
 import static com.mycompany.projet.s2.App.root;
 import java.util.ArrayList;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
+import javafx.scene.*;
 
 public class Niveau {
     int idNiveau;
     double hauteurSousPlafond;
-    static ArrayList <Appart> appartements = new ArrayList<>();
+    static ArrayList <Appartement> listeAppartements  = new ArrayList<>();
 
-    Niveau (int id, double hsp, ArrayList<Appart> listedesappartements){
-        this.idNiveau=id;
-        this.hauteurSousPlafond=hsp;
-        this.appartements=listedesappartements;} 
+    Niveau (int idNiveau, double hauteurSousPlafond, ArrayList<Appartement> listeAppartements){
+        this.idNiveau=idNiveau;
+        this.hauteurSousPlafond=hauteurSousPlafond;
+        this.listeAppartements=listeAppartements;} 
 
     public void afficher() {
-        System.out.println ("Niveau(" +idNiveau +
-                "," + hauteurSousPlafond + 
-                "," + appartements);}
+        String listeAppartementsid = "";
+        for (int i=0; i<= this.listeAppartements.size(); i++){
+            listeAppartementsid += ";"+this.listeAppartements.get(i).idAppartement;}
+        System.out.println ("Niveau;" +
+                idNiveau +";" + 
+                hauteurSousPlafond + 
+                listeAppartementsid);}
     
     public double surface(){
         double surface = 0;
-        for (int i=0;i<this.appartements.size();i++){     
-            surface = surface + this.appartements.get(i).surface();}
+        for (int i=0;i<this.listeAppartements.size();i++){     
+            surface = surface + this.listeAppartements.get(i).surface();}
         return surface;}
     
-    /*public double montantrevetement(){
+    public double montantRevetement(){
         double montant = 0;
-        for (int i=0;i<this.appartements.size();i++){     
-            montant = montant + this.appartements.get(i).montantrevetement();}
-        return montant;}*/
+        for (int i=0;i<this.listeAppartements.size();i++){     
+            montant += this.listeAppartements.get(i).montantRevetement();}
+        return montant;}
     
-    public void rewritelevel(){
+    /*public void rewritelevel(){
         for ( Appart ap : this.appartements){
             for (Piece pi : ap.pieces){
                 for (int k=0; k<= pi.listemurs.size();k++){
@@ -55,5 +56,5 @@ public class Niveau {
                 }
             }
         }
-    }
+    }*/
 }
