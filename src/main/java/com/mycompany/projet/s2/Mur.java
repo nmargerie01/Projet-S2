@@ -6,32 +6,37 @@ public class Mur {
     int idMur;
     Coin CoinDebut;
     Coin CoinFin;
-    int nbFenetre;
-    int nbPorte;
-    ArrayList revetmur = new ArrayList();
+    int nbreFenetres;
+    int nbrePortes;
+    ArrayList<Revetement> listeRevetements = new ArrayList<>();
     
-    Mur (int id,Coin a,Coin b,int f,int p, ArrayList revetmur){
-        this.idMur=id;
-        this.CoinDebut=a;
-        this.CoinFin=b;
-        this.nbFenetre=f;
-        this.nbPorte=p;
-        this.revetmur=revetmur;} 
+    Mur (int idMur,Coin CoinDebut,Coin CoinFin,int nbreFenetres,int nbrePortes, ArrayList<Revetement> listeRevetements){
+        this.idMur=idMur;
+        this.CoinDebut=CoinDebut;
+        this.CoinFin=CoinFin;
+        this.nbreFenetres=nbreFenetres;
+        this.nbrePortes=nbrePortes;
+        this.listeRevetements=listeRevetements;} 
     
+    @Override
+    public String toString() {
+        return "Mur;"+idMur+";"+CoinDebut.idCoin+";"+CoinFin.idCoin+";"+nbreFenetres+";"+nbrePortes+";"+listeRevetements;}
     
     public void afficher() {
-        System.out.println ("Mur;" +idMur +
-                ";" + CoinDebut.idCoin + 
-                ";" + CoinFin.idCoin +
-                ";" + nbFenetre +
-                ";" + nbPorte +
-                ";" + revetmur);}
+        String listeRevetementsid = "";
+        for (int i=0; i<= listeRevetements.size(); i++){
+            listeRevetementsid=listeRevetementsid+listeRevetements.get(i)+";";}
+        System.out.println ("Mur;"+idMur+";"+CoinDebut.idCoin+";"+CoinFin.idCoin+";"+nbreFenetres+";"+nbrePortes+";"+listeRevetementsid);}
     
-    public double surface(){    
-        double d=Math.sqrt(((App.x1-App.x2)*(App.x1-App.x2))+((App.y1-App.y2)*(App.y1-App.y2)));
+    public double surface(){   
+        double x1 = this.CoinDebut.x;
+        double y1 = this.CoinDebut.y;
+        double x2 = this.CoinFin.x;
+        double y2 = this.CoinFin.y;
+        double d=Math.sqrt(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)));
         double f = App.p1;
         double p = App.p2;
-        double h = 2;
+        double h = App.h ;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
         surface=surface*(2/100);
         return surface;}}
