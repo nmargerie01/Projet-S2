@@ -206,9 +206,9 @@ public class Principale {
                 return piece;}}
         return null;}
     
-    public static Appart rechercheappart (int id) {
-        for (Appart appart : listeAppart) {
-            if (appart.idAppart == id) {
+    public static Appartement rechercheappartement (int id) {
+        for (Appartement appart : listeAppartement) {
+            if (appart.idAppartement == id) {
                 return appart;}}
         return null;}
     

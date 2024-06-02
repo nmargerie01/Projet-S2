@@ -108,19 +108,72 @@ public class Batiment {
                     ArrayList<Revetement> listerevet = new ArrayList<>();
                     for (int z=6; z<=n; z++){
                         Revetement r = Principale.rechercherevetement(z);
-                        liste.add(r);}
+                        listerevet.add(r);}
                     Sol s = new Sol(id, liste,listerevet);
                     Principale.listeSol.add(s);}
                 
-                Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
-                r.afficher();
-                Principale.listeRevetement.add(r);}}
+                else if (objet.contains("Plafond")){
+                    int id = Integer.parseInt(parties[1]);
+                    ArrayList<Coin> liste = new ArrayList<>();
+                    for (int k=2; k<=5; k++){                           //Ligne à changer si moyen de reperer le changement entre coin et revetement
+                        Coin c = Principale.recherchecoin(k);
+                        liste.add(c);}
+                    ArrayList<Revetement> listerevet = new ArrayList<>();
+                    for (int z=6; z<=n; z++){
+                        Revetement r = Principale.rechercherevetement(z);
+                        listerevet.add(r);}
+                    Plafond p = new Plafond(id, liste,listerevet);
+                    Principale.listePlafond.add(p);}
+                
+                else if (objet.contains("Piece")){
+                    int id = Integer.parseInt(parties[1]);
+                    Sol s = Principale.recherchesol(Integer.parseInt(parties[2]));
+                    Plafond p = Principale.rechercheplafond(Integer.parseInt(parties[3]));
+                    ArrayList<Mur> liste = new ArrayList<>();
+                    for (int k=4; k<=n; k++){                        
+                        Mur m = Principale.recherchemur(k);
+                        liste.add(m);}
+                    Piece piece = new Piece(id,s,p,liste);
+                    Principale.listePiece.add(piece);}
+                
+                else if (objet.contains("Appartement")){
+                    int id = Integer.parseInt(parties[1]);
+                    int niveau = Integer.parseInt(parties[2]);
+                    ArrayList<Piece> liste = new ArrayList<>();
+                    for (int k=3; k<=n; k++){                        
+                        Piece p = Principale.recherchepiece(k);
+                        liste.add(p);}
+                    Appartement a = new Appartement(id,niveau,liste);
+                    Principale.listeAppartement.add(a);}
+                
+                else if (objet.contains("Niveau")){
+                    int id = Integer.parseInt(parties[1]);
+                    double hsp = Double.parseDouble(parties[2]);
+                    ArrayList<Appartement> liste = new ArrayList<>();
+                    for (int k=3; k<=n; k++){                        
+                        Appartement p = Principale.(k);
+                        liste.add(p);}
+                    Niveau niv = new Niveau (id,hsp,liste);
+                    Principale.listeNiveau.add(niv);}
+                
+                else if (objet.contains("Batiment")){
+                    int id = Integer.parseInt(parties[1]);
+                    double hsp = Double.parseDouble(parties[2]);
+                    ArrayList<Appartement> liste = new ArrayList<>();
+                    for (int k=3; k<=n; k++){                        
+                        Appartement p = Principale.rechercheappartement(k);
+                        liste.add(p);}
+                    Niveau niv = new Niveau (id,hsp,liste);
+                    Principale.listeNiveau.add(niv);}}}
+                
+                
     
         catch (FileNotFoundException e){
             System.out.println("Erreur : le fichier n’existe pas! " + e);} 
         catch (IOException err){
-            System.out.println("Erreur de lecture du fichier: " + err);}}}
-    devisBatiment()
+            System.out.println("Erreur de lecture du fichier: " + err);}}
+
+    public void devisBatiment(){}
     
     
     
