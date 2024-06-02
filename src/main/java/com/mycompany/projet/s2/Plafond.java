@@ -15,9 +15,9 @@ public class Plafond {
     public void afficher() {
         String listeCoinsid = "";
         String listeRevetementsid = "";
-        for (int i=0; i<= this.listeCoins.size(); i++){
+        for (int i=0; i< this.listeCoins.size(); i++){
             listeCoinsid += ";"+this.listeCoins.get(i).idCoin;}
-        for (int i=0; i<= this.listeRevetements.size(); i++){
+        for (int i=0; i< this.listeRevetements.size(); i++){
             listeRevetementsid += ";"+this.listeRevetements.get(i).idRevetement;}
         System.out.print ("Plafond;" +idPlafond +
                 listeCoinsid+

@@ -103,8 +103,7 @@ public class App extends Application {
                 Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
                 indication.setText("Cliquer pour mettre un coin");
                 Principale.listeCoin.add(c);
-                c.afficher();
-                c.toString();}
+                c.afficher();}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
@@ -337,8 +336,7 @@ public class App extends Application {
         revetmur.add(Principale.rechercherevetement(Integer.parseInt(parties[i])));}
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, Integer.parseInt(p1), Integer.parseInt(p2), revetmur);
         Principale.listeMur.add(mur);
-        mur.afficher();
-        mur.toString();}
+        mur.afficher();}
     private void Quadrillage(){
         for (int row = 0; row <= ligne; row++) {
             for (int col = 0; col <= colonne; col++) {

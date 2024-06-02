@@ -37,18 +37,18 @@ public class Batiment {
     public void sauvegarder(){
         String sauvegarde = "";
         sauvegarde += this.toString()+"\n";
-        for (int i=0;i<=this.listeNiveaux.size();i++){
+        for (int i=0;i<this.listeNiveaux.size();i++){
             sauvegarde += this.listeNiveaux.get(i).toString()+"\n";
             Niveau n = this.listeNiveaux.get(i);
-            for (int j=0;j<=n.listeAppartements.size();j++){
+            for (int j=0;j<n.listeAppartements.size();j++){
                 sauvegarde += n.listeAppartements.get(j).toString()+"\n";
                 Appartement a = n.listeAppartements.get(j);
-                for (int k=0;k<=a.listePieces.size();k++){
+                for (int k=0;k<a.listePieces.size();k++){
                     sauvegarde += a.listePieces.get(k).toString()+"\n";
                     Piece p = a.listePieces.get(k);
                     sauvegarde += a.listePieces.get(k).sol.toString()+"\n";
                     sauvegarde += a.listePieces.get(k).plafond.toString()+"\n";
-                    for (int l=0;l<=p.listeMurs.size();l++){
+                    for (int l=0;l<p.listeMurs.size();l++){
                         sauvegarde += p.listeMurs.get(l).toString()+"\n";
                         sauvegarde += p.listeMurs.get(l).CoinDebut.toString()+"\n";
                         sauvegarde += p.listeMurs.get(l).CoinFin.toString()+"\n";}}}}
