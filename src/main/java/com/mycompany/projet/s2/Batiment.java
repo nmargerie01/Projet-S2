@@ -46,6 +46,8 @@ public class Batiment {
                 for (int k=0;k<=a.listePieces.size();k++){
                     sauvegarde += a.listePieces.get(k).toString()+"\n";
                     Piece p = a.listePieces.get(k);
+                    sauvegarde += a.listePieces.get(k).sol.toString()+"\n";
+                    sauvegarde += a.listePieces.get(k).plafond.toString()+"\n";
                     for (int l=0;l<=p.listeMurs.size();l++){
                         sauvegarde += p.listeMurs.get(l).toString()+"\n";
                         sauvegarde += p.listeMurs.get(l).CoinDebut.toString()+"\n";
@@ -86,11 +88,30 @@ public class Batiment {
 
                 else if (objet.contains("Mur")){
                     int id = Integer.parseInt(parties[1]);
-                    double x = Double.parseDouble(parties[2]);
-                    double y = Double.parseDouble(parties[3]);
-                    Coin c = new Coin(id, x, y);
-                    Principale.listeCoin.add(c);}
+                    Coin debut = Principale.recherchecoin(Integer.parseInt(parties[2]));
+                    Coin fin = Principale.recherchecoin(Integer.parseInt(parties[3]));
+                    int fenetre = Integer.parseInt(parties[4]);
+                    int porte = Integer.parseInt(parties[5]);
+                    ArrayList<Revetement> liste = new ArrayList<>();
+                    for (int k=6; k<=n; k++){
+                        Revetement r = Principale.rechercherevetement(k);
+                        liste.add(r);}
+                    Mur m = new Mur(id, debut, fin, fenetre, porte,liste);
+                    Principale.listeMur.add(m);}
 
+                else if (objet.contains("Sol")){
+                    int id = Integer.parseInt(parties[1]);
+                    ArrayList<Coin> liste = new ArrayList<>();
+                    for (int k=2; k<=5; k++){                           //Ligne à changer si moyen de reperer le changement entre coin et revetement
+                        Coin c = Principale.recherchecoin(k);
+                        liste.add(c);}
+                    ArrayList<Revetement> listerevet = new ArrayList<>();
+                    for (int z=6; z<=n; z++){
+                        Revetement r = Principale.rechercherevetement(z);
+                        liste.add(r);}
+                    Sol s = new Sol(id, liste,listerevet);
+                    Principale.listeSol.add(s);}
+                
                 Revetement r = new Revetement(id, nom, mur, sol, plafond, prix);
                 r.afficher();
                 Principale.listeRevetement.add(r);}}
