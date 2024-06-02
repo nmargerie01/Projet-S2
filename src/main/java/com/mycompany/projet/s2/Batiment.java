@@ -54,7 +54,11 @@ public class Batiment {
                         sauvegarde += p.listeMurs.get(l).CoinFin.toString()+"\n";}}}}
                         
         File fichier = new File(App.nomDeSauvegarde);
-        fichier.createNewFile();
+        try {
+            fichier.createNewFile();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fichier))) {
             writer.write(sauvegarde);}
