@@ -1,6 +1,7 @@
 package com.mycompany.projet.s2;
 
 import java.util.ArrayList;
+import javafx.scene.shape.Line;
 
 public class Mur {
     int idMur;
@@ -20,19 +21,20 @@ public class Mur {
     
     @Override
     public String toString() {
-        return "Mur;"+idMur+";"+CoinDebut.idCoin+";"+CoinFin.idCoin+";"+nbreFenetres+";"+nbrePortes+";"+listeRevetements;}
-    
-    public void afficher() {
         String listeRevetementsid = "";
         for (int i=0; i<= this.listeRevetements.size(); i++){
             listeRevetementsid += ";"+this.listeRevetements.get(i).idRevetement;}
-        System.out.println ("Mur;"+
+        return "Mur;"+
                 idMur+";"+
                 CoinDebut.idCoin+";"+
                 CoinFin.idCoin+";"+
                 nbreFenetres+";"+
                 nbrePortes+
-                listeRevetementsid);}
+                listeRevetementsid;}
+    
+    public void afficher() {
+    Line line = new Line(this.CoinDebut.x, this.CoinDebut.y, this.CoinFin.x, this.CoinFin.y);
+        App.root.getChildren().add(line);}
     
     public double surface(){   
         double x1 = this.CoinDebut.x;

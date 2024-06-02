@@ -324,7 +324,7 @@ public class App extends Application {
         int n = parties.length;
         for(int i=0;i<=n;i++){
         revetmur.add(Principale.rechercherevetement(Integer.parseInt(parties[i])));}
-        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetmur);
+        Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, Integer.parseInt(p1), Integer.parseInt(p2), revetmur);
         Principale.listeMur.add(mur);
         mur.afficher();}
     private void Quadrillage(){

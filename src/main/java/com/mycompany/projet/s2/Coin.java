@@ -1,5 +1,8 @@
 package com.mycompany.projet.s2;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
 public class Coin {
     int idCoin;
     double x, y;
@@ -14,4 +17,5 @@ public class Coin {
         return "Coin;"+idCoin+";"+x+";"+y;}
 
     public void afficher(){
-        System.out.println("Coin;"+idCoin+";"+x+";"+y);}}
+        Circle circle = new Circle(this.x, this.y, 2, Color.BLACK);
+        App.root.getChildren().add(circle);}}
