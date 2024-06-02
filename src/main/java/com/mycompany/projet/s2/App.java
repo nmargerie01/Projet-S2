@@ -31,7 +31,10 @@ public class App extends Application {
     
     // PIECE
     static double x1,x2,x3,x4,y1,y2,y3,y4;
-    BooleanData doubleclic,deuxclic,troisclic,quatreclic = new BooleanData();
+    BooleanData doubleclic = new BooleanData();
+    BooleanData deuxclic = new BooleanData();
+    BooleanData troisclic = new BooleanData();
+    BooleanData quatreclic = new BooleanData();
     
     // NIVEAU
     ArrayList<Appartement>listeAppart=new ArrayList<>();
@@ -42,10 +45,13 @@ public class App extends Application {
     ChoiceBox<String> creation = new ChoiceBox<>();
     ChoiceBox<String> level = new ChoiceBox<>();
     VBox legende = new VBox();
-    Label echelle,indication = new Label();
+    Label echelle = new Label();
+    Label indication = new Label();
     Button niveaux = new Button("Niveau +");
-    VBox vboxrevet,vboxrevet2 = new VBox();
-    Label titre,titre2 = new Label();
+    VBox vboxrevet = new VBox();
+    VBox vboxrevet2 = new VBox();
+    Label titre = new Label();
+    Label titre2 = new Label();
     MenuBar menuBar = new MenuBar();
     Button creerappart = new Button("Creer un appart");
     
