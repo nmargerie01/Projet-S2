@@ -56,19 +56,12 @@ public class App extends Application {
     // INTERFACE
     BorderPane layout = new BorderPane();
     static Pane root = new Pane(); 
-    
-    
-    
-    
-    
-    
+       
     int i= 1;
     static int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     
-    static String nomDeSauvegarde;
-
     
     @Override
     public void start(Stage stage) throws Exception {
