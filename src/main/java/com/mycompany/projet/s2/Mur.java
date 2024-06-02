@@ -22,7 +22,7 @@ public class Mur {
     @Override
     public String toString() {
         String listeRevetementsid = "";
-        for (int i=0; i<= this.listeRevetements.size(); i++){
+        for (int i=0; i< this.listeRevetements.size(); i++){
             listeRevetementsid += ";"+this.listeRevetements.get(i).idRevetement;}
         return "Mur;"+
                 idMur+";"+
