@@ -151,35 +151,28 @@ public class Batiment {
                     double hsp = Double.parseDouble(parties[2]);
                     ArrayList<Appartement> liste = new ArrayList<>();
                     for (int k=3; k<=n; k++){                        
-                        Appartement p = Principale.(k);
+                        Appartement p = Principale.rechercheappartement(k);
                         liste.add(p);}
                     Niveau niv = new Niveau (id,hsp,liste);
                     Principale.listeNiveau.add(niv);}
                 
                 else if (objet.contains("Batiment")){
                     int id = Integer.parseInt(parties[1]);
-                    double hsp = Double.parseDouble(parties[2]);
-                    ArrayList<Appartement> liste = new ArrayList<>();
-                    for (int k=3; k<=n; k++){                        
-                        Appartement p = Principale.rechercheappartement(k);
-                        liste.add(p);}
-                    Niveau niv = new Niveau (id,hsp,liste);
-                    Principale.listeNiveau.add(niv);}}}
+                    ArrayList<Niveau> liste = new ArrayList<>();
+                    for (int k=2; k<=n; k++){                        
+                        Niveau ni = Principale.rechercheniveau(k);
+                        liste.add(ni);}
+                    Batiment bat = new Batiment (id,liste);
+                    Principale.listeBatiment.add(bat);}}}
                 
-                
-    
         catch (FileNotFoundException e){
             System.out.println("Erreur : le fichier n’existe pas! " + e);} 
         catch (IOException err){
             System.out.println("Erreur de lecture du fichier: " + err);}}
 
-    public void devisBatiment(){}
-    
-    
-    
-    /*public double devisbatiment(){
+    public String devisBatiment(){
         double devis = 0;
-        for (int i=0;i<this.niveaux.size();i++){     
-            devis = devis + this.niveaux.get(i).montantrevetement();}
-        return devis;}*/
+        for (int i=0;i<this.listeNiveaux.size();i++){     
+            devis += this.listeNiveaux.get(i).montantRevetement();}
+        return "Prix total du batiment : "+devis+ " €";}
 }
