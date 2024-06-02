@@ -35,6 +35,7 @@ public class App extends Application {
     
     // NIVEAU
     ArrayList<Appartement>listeAppart=new ArrayList<>();
+    static int n = 1;                                           //nb de niveau - compteur
     
     // LEGENDE
     HBox hbox = new HBox();
@@ -57,8 +58,6 @@ public class App extends Application {
     BorderPane layout = new BorderPane();
     static Pane root = new Pane(); 
        
-    int i= 1;
-    static int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
     
