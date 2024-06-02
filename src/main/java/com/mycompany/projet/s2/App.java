@@ -18,7 +18,8 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     // GESTION DE FICHIER
-    static String cheminacces;
+    static String cheminacces;                  //Chemin d'accès pour trouver le fichier à ouvrir
+    static String nomDeSauvegarde;              //Nom du fichier de l'enregistrement
     
     // QUADRILLAGE
     private final int ligne = 120; 
