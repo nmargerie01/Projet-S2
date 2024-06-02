@@ -263,11 +263,16 @@ public class App extends Application {
         ArrayList revsol = new ArrayList();
         revsol.add(p1);
         ArrayList revplafond = new ArrayList();
-        revplafond.add(p2);                
-        Sol sol = new Sol(Principale.listeSol.size()+1,coin1,coin2,coin3,coin4,revsol);
+        revplafond.add(p2);      
+        ArrayList<Coin> listedecoins = new ArrayList<>();
+        listedecoins.add(coin1);
+        listedecoins.add(coin2);
+        listedecoins.add(coin3);
+        listedecoins.add(coin4);
+        Sol sol = new Sol(Principale.listeSol.size()+1,listedecoins,revsol);
         Principale.listeSol.add(sol);
         sol.afficher();
-        Plafond plafond = new Plafond(Principale.listePlafond.size()+1,coin1,coin2,coin3,coin4,revplafond);
+        Plafond plafond = new Plafond(Principale.listePlafond.size()+1,listedecoins,revplafond);
         Principale.listePlafond.add(plafond);
         plafond.afficher();
         Piece p = new Piece(Principale.listePiece.size()+1,sol,plafond,listemurs);
@@ -427,10 +432,7 @@ public class App extends Application {
         Scene scene = new Scene(grid);
         fenetreniveau.setScene(scene);
         fenetreniveau.showAndWait();}
-    private void updatePrixAndSurface() {
-        chiffresurfaceLabel.setText(" " + String.valueOf(Principale.chiffresurface));
-        chiffreprixLabel.setText(" " + String.valueOf(Principale.chiffreprix));
-}
+    
     public static void main (String[] args) {
         launch(args);
     }
