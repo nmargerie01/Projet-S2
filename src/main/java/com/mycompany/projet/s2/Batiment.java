@@ -62,7 +62,7 @@ public class Batiment {
         catch (IOException e) {
             System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());}}
 
-    public void lireBatiment(){
+    public static void lireBatiment(){
          List<String> lignes = new ArrayList<>();
 
         try {
