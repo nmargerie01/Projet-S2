@@ -226,16 +226,23 @@ public class App extends Application {
             listeAppart.clear();});
         
         devis.setOnAction(event4 -> {
-            Batiment batiment = new Batiment(1,Principale.listeNiveau);
-            Principale.listeBatiment.add(batiment);
-            fenetredevis();
-        });
+            Batiment batiment = Principale.listeBatiment.get(0);
+            if (Principale.listeBatiment.isEmpty()){
+                batiment = new Batiment(1,Principale.listeNiveau);
+                Principale.listeBatiment.add(batiment);}    
+            fenetredevis();});
         
         ouvrir.setOnAction(event4 -> {
-        });
+            fenetreouvrir();
+            Batiment.lireBatiment();});
         
         enregistrer.setOnAction(event4 -> {
-            
+            Batiment batiment = Principale.listeBatiment.get(0);
+            if (Principale.listeBatiment.isEmpty()){
+                batiment = new Batiment(1,Principale.listeNiveau);
+                Principale.listeBatiment.add(batiment);}           
+            fenetreenregistrer();
+            batiment.sauvegarder();
         });
         
         Scene scene = new Scene(layout, (colonne * taillecase)+240, ligne * taillecase);
@@ -464,9 +471,31 @@ public class App extends Application {
         Scene scene = new Scene(grid);
         fenetreouvrir.setScene(scene);
         fenetreouvrir.showAndWait();}
+    private void fenetreenregistrer () {
+        Stage fenetre = new Stage();
+        fenetre.setTitle("Enregistrer le fichier");
+        
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(20));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        
+        Label lab = new Label("Nom du fichier");       
+        TextField text = new TextField();      
+                     
+        Button valider = new Button("Valider");
+        valider.setOnAction(event5 -> {
+            nomDeSauvegarde = text.getText();
+            fenetre.close();});
+        grid.add(lab, 0, 0);
+        grid.add(text, 1, 0);
+        grid.add(valider, 0, 3, 2, 1);
+        Scene scene = new Scene(grid);
+        fenetre.setScene(scene);
+        fenetre.showAndWait();}
     private void fenetredevis() {
-        Stage fenetredevis = new Stage();
-        fenetredevis.setTitle("Devis");
+        Stage fenetre = new Stage();
+        fenetre.setTitle("Devis");
         
         StackPane message = new StackPane();
         Batiment batdevis = Principale.listeBatiment.get(0);
@@ -475,8 +504,8 @@ public class App extends Application {
         message.getChildren().add(labeldevis);
      
         Scene scene = new Scene(message);
-        fenetredevis.setScene(scene);
-        fenetredevis.showAndWait();}
+        fenetre.setScene(scene);
+        fenetre.showAndWait();}
     public static void main (String[] args) {
         launch(args);
     }

@@ -34,12 +34,12 @@ public class Batiment {
                 idBatiment +
                 listeNiveauxid);}
     
-    public void sauvegarder() throws IOException{
+    public void sauvegarder(){
         String sauvegarde = "";
         sauvegarde += this.toString()+"\n";
-        for (int i=0;i<=listeNiveaux.size();i++){
-            sauvegarde += listeNiveaux.get(i).toString()+"\n";
-            Niveau n = listeNiveaux.get(i);
+        for (int i=0;i<=this.listeNiveaux.size();i++){
+            sauvegarde += this.listeNiveaux.get(i).toString()+"\n";
+            Niveau n = this.listeNiveaux.get(i);
             for (int j=0;j<=n.listeAppartements.size();j++){
                 sauvegarde += n.listeAppartements.get(j).toString()+"\n";
                 Appartement a = n.listeAppartements.get(j);
