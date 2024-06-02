@@ -42,8 +42,8 @@ public class Mur {
         double x2 = this.CoinFin.x;
         double y2 = this.CoinFin.y;
         double d=Math.sqrt(((x1-x2)*(x1-x2))+((y1-y2)*(y1-y2)));
-        double f = App.p1;
-        double p = App.p2;
+        double f = Integer.parseInt(App.p1);
+        double p = Integer.parseInt(App.p2);
         double h = App.h ;
         double surface=((d*h)-((f*1.44)+(p*1.68)));
         surface=surface*(2/100);
