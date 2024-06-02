@@ -54,6 +54,10 @@ public class App extends Application {
     Label titre2 = new Label();
     MenuBar menuBar = new MenuBar();
     Button creerappart = new Button("Creer un appart");
+    MenuItem devis = new MenuItem("Devis");
+    MenuItem ouvrir = new MenuItem("Ouvrir");
+    MenuItem enregistrer = new MenuItem("Enregistrer");
+    Menu file = new Menu("Fichier");
     
     // FENETRE DE PARAMETRE
     static double h;
@@ -313,11 +317,7 @@ public class App extends Application {
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
     private void Barredemenu(){
-        MenuItem item1 = new MenuItem("Ouvrir");
-        MenuItem item2 = new MenuItem("Enregistrer");
-        MenuItem item3 = new MenuItem("Fermer");
-        Menu file = new Menu("Fichier");
-        file.getItems().addAll(item1, item2, item3);
+        file.getItems().addAll(devis, ouvrir, enregistrer);
         menuBar.getMenus().addAll(file);
         menuBar.setUseSystemMenuBar(true);
         
