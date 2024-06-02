@@ -39,7 +39,8 @@ public class App extends Application {
     
     // LEGENDE
     HBox hbox = new HBox();
-    ChoiceBox<String> creation,level = new ChoiceBox<>();
+    ChoiceBox<String> creation = new ChoiceBox<>();
+    ChoiceBox<String> level = new ChoiceBox<>();
     VBox legende = new VBox();
     Label echelle,indication = new Label();
     Button niveaux = new Button("Niveau +");
