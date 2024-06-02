@@ -17,44 +17,55 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    // GESTION DE FICHIER
     static String cheminacces;
-
-    private final int rows = 120; 
-    private final int cols = 200; 
-    private final int tcase = 5;
-    static double x,y,x1,x2,x3,x4,y1,y2,y3,y4,h;
-    static int p1, p2 ,p3;
-    BooleanData doubleclic = new BooleanData();
-    BooleanData deuxclic = new BooleanData();
-    BooleanData troisclic = new BooleanData();
-    BooleanData quatreclic = new BooleanData();
-    VBox vboxrevet = new VBox();
-    Label titre = new Label();
-    VBox vboxrevet2 = new VBox();
-    Label titre2 = new Label();
-    Label lab3 = new Label();       
-    TextField text3 = new TextField();
+    
+    // QUADRILLAGE
+    private final int ligne = 120; 
+    private final int colonne = 200; 
+    private final int taillecase = 5;
+    
+    // COIN
+    static double x,y;
+    
+    // PIECE
+    static double x1,x2,x3,x4,y1,y2,y3,y4;
+    BooleanData doubleclic,deuxclic,troisclic,quatreclic = new BooleanData();
+    
+    // NIVEAU
+    ArrayList<Appartement>listeAppart=new ArrayList<>();
+    
+    // LEGENDE
     HBox hbox = new HBox();
-    ChoiceBox<String> creation = new ChoiceBox<>();
-    ChoiceBox<String> level = new ChoiceBox<>();
+    ChoiceBox<String> creation,level = new ChoiceBox<>();
+    VBox legende = new VBox();
+    Label echelle,indication = new Label();
+    Button niveaux = new Button("Niveau +");
+    VBox vboxrevet,vboxrevet2 = new VBox();
+    Label titre,titre2 = new Label();
+    MenuBar menuBar = new MenuBar();
+    Button creerappart = new Button("Creer un appart");
+    
+    // FENETRE DE PARAMETRE
+    static double h;
+    static int p1, p2 ,p3;
+    Label labparametre3 = new Label();       
+    TextField text3 = new TextField();
+    
+    // INTERFACE
     BorderPane layout = new BorderPane();
     static Pane root = new Pane(); 
-    VBox legende = new VBox();
-    Label echelle = new Label();
-    Label indication = new Label();
-    Label surface = new Label("Surface au sol :");
-    Label prix = new Label("Prix :");
-    Label chiffresurfaceLabel = new Label(" "+String.valueOf(Principale.chiffresurface));
-    Label chiffreprixLabel = new Label(" "+String.valueOf(Principale.chiffreprix));   
-    HBox hsurfaceausol = new HBox(surface, chiffresurfaceLabel, new Label(" m²"));
-    HBox hprix = new HBox(prix, chiffreprixLabel, new Label(" €"));
-    Button niveaux = new Button("Niveau +");
+    
+    
+    
+    
+    
+    
     int i= 1;
     static int n = 1;
     ArrayList<Polygon> listedesrecpiece = new ArrayList<>();
     ArrayList<Piece> listedespiecechoisie = new ArrayList<>();
-    MenuBar menuBar = new MenuBar();
-    Button creerappart = new Button("Creer un appart");
+    
     static String nomDeSauvegarde;
 
     
@@ -90,8 +101,8 @@ public class App extends Application {
                 for (int i=0;i<Principale.listeRevetement.size();i++){ 
                     Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
                     vboxrevet.getChildren().add(label);}
-                x = Math.floor(event.getX() / tcase) * tcase;
-                y = Math.floor(event.getY() / tcase) * tcase;
+                x = Math.floor(event.getX() / taillecase) * taillecase;
+                y = Math.floor(event.getY() / taillecase) * taillecase;
                 indication.setText("Cliquer pour mettre un coin");                    
                 Coin();}
             
@@ -106,15 +117,15 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourMur == true) {
                         vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}     
                 if (doubleclic.bool == true){
-                    x2 = Math.floor(event.getX() / tcase) * tcase;
-                    y2 = Math.floor(event.getY() / tcase) * tcase;
+                    x2 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y2 = Math.floor(event.getY() / taillecase) * taillecase;
                     fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
                     Mur();
                     indication.setText("Selectionner le 1er coin du mur");                    
                     doubleclic.bool = false;}       
                 else {
-                    x1 = Math.floor(event.getX() / tcase) * tcase;
-                    y1 = Math.floor(event.getY() / tcase) * tcase;
+                    x1 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y1 = Math.floor(event.getY() / taillecase) * taillecase;
                     indication.setText("Selectionner le 2eme coin du mur");
                     doubleclic.bool = true;}}
 
@@ -133,26 +144,26 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourPlafond == true) {
                         vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
                 if (quatreclic.bool == true){
-                    x4 = Math.floor(event.getX() / tcase) * tcase;
-                    y4 = Math.floor(event.getY() / tcase) * tcase;
+                    x4 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y4 = Math.floor(event.getY() / taillecase) * taillecase;
                     quatreclic.bool = false;
                     indication.setText("Selectionner le 1eme coin de la piece");
                     Piece();}
                 else if (troisclic.bool == true){
-                    x3 = Math.floor(event.getX() / tcase) * tcase;
-                    y3 = Math.floor(event.getY() / tcase) * tcase;
+                    x3 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y3 = Math.floor(event.getY() / taillecase) * taillecase;
                     troisclic.bool = false;
                     quatreclic.bool = true;
                     indication.setText("Selectionner le 4eme coin de la piece");}
                 else if (deuxclic.bool == true){
-                    x2 = Math.floor(event.getX() / tcase) * tcase;
-                    y2 = Math.floor(event.getY() / tcase) * tcase;
+                    x2 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y2 = Math.floor(event.getY() / taillecase) * taillecase;
                     deuxclic.bool = false;
                     troisclic.bool = true;
                     indication.setText("Selectionner le 3eme coin de la piece");}
                 else{
-                    x1 = Math.floor(event.getX() / tcase) * tcase;
-                    y1 = Math.floor(event.getY() / tcase) * tcase;
+                    x1 = Math.floor(event.getX() / taillecase) * taillecase;
+                    y1 = Math.floor(event.getY() / taillecase) * taillecase;
                     deuxclic.bool = true;
                     indication.setText("Selectionner le 2eme coin de la piece");}}
 
@@ -188,17 +199,15 @@ public class App extends Application {
                     Mur mur4 = Principale.recherchemurparcoordonnee(x1, y1, x2, x2);
                     if (X >= X1 && X <= X2 && Y >= Y1 && Y <= Y2){
                         for (Piece piece : Principale.listePiece){
-                            if (piece.listemurs.contains(mur1) && piece.listemurs.contains(mur2) && piece.listemurs.contains(mur3) && piece.listemurs.contains(mur4)) {
+                            if (piece.listeMurs.contains(mur1) && piece.listeMurs.contains(mur2) && piece.listeMurs.contains(mur3) && piece.listeMurs.contains(mur4)) {
                                 listedespiecechoisie.add(piece);}}}}}
                         
             });
         
         creerappart.setOnAction(event4 -> {
-            Appart a = new Appart(Principale.listeAppart.size()+1,n,listedespiecechoisie);
+            Appartement a = new Appartement(Principale.listeAppartement.size()+1,n,listedespiecechoisie);
             listedespiecechoisie.clear();
-            Principale.listeAppart.add(a);
-            Niveau.appartements.add(a);
-            a.afficher();});
+            Principale.listeAppartement.add(a);});
         
         niveaux.setOnAction(event3 -> {
             n++;
@@ -206,13 +215,13 @@ public class App extends Application {
             level.setValue("Niveau "+n);
             root.getChildren().clear();
             Quadrillage();
-            Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,Niveau.appartements);
-            niveau.afficher();
-            Niveau.appartements.clear();
-            Niveau levelgris = Principale.rechercheniveau(n-1);
-            levelgris.rewritelevel();});
+            for (Appartement ap : Principale.listeAppartement){
+                if (ap.idNiveauAppartement==(n-1)){
+                    listeAppart.add(ap);}}
+            Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,listeAppart);
+            listeAppart.clear();});
         
-        Scene scene = new Scene(layout, (cols * tcase)+240, rows * tcase);
+        Scene scene = new Scene(layout, (colonne * taillecase)+240, ligne * taillecase);
         stage.setScene(scene);
         stage.setTitle("Devis");
         stage.show();
@@ -232,12 +241,8 @@ public class App extends Application {
         doubleclic.bool = true;
         deuxclic.bool = false;
         troisclic.bool = false;
-        quatreclic.bool = false;
-        surface.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-        prix.setStyle("-fx-font-weight: bold; -fx-underline: true;");
-        hsurfaceausol.setPadding(new Insets(50,0,0,0));
-        hprix.setPadding(new Insets(30,0,0,0));
-        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2,hsurfaceausol,hprix);
+        quatreclic.bool = false;    
+        legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
     }
     private void Piece(){
@@ -296,10 +301,10 @@ public class App extends Application {
         c.afficher();
     }
     private void Quadrillage(){
-        for (int row = 0; row <= rows; row++) {
-            for (int col = 0; col <= cols; col++) {
-                double varx = col * tcase;
-                double vary = row * tcase;
+        for (int row = 0; row <= ligne; row++) {
+            for (int col = 0; col <= colonne; col++) {
+                double varx = col * taillecase;
+                double vary = row * taillecase;
                 root.getChildren().add(new Circle(varx, vary, 0.5, Color.BLACK));}}
     }
     private void Barredemenu(){
@@ -368,18 +373,18 @@ public class App extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
         
-        Label lab1 = new Label(parametre1);       
+        Label labparametre1 = new Label(parametre1);       
         TextField text1 = new TextField();      
         text1.setPromptText("Nombre");
                 
-        Label lab2 = new Label(parametre2);       
+        Label labparametre2 = new Label(parametre2);       
         TextField text2 = new TextField();      
         text2.setPromptText("Nombre");
         
         if ((parametre3) != ("")){
-        lab3.setText(parametre3);       
+        labparametre3.setText(parametre3);       
         text3.setPromptText("Nombre");
-        grid.add(lab3, 0, 2);
+        grid.add(labparametre3, 0, 2);
         grid.add(text3, 1, 2);}
         
         Button valider = new Button("Valider");
@@ -389,9 +394,9 @@ public class App extends Application {
             p3 = Integer.valueOf(text3.getText());
             fenetreparametre.close();
             doubleclic.bool = false;});
-        grid.add(lab1, 0, 0);
+        grid.add(labparametre1, 0, 0);
         grid.add(text1, 1, 0);
-        grid.add(lab2, 0, 1);
+        grid.add(labparametre2, 0, 1);
         grid.add(text2, 1, 1);
         grid.add(valider, 0, 3, 2, 1);
         Scene scene = new Scene(grid);
