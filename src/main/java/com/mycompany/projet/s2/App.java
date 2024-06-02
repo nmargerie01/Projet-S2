@@ -225,6 +225,19 @@ public class App extends Application {
             Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,listeAppart);
             listeAppart.clear();});
         
+        devis.setOnAction(event4 -> {
+            Batiment batiment = new Batiment(1,Principale.listeNiveau);
+            Principale.listeBatiment.add(batiment);
+            fenetredevis();
+        });
+        
+        ouvrir.setOnAction(event4 -> {
+        });
+        
+        enregistrer.setOnAction(event4 -> {
+            
+        });
+        
         Scene scene = new Scene(layout, (colonne * taillecase)+240, ligne * taillecase);
         stage.setScene(scene);
         stage.setTitle("Devis");
@@ -301,7 +314,6 @@ public class App extends Application {
         //updatePrixAndSurface();
         mur.afficher();
         System.out.println(mur.surface());}
-    
     private void Coin(){
         Circle circle = new Circle(x, y, 2, Color.BLACK);
         root.getChildren().add(circle);
@@ -337,7 +349,6 @@ public class App extends Application {
         indication.setPadding(new Insets(5,20,0,20));
         
         hbox.getChildren().addAll(menuBar, creation,level,niveaux,echelle,indication);}
-    
     private void Recuperationdesrevetement(){
         try { 
             Principale.listeRevetement.clear();
@@ -368,7 +379,6 @@ public class App extends Application {
             System.out.println("Erreur : le fichier n’existe pas! " + e);} 
         catch (IOException err){
             System.out.println("Erreur de lecture du fichier: " + err);}}
-    
     private void fenetreparametre (String title, String parametre1,String parametre2,String parametre3) {
         Stage fenetreparametre = new Stage();
         fenetreparametre.setTitle(title);
@@ -432,7 +442,41 @@ public class App extends Application {
         Scene scene = new Scene(grid);
         fenetreniveau.setScene(scene);
         fenetreniveau.showAndWait();}
-    
+    private void fenetreouvrir () {
+        Stage fenetreouvrir = new Stage();
+        fenetreouvrir.setTitle("Ouvrir un fichier");
+        
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(20));
+        grid.setHgap(10);
+        grid.setVgap(10);
+        
+        Label lab = new Label("Chemin d'acces du fichier");       
+        TextField text = new TextField();      
+                     
+        Button valider = new Button("Valider");
+        valider.setOnAction(event5 -> {
+            cheminacces = text.getText();
+            fenetreouvrir.close();});
+        grid.add(lab, 0, 0);
+        grid.add(text, 1, 0);
+        grid.add(valider, 0, 3, 2, 1);
+        Scene scene = new Scene(grid);
+        fenetreouvrir.setScene(scene);
+        fenetreouvrir.showAndWait();}
+    private void fenetredevis() {
+        Stage fenetredevis = new Stage();
+        fenetredevis.setTitle("Devis");
+        
+        StackPane message = new StackPane();
+        Batiment batdevis = Principale.listeBatiment.get(0);
+        String textedevis = batdevis.devisBatiment();
+        Label labeldevis = new Label(textedevis);
+        message.getChildren().add(labeldevis);
+     
+        Scene scene = new Scene(message);
+        fenetredevis.setScene(scene);
+        fenetredevis.showAndWait();}
     public static void main (String[] args) {
         launch(args);
     }
