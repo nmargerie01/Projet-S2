@@ -46,7 +46,7 @@ public class App extends Application {
     ChoiceBox<String> level = new ChoiceBox<>();
     VBox legende = new VBox();
     Label echelle = new Label();
-    Label indication = new Label();
+    static Label indication = new Label();
     Button niveaux = new Button("Niveau +");
     VBox vboxrevet = new VBox();
     VBox vboxrevet2 = new VBox();
@@ -61,7 +61,7 @@ public class App extends Application {
     
     // FENETRE DE PARAMETRE
     static double h;
-    static int p1, p2 ,p3;
+    static String p1,p2,p3;
     Label labparametre3 = new Label();       
     TextField text3 = new TextField();
     
@@ -97,33 +97,21 @@ public class App extends Application {
             
             // Création d'un coin
             if (creation.getValue().equals("Coin")) {
-                hbox.getChildren().remove(creerappart);
-                vboxrevet.getChildren().clear();
-                titre.setText("Tout les revetement"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){ 
-                    Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
-                    vboxrevet.getChildren().add(label);}
+                legendecoin();
                 x = Math.floor(event.getX() / taillecase) * taillecase;
-                y = Math.floor(event.getY() / taillecase) * taillecase;
-                indication.setText("Cliquer pour mettre un coin");                    
-                Coin();}
+                y = Math.floor(event.getY() / taillecase) * taillecase;               
+                Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
+                indication.setText("Cliquer pour mettre un coin");
+                Principale.listeCoin.add(c);
+                c.afficher();}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
-                hbox.getChildren().remove(creerappart);
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de mur"); 
-                vboxrevet2.getChildren().clear();
-                titre2.setText("");
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourMur == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}     
+                legendemur();     
                 if (doubleclic.bool == true){
                     x2 = Math.floor(event.getX() / taillecase) * taillecase;
                     y2 = Math.floor(event.getY() / taillecase) * taillecase;
-                    fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "n° du revetement");
+                    fenetreparametre("Mur", "Nb de fenetres", "Nb de portes", "Revetement(s)");
                     Mur();
                     indication.setText("Selectionner le 1er coin du mur");                    
                     doubleclic.bool = false;}       
@@ -269,6 +257,26 @@ public class App extends Application {
         legende.getChildren().addAll(titre,vboxrevet,titre2,vboxrevet2);
         legende.setPadding(new Insets (20));
     }
+    private void legendecoin(){
+        hbox.getChildren().remove(creerappart);
+                vboxrevet.getChildren().clear();
+                titre.setText("Tout les revetement"); 
+                vboxrevet2.getChildren().clear();
+                titre2.setText("");
+                for (int i=0;i<Principale.listeRevetement.size();i++){ 
+                    Label label = new Label (Principale.listeRevetement.get(i).afficherlegende());
+                    vboxrevet.getChildren().add(label);}
+    }
+    private void legendemur(){
+        hbox.getChildren().remove(creerappart);
+                vboxrevet.getChildren().clear();
+                titre.setText("Revetement de mur"); 
+                vboxrevet2.getChildren().clear();
+                titre2.setText("");
+                for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                    if (Principale.listeRevetement.get(i).pourMur == true) {
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+    }
     private void Piece(){
         ArrayList listemurs = new ArrayList(); 
         Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
@@ -309,25 +317,16 @@ public class App extends Application {
         p.afficher();
     }
     private void Mur(){
-        Line line = new Line(x1, y1, x2, y2);
-        root.getChildren().add(line);
         Coin debut = Principale.recherchecoinparcoordonnee(x1, y1);
         Coin fin = Principale.recherchecoinparcoordonnee(x2, y2);
-        ArrayList revetmur = new ArrayList();
-        revetmur.add(p3);
+        ArrayList<Revetement> revetmur = new ArrayList<>();
+        String[] parties = p3.split(",");
+        int n = parties.length;
+        for(int i=0;i<=n;i++){
+        revetmur.add(Principale.rechercherevetement(Integer.parseInt(parties[i])));}
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, p1, p2, revetmur);
         Principale.listeMur.add(mur);
-        //Principale.chiffreprix = Principale.chiffreprix+(mur.surface()*revetement.prixUnitaire);
-        //updatePrixAndSurface();
-        mur.afficher();
-        System.out.println(mur.surface());}
-    private void Coin(){
-        Circle circle = new Circle(x, y, 2, Color.BLACK);
-        root.getChildren().add(circle);
-        Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
-        Principale.listeCoin.add(c);
-        c.afficher();
-    }
+        mur.afficher();}
     private void Quadrillage(){
         for (int row = 0; row <= ligne; row++) {
             for (int col = 0; col <= colonne; col++) {
@@ -405,15 +404,14 @@ public class App extends Application {
         
         if ((parametre3) != ("")){
         labparametre3.setText(parametre3);       
-        text3.setPromptText("Nombre");
         grid.add(labparametre3, 0, 2);
         grid.add(text3, 1, 2);}
         
         Button valider = new Button("Valider");
         valider.setOnAction(event2 -> {
-            p1 = Integer.valueOf(text1.getText());
-            p2 = Integer.valueOf(text2.getText());
-            p3 = Integer.valueOf(text3.getText());
+            p1 = text1.getText();
+            p2 = text2.getText();
+            p3 = text3.getText();
             fenetreparametre.close();
             doubleclic.bool = false;});
         grid.add(labparametre1, 0, 0);
