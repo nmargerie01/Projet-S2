@@ -103,7 +103,8 @@ public class App extends Application {
                 Coin c = new Coin(Principale.listeCoin.size() + 1, x, y);
                 indication.setText("Cliquer pour mettre un coin");
                 Principale.listeCoin.add(c);
-                c.afficher();}
+                c.afficher();
+                c.toString();}
             
             // Creation d'un mur
             if (creation.getValue().equals("Mur")) {
@@ -124,17 +125,7 @@ public class App extends Application {
         
             // Creation d'une piece
             if (creation.getValue().equals("Piece")){
-                hbox.getChildren().remove(creerappart);
-                vboxrevet.getChildren().clear();
-                titre.setText("Revetement de sol"); 
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourSol == true) {
-                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}                
-                vboxrevet2.getChildren().clear();
-                titre2.setText("Revetement de plafond"); 
-                for (int i=0;i<Principale.listeRevetement.size();i++){                 
-                    if (Principale.listeRevetement.get(i).pourPlafond == true) {
-                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+                legendepiece();
                 if (quatreclic.bool == true){
                     x4 = Math.floor(event.getX() / taillecase) * taillecase;
                     y4 = Math.floor(event.getY() / taillecase) * taillecase;
@@ -211,7 +202,8 @@ public class App extends Application {
                 if (ap.idNiveauAppartement==(n-1)){
                     listeAppart.add(ap);}}
             Niveau niveau = new Niveau(Principale.listeNiveau.size()+1,h,listeAppart);
-            listeAppart.clear();});
+            listeAppart.clear();
+            fenetreniveau();});
         
         devis.setOnAction(event4 -> {
             Batiment batiment = Principale.listeBatiment.get(0);
@@ -277,6 +269,19 @@ public class App extends Application {
                     if (Principale.listeRevetement.get(i).pourMur == true) {
                         vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
     }
+    private void legendepiece(){
+        hbox.getChildren().remove(creerappart);
+                vboxrevet.getChildren().clear();
+                titre.setText("Revetement de sol"); 
+                for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                    if (Principale.listeRevetement.get(i).pourSol == true) {
+                        vboxrevet.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}                
+                vboxrevet2.getChildren().clear();
+                titre2.setText("Revetement de plafond"); 
+                for (int i=0;i<Principale.listeRevetement.size();i++){                 
+                    if (Principale.listeRevetement.get(i).pourPlafond == true) {
+                        vboxrevet2.getChildren().add(new Label (Principale.listeRevetement.get(i).afficherlegende()));}}
+    }
     private void Piece(){
         ArrayList listemurs = new ArrayList(); 
         Coin coin1 = Principale.recherchecoinparcoordonnee(x1, y1);
@@ -292,10 +297,16 @@ public class App extends Application {
         listemurs.add(mur3.idMur);
         listemurs.add(mur4.idMur);
         fenetreparametre ("Pièce", "n° du revet. du sol","n° du revet. du plafond","");
-        ArrayList revsol = new ArrayList();
-        revsol.add(p1);
-        ArrayList revplafond = new ArrayList();
-        revplafond.add(p2);      
+        ArrayList<Revetement> revsol = new ArrayList<>();
+        String[] parties = p1.split(",");
+        int n = parties.length;
+        for(int i=0;i<n;i++){
+        revsol.add(Principale.rechercherevetement(Integer.parseInt(parties[i])));}
+        ArrayList<Revetement> revplafond = new ArrayList<>();
+        String[] parties2 = p2.split(",");
+        int n2 = parties2.length;
+        for(int i=0;i<n2;i++){
+        revplafond.add(Principale.rechercherevetement(Integer.parseInt(parties2[i])));} 
         ArrayList<Coin> listedecoins = new ArrayList<>();
         listedecoins.add(coin1);
         listedecoins.add(coin2);
@@ -322,11 +333,12 @@ public class App extends Application {
         ArrayList<Revetement> revetmur = new ArrayList<>();
         String[] parties = p3.split(",");
         int n = parties.length;
-        for(int i=0;i<=n;i++){
+        for(int i=0;i<n;i++){
         revetmur.add(Principale.rechercherevetement(Integer.parseInt(parties[i])));}
         Mur mur = new Mur(Principale.listeMur.size() + 1, debut, fin, Integer.parseInt(p1), Integer.parseInt(p2), revetmur);
         Principale.listeMur.add(mur);
-        mur.afficher();}
+        mur.afficher();
+        mur.toString();}
     private void Quadrillage(){
         for (int row = 0; row <= ligne; row++) {
             for (int col = 0; col <= colonne; col++) {
@@ -439,8 +451,7 @@ public class App extends Application {
         Button valider = new Button("Valider");
         valider.setOnAction(event5 -> {
             h = Double.parseDouble(text.getText());
-            fenetreniveau.close();
-            Principale.listeNiveau.get(n).hauteurSousPlafond=h;});
+            fenetreniveau.close();});
         grid.add(lab, 0, 0);
         grid.add(text, 1, 0);
         grid.add(valider, 0, 3, 2, 1);
